@@ -3,16 +3,16 @@ import * as dat from 'dat.gui'
 
 import Sizes from './Utils/Sizes.js'
 import Time from './Utils/Time.js'
-import World from './World.js'
+import World from './World/index.js'
 import Resources from './Resources.js'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js'
 import BlurPass from './Passes/Blur.js'
+import GlowsPass from './Passes/Glows.js'
+import Camera from './Camera.js'
 
 export default class Application
 {
@@ -35,7 +35,6 @@ export default class Application
             this.setRenderer()
             this.setCamera()
             this.setPasses()
-            this.setOrbitControls()
             this.setWorld()
         })
     }
@@ -74,19 +73,18 @@ export default class Application
      */
     setCamera()
     {
-        this.camera = new THREE.PerspectiveCamera(40, this.sizes.viewport.width / this.sizes.viewport.height, 2, 50)
-        this.camera.up.z = 1
-        this.camera.up.y = 0
-        // this.camera.position.set(5 * 2, 7 * 2, 5 * 2)
-        this.camera.position.set(8, - 8, 12)
-        this.camera.lookAt(new THREE.Vector3())
-        this.scene.add(this.camera)
+        this.camera = new Camera({
+            time: this.time,
+            sizes: this.sizes,
+            renderer: this.renderer,
+            debug: this.debug
+        })
 
-        // Resize event
-        this.sizes.on('resize', () =>
+        this.scene.add(this.camera.instance)
+
+        this.time.on('tick', () =>
         {
-            this.camera.aspect = this.sizes.viewport.width / this.sizes.viewport.height
-            this.camera.updateProjectionMatrix()
+            this.camera.target.copy(this.world.car.chassis.object.position)
         })
     }
 
@@ -104,26 +102,10 @@ export default class Application
         this.passes.composer = new EffectComposer(this.renderer)
 
         // Create passes
-        this.passes.renderPass = new RenderPass(this.scene, this.camera)
-
-        this.passes.unrealBloomPass = new UnrealBloomPass(new THREE.Vector2(this.sizes.viewport.width, this.sizes.viewport.height), 0.5, 0.4, 0.85)
-        this.passes.unrealBloomPass.threshold = 0
-        this.passes.unrealBloomPass.strength = 0.1
-        this.passes.unrealBloomPass.radius = 2
+        this.passes.renderPass = new RenderPass(this.scene, this.camera.instance)
 
         this.passes.smaa = new SMAAPass(this.sizes.viewport.width * this.renderer.getPixelRatio(), this.sizes.viewport.height * this.renderer.getPixelRatio())
         this.passes.smaa.enabled = this.renderer.getPixelRatio() <= 1
-
-        // Debug
-        if(this.debug)
-        {
-            const folder = this.passes.debugFolder.addFolder('unreal bloom')
-            folder.open()
-
-            folder.add(this.passes.unrealBloomPass, 'threshold').step(0.001).min(0).max(1)
-            folder.add(this.passes.unrealBloomPass, 'strength').step(0.001).min(0).max(1)
-            folder.add(this.passes.unrealBloomPass, 'radius').step(0.001).min(0).max(10)
-        }
 
         this.passes.horizontalBlurPass = new ShaderPass(BlurPass)
         this.passes.horizontalBlurPass.material.uniforms.uResolution.value = new THREE.Vector2(this.sizes.viewport.width, this.sizes.viewport.height)
@@ -143,11 +125,34 @@ export default class Application
             folder.add(this.passes.verticalBlurPass.material.uniforms.uStrength.value, 'y').step(0.001).min(0).max(10)
         }
 
+        this.passes.glowsPass = new ShaderPass(GlowsPass)
+        this.passes.glowsPass.color = '#ffcfe0'
+        this.passes.glowsPass.material.uniforms.uPosition.value = new THREE.Vector2(1, 0.5)
+        this.passes.glowsPass.material.uniforms.uRadius.value = 0.7
+        this.passes.glowsPass.material.uniforms.uColor.value = new THREE.Color(this.passes.glowsPass.color)
+        this.passes.glowsPass.material.uniforms.uAlpha.value = 0.55
+
+        // Debug
+        if(this.debug)
+        {
+            const folder = this.passes.debugFolder.addFolder('glows')
+            folder.open()
+
+            folder.add(this.passes.glowsPass.material.uniforms.uPosition.value, 'x').step(0.001).min(- 1).max(2).name('positionX')
+            folder.add(this.passes.glowsPass.material.uniforms.uPosition.value, 'y').step(0.001).min(- 1).max(2).name('positionY')
+            folder.add(this.passes.glowsPass.material.uniforms.uRadius, 'value').step(0.001).min(0).max(2).name('radius')
+            folder.addColor(this.passes.glowsPass, 'color').name('color').onChange(() =>
+            {
+                this.passes.glowsPass.material.uniforms.uColor.value = new THREE.Color(this.passes.glowsPass.color)
+            })
+            folder.add(this.passes.glowsPass.material.uniforms.uAlpha, 'value').step(0.001).min(0).max(1).name('alpha')
+        }
+
         // Add passes
         this.passes.composer.addPass(this.passes.renderPass)
-        this.passes.composer.addPass(this.passes.unrealBloomPass)
         this.passes.composer.addPass(this.passes.horizontalBlurPass)
         this.passes.composer.addPass(this.passes.verticalBlurPass)
+        this.passes.composer.addPass(this.passes.glowsPass)
         this.passes.composer.addPass(this.passes.smaa)
 
         // Time tick
@@ -155,7 +160,7 @@ export default class Application
         {
             // Renderer
             this.passes.composer.render()
-            // this.renderer.render(this.scene, this.camera)
+            // this.renderer.render(this.scene, this.camera.instance)
         })
 
         // Resize event
@@ -171,16 +176,6 @@ export default class Application
     }
 
     /**
-     * Set orbit controls
-     */
-    setOrbitControls()
-    {
-        this.orbitControls = new OrbitControls(this.camera, this.$canvas)
-        this.orbitControls.enableKeys = false
-        this.orbitControls.zoomSpeed = 0.5
-    }
-
-    /**
      * Set world
      */
     setWorld()
@@ -190,8 +185,7 @@ export default class Application
             resources: this.resources,
             time: this.time,
             camera: this.camera,
-            renderer: this.renderer,
-            orbitControls: this.orbitControls
+            renderer: this.renderer
         })
         this.scene.add(this.world.container)
     }
@@ -204,7 +198,7 @@ export default class Application
         this.time.off('tick')
         this.sizes.off('resize')
 
-        this.orbitControls.dispose()
+        this.camera.orbitControls.dispose()
         this.renderer.dispose()
         this.debug.destroy()
     }
