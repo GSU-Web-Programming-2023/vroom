@@ -1,7 +1,69 @@
-*
-{
-    padding: 0;
-    margin: 0;
+div.hud > * {
+    z-index: 1000;
+    position: absolute;
+    color: white;
+    padding: 1em;
+    font-family: system-ui;
+}
+
+.top-left{
+    top: 0;
+    left: 0;
+}
+
+.top-middle {
+    top: 0;
+    left: 47vw;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.bottom-middle {
+    bottom: 2%;
+    left: 300px;
+    width: 60%;
+    max-width: 60%;
+}
+
+.bottom-middle > * {
+    position: relative;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+#page-title {
+    font-size: x-large;
+}
+
+#timer {
+    font-size: x-large;
+}
+
+#minimap {
+    padding: 4em 6em;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.493);
+}
+
+#chat-bubble {
+    width: 60vw;
+    word-break: break-all;
+    word-wrap: break-word;
+    display: block;
+    text-align: center;
+    font-size: xx-large;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .canvas
