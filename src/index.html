@@ -18,19 +18,20 @@
         </div>
         <div class="top-right"></div>
         <div class="bottom-left">
-            <span id="minimap">MINIMAP?</span>
+            <img id="hud-controls" src="images/WASD.png"></img>
         </div>
         <div class="bottom-middle">
             <span id="chat-bubble">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Pretty useful for testing the character limit of npc dialogue text.</span>
             <!-- <span id="chat-bubble"></span> -->
         </div>
         <div class="bottom-right">
-            <img id="hud-controls" src="images/WASD.png"></img>
+            <img id="spedometer" src="images/spedometer.png"></img>
         </div>
     </div>
 
     <!-- HUD Timer -->
-    <script src="javascript/hud/timer.js"></script>
+    <script src="javascript/hud/timer.js" async></script>
+    <script src="javascript/hud/chat-bubble.js" async></script>
 
     <!-- GAME -->
     <canvas class="canvas js-canvas"></canvas>

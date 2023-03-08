@@ -1,4 +1,4 @@
-window.onload = function () {
+window.addEventListener('load', function() {
     var hours = 00; 
     var minutes = 00; 
     var seconds = 00; 
@@ -37,4 +37,4 @@ window.onload = function () {
             appendHours.innerHTML = hours;
         }
     }, 1000)
-}
+});

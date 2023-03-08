@@ -22,7 +22,7 @@ div.hud > * {
 }
 
 .bottom-left {
-    bottom: 4em;
+    bottom: 0;
     left: 0;
 }
 
@@ -31,6 +31,10 @@ div.hud > * {
     left: 300px;
     width: 60%;
     max-width: 60%;
+}
+
+.bottom-middle > * {
+    position: relative;
 }
 
 .bottom-right {
@@ -53,6 +57,10 @@ div.hud > * {
 }
 
 #chat-bubble {
+    width: 60vw;
+    word-break: break-all;
+    word-wrap: break-word;
+    display: block;
     text-align: center;
     font-size: xx-large;
     font-family: 'Courier New', Courier, monospace;
