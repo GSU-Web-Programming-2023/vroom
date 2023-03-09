@@ -18,3 +18,15 @@ function typeWriter() {
 window.addEventListener('load', function() {
   typeWriter();
 });
+
+setTimeout(function() {
+  let opacity = 1;
+  let timer = setInterval(function() {
+    if (opacity <= 0.1) {
+      clearInterval(timer);
+      span.style.display = 'none';
+    }
+    span.style.opacity = opacity;
+    opacity -= opacity * 0.1;
+  }, 25);
+}, 25000);
