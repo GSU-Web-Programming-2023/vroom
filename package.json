@@ -33,6 +33,7 @@
     "watcherGlob": "**"
   },
   "dependencies": {
+    "deasync": "latest --ignore-scripts",
     "gsap": "^2.1.2"
   }
 }
