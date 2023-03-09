@@ -11,10 +11,15 @@ div.hud > * {
     font-family: system-ui;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 450px) {
     .hud, .dg {
         display: none;
     }
+}
+
+/* Hide debug menu */
+.dg {
+    display: none;
 }
 
 .top-left{
