@@ -11,8 +11,8 @@ div.hud > * {
     font-family: system-ui;
 }
 
-@media (max-width: 450px) {
-    .hud, .dg {
+@media only screen and (max-width: 1300px) {
+    .hud {
         display: none;
     }
 }
