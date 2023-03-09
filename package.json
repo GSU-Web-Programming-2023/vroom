@@ -13,8 +13,7 @@
   },
   "author": "",
   "license": "MIT",
-  "bugs": {
-  },
+  "bugs": {},
   "homepage": "",
   "devDependencies": {
     "cannon": "^0.6.2",
@@ -33,7 +32,6 @@
     "watcherGlob": "**"
   },
   "dependencies": {
-    "deasync": "latest --ignore-scripts",
     "gsap": "^2.1.2"
   }
 }
