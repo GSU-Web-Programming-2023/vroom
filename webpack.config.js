@@ -1,6 +1,5 @@
 const path = require('path');
 const ThreeGltfLoader = require('three-gltf-loader');
-const { CopyWebpackPlugin } = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './static/javascript/index.js',
@@ -52,7 +51,6 @@ module.exports = {
     extensions: ['.js', '.glb', '.gltf', '.png', '.jpg', '.gif', '.glsl'],
   },
   plugins: [
-    new CopyWebpackPlugin(),
     {
       apply: (compiler) => {
         compiler.hooks.beforeCompile.tap('BeforeCompilePlugin', () => {
