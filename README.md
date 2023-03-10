@@ -18,9 +18,9 @@ npm install -g parcel-bundler
 # Install dependencies (only for first time)
 npm i
 
-# Serve at localhost:1234
-npm run dev
+# Bundle JS files
+npx webpack --config webpack.config.js
 
-# Build for production in the dist/ directory
-npm run build
+# Run the flask server
+flask run
 ```
