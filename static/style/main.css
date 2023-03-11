@@ -11,7 +11,7 @@ div.hud > * {
     font-family: system-ui;
 }
 
-@media only screen and (max-width: 1300px) {
+@media (max-width: 900px) {
     .hud {
         display: none;
     }
@@ -75,7 +75,6 @@ div.hud > * {
 }
 
 #chat-bubble {
-    display: none;
     width: 60vw;
     word-break: break-all;
     word-wrap: break-word;
