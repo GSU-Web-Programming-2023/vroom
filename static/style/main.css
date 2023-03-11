@@ -1,7 +1,11 @@
 @font-face {
     font-family: 'cyberpunk';
     src: url('fonts/cyberpunk.ttf') format('truetype');
-  }  
+}
+
+html, body {
+    background-color: #333;
+}
 
 div.hud > * {
     z-index: 750;
@@ -18,7 +22,8 @@ div.hud > * {
 }
 
 /* Hide debug menu */
-.dg {
+.dg.ac {
+    z-index: 1001 !important;
     display: none;
 }
 
@@ -28,8 +33,8 @@ div.hud > * {
 }
 
 .top-middle {
-    top: 0;
-    left: 47vw;
+    top: 3.5em;
+    left: 53vw;
 }
 
 .top-right {
@@ -84,6 +89,10 @@ div.hud > * {
     text-align: center;
     font-size: xx-large;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.achievement-banner {
+    opacity: 0;
 }
 
 .canvas

@@ -17,6 +17,6 @@ function typeWriter(text) {
 }
 
 // Example of how to user typeWriter()
-window.addEventListener('load', function() {
-  typeWriter("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Pretty useful for testing the character limit of npc dialogue text.");
-});
+// window.addEventListener('load', function() {
+//   typeWriter("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Pretty useful for testing the character limit of npc dialogue text.");
+// });

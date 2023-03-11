@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Vroom</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/achievement.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -23,7 +24,21 @@
                 &nbsp;seconds&nbsp;
             </div>
         </div>
-        <div class="top-middle"></div>
+        <div class="top-middle">
+            <div class="achievement-banner animated">
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-trophy icon logo"></div>
+        
+                <div class="achievement-text">
+                    <p class="achievement-notification"></p>
+                    <p class="achievement-name"><i class="icon gamerscore"></i></p>
+                </div>
+            </div>
+        </div>
         <div class="top-right">
             <canvas id="minimap" tooltip="minimap"></canvas>
         </div>
@@ -40,6 +55,7 @@
     <!-- HUD JS -->
     <script src="{{ url_for('static', filename='javascript/hud/timer.js') }}" async></script>
     <script src="{{ url_for('static', filename='javascript/hud/typeWriter.js') }}" async></script>
+    <script src="{{ url_for('static', filename='javascript/hud/achievement.js') }}" async></script>
     <!-- GAME JS -->
     <canvas class="canvas js-canvas"></canvas>
     <script src="{{ url_for('static', filename='javascript/bundle.js') }}"></script>
