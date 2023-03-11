@@ -25,7 +25,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: '../static/models/',
+              outputPath: '../tmp/models/',
             },
           },
         ],
@@ -36,7 +36,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: '../static/images/',
+              outputPath: '../tmp/images/',
             },
           },
         ],

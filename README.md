@@ -21,7 +21,7 @@ npm i
 # Bundle JS files
 npx webpack --config webpack.config.js
 
-# Run the flask server
+# Run the flask server on localhost:5000
 flask run
 ```
 
