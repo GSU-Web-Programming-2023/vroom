@@ -4,7 +4,7 @@
   }  
 
 div.hud > * {
-    z-index: 1000;
+    z-index: 750;
     position: absolute;
     color: white;
     padding: 1em;
@@ -63,9 +63,11 @@ div.hud > * {
 }
 
 #minimap {
-    padding: 4em 6em;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.493);
+    max-width: 6em;
+    max-height: 6em;
+    border-radius: 300px;
+    padding: 6em 4.5em;
+    background-color: #00000061;
 }
 
 #spedometer {

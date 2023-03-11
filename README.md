@@ -12,10 +12,10 @@ python3
 Run the following commands:
 
 ``` bash
-# Create python environment
+# Create a python environment if the 'env' folder doesn't exist
 python3 -m venv env
 
-# Activate python environment
+# Activate the python environment
 env\Scripts\activate
 
 # Install python modules

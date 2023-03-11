@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Vroom</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -23,7 +24,9 @@
             </div>
         </div>
         <div class="top-middle"></div>
-        <div class="top-right"></div>
+        <div class="top-right">
+            <canvas id="minimap" tooltip="minimap"></canvas>
+        </div>
         <div class="bottom-left">
             <img id="hud-controls" src="{{ url_for('static', filename='images/WASD.png') }}"></img>
         </div>
@@ -34,16 +37,13 @@
             <span id="spedometer">99mph</span>
         </div>
     </div>
-
     <!-- HUD JS -->
     <script src="{{ url_for('static', filename='javascript/hud/timer.js') }}" async></script>
     <script src="{{ url_for('static', filename='javascript/hud/typeWriter.js') }}" async></script>
-
     <!-- GAME JS -->
     <canvas class="canvas js-canvas"></canvas>
     <script src="{{ url_for('static', filename='javascript/bundle.js') }}"></script>
-
-    <!-- Misc JS -->
+    <!-- OTHER JS -->
     <script src="{{ url_for('static', filename='javascript/misc.js') }}" async></script>
 </body>
 </html>
