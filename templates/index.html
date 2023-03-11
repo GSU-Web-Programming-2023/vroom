@@ -11,11 +11,18 @@
     <!-- HUD -->
     <div class="hud">
         <div class="top-left">
-            <span id="page-title">VROOM</span>
+            <div id="timer">
+                <span>Time in game:&nbsp;</span>
+                <br>
+                <span id="hours">00</span>
+                &nbsp;hours&nbsp;
+                <span id="minutes">00</span>
+                &nbsp;minutes&nbsp;
+                <span id="seconds">00</span>
+                &nbsp;seconds&nbsp;
+            </div>
         </div>
-        <div class="top-middle" id="timer">
-            <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
-        </div>
+        <div class="top-middle"></div>
         <div class="top-right"></div>
         <div class="bottom-left">
             <img id="hud-controls" src="{{ url_for('static', filename='images/WASD.png') }}"></img>
@@ -31,10 +38,13 @@
 
     <!-- HUD JS -->
     <script src="{{ url_for('static', filename='javascript/hud/timer.js') }}" async></script>
-    <script src="{{ url_for('static', filename='javascript/hud/chat-bubble.js') }}" async></script>
+    <script src="{{ url_for('static', filename='javascript/hud/typeWriter.js') }}" async></script>
 
     <!-- GAME JS -->
     <canvas class="canvas js-canvas"></canvas>
     <script src="{{ url_for('static', filename='javascript/bundle.js') }}"></script>
+
+    <!-- Misc JS -->
+    <script src="{{ url_for('static', filename='javascript/misc.js') }}" async></script>
 </body>
 </html>

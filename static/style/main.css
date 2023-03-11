@@ -58,12 +58,8 @@ div.hud > * {
     right: 0;
 }
 
-#page-title {
-    font-size: x-large;
-}
-
 #timer {
-    font-size: x-large;
+    font-size: large;
 }
 
 #minimap {
@@ -79,6 +75,7 @@ div.hud > * {
 }
 
 #chat-bubble {
+    display: none;
     width: 60vw;
     word-break: break-all;
     word-wrap: break-word;
