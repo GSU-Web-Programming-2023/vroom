@@ -1,5 +1,14 @@
-## Setup
-Download [Node.js](https://nodejs.org/en/download/).
+# Setup
+## Download [Node.js](https://nodejs.org/en/download/).
+
+## Install Python 3
+Windows:
+``` bash
+# Install from the Windows Store by running the command
+python3
+```
+
+## Run the app
 Run the following commands:
 
 ``` bash
