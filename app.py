@@ -39,7 +39,7 @@ def api():
                 db.session.commit()
                 return { 'user' : user.username }
             else:
-                return {'error': 'That user does not exist'}
+                return {'error': 'A user with that username and password does not exist.'}
         elif "register" == data['postType']:
             username = data['username']
             password = data['password']

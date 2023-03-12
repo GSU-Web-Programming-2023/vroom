@@ -2,44 +2,15 @@ function login () {
   const url = 'http://localhost:5000/api/endpoint/';
   let username = document.getElementById('username1').value;
   let password = document.getElementById('password1').value;
-  const data = {
-    postType : 'login',
-    username : username,
-    password : password
-  };
 
-  response = fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(data => {
-      if ('error' in data) {
-          alert(data['error']);
-      } else {
-        console.log(`Welcome back ${data['username']}`)
-        let elem = document.getElementById('landing-page');
-        elem.style.display = "none";
-      }
-    }).catch(error => alert(error));
-}
-
-function register () {
-  const url = 'http://localhost:5000/api/endpoint/';
-  let username = document.getElementById('username2').value;
-  let password = document.getElementById('password2').value;
-  let password2 = document.getElementById('password3').value;
-
-  if (password === password2) {
+  if (username === "" || password === "") {
+    alert("Please enter both your username and password to log in.");
+  } else {
     const data = {
-      postType : 'register',
+      postType : 'login',
       username : username,
       password : password
     };
-
     response = fetch(url, {
       method: 'POST',
       headers: {
@@ -49,16 +20,54 @@ function register () {
     })
     .then(response => response.json())
     .then(data => {
-      if ('error' in data) {
-          alert(data['error']);
-      } else {
-        console.log(`${data['username']} just registered`)
-        let elem = document.getElementById('landing-page');
-        elem.style.display = "none";
-      }
-    }).catch(error => alert(error));
+        if ('error' in data) {
+            alert(data['error']);
+        } else {
+          console.log(`Welcome back ${data['username']}`)
+          let elem = document.getElementById('landing-page');
+          elem.style.display = "none";
+        }
+      }).catch(error => alert(error));
+  }
+}
+
+function register () {
+  const url = 'http://localhost:5000/api/endpoint/';
+  let username = document.getElementById('username2').value;
+  let password = document.getElementById('password2').value;
+  let password2 = document.getElementById('password3').value;
+
+  if (username === "" || password === "" || password2 === "") {
+    alert("Please enter your username and password and confirm your password to register.");
   } else {
-    alert("Your passwords do not match. Please try again.");
+
+    if (password === password2) {
+      const data = {
+        postType : 'register',
+        username : username,
+        password : password
+      };
+
+      response = fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if ('error' in data) {
+            alert(data['error']);
+        } else {
+          console.log(`${data['username']} just registered`)
+          let elem = document.getElementById('landing-page');
+          elem.style.display = "none";
+        }
+      }).catch(error => alert(error));
+    } else {
+      alert("Your passwords do not match. Please try again.");
+    }
   }
 }
 
