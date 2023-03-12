@@ -95,7 +95,7 @@ div.hud > * {
     opacity: 0;
 }
 
-.landing-page {
+#landing-page {
     padding: 0;
     margin: 0;
     position: absolute;

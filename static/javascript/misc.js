@@ -1,4 +1,3 @@
-// For next time: Create a user and try to log in
 function validateLogin(username) {
   const url = 'http://localhost:5000/api/endpoint/';
   const data = {
@@ -12,10 +11,11 @@ function validateLogin(username) {
     },
     body: JSON.stringify(data)
   })
-  .then(response => {
-      if (response['logged_in']) {
-        let elem = document.getElementsByClassName('landing-page')
-        elem.style.display = none;
+  .then(response => response.json())
+  .then(data => {
+      if (data['logged_in']) {
+        let elem = document.getElementById('landing-page');
+        elem.style.display = "none";
       }
     }
   ).catch(error => console.error(error));
@@ -23,8 +23,8 @@ function validateLogin(username) {
 
 function login () {
   const url = 'http://localhost:5000/api/endpoint/';
-  let username = document.getElementById('username').value;
-  let password = document.getElementById('password').value;
+  let username = document.getElementById('username1').value;
+  let password = document.getElementById('password1').value;
   const data = {
     postType : 'login',
     username : username,
@@ -44,9 +44,9 @@ function login () {
 
 function register () {
   const url = 'http://localhost:5000/api/endpoint/';
-  let username = document.getElementById('username').value;
-  let password = document.getElementById('password').value;
-  let password2 = document.getElementById('password2').value;
+  let username = document.getElementById('username2').value;
+  let password = document.getElementById('password2').value;
+  let password2 = document.getElementById('password3').value;
 
   if (password === password2) {
     const data = {
@@ -62,7 +62,13 @@ function register () {
       },
       body: JSON.stringify(data)
     })
-    .then(response => console.log(response))
+    .then(response => {
+        if (response['logged_in']) {
+          let elem = document.getElementByClassName('landing-page')
+          elem.style.display = "none";
+        }
+      }
+    )
     .catch(error => console.error(error));
   } else {
     let message = document.getElementsByClassName('form-message');

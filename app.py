@@ -14,7 +14,7 @@ migrate = Migrate(app, db)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     is_logged_in = db.Column(db.Boolean, nullable=False, default=False)
 
@@ -45,9 +45,10 @@ def api():
             password = data['password']
             new_user = User(username=username, password=password)
             db.session.add(new_user)
+            new_user.is_logged_in = True
             db.session.commit()
             return { 'registered' : new_user.username }
-        elif "validate-user" == data['postType']:
+        elif "validate-login" == data['postType']:
             username = data['username']
             user = User.query.filter_by(username=username).first()
             return { 'logged_in' : user.is_logged_in }
