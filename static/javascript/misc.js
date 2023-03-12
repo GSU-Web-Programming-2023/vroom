@@ -17,9 +17,13 @@ function login () {
   })
   .then(response => response.json())
   .then(data => {
-      console.log("Welcome back {data['username']}")
-      let elem = document.getElementById('landing-page');
-      elem.style.display = "none";
+      if ('error' in data) {
+          alert(data['error']);
+      } else {
+        console.log(`Welcome back ${data['username']}`)
+        let elem = document.getElementById('landing-page');
+        elem.style.display = "none";
+      }
     }).catch(error => alert(error));
 }
 
@@ -43,16 +47,18 @@ function register () {
       },
       body: JSON.stringify(data)
     })
-    .then(response => {
-        let elem = document.getElementByClassName('landing-page')
+    .then(response => response.json())
+    .then(data => {
+      if ('error' in data) {
+          alert(data['error']);
+      } else {
+        console.log(`${data['username']} just registered`)
+        let elem = document.getElementById('landing-page');
         elem.style.display = "none";
       }
-    )
-    .catch(error => alert(error));
+    }).catch(error => alert(error));
   } else {
-    let message = document.getElementsByClassName('form-message');
-    message.innerHTML = "Your passwords do not match. Please try again.";
-    message.style.display = "block";
+    alert("Your passwords do not match. Please try again.");
   }
 }
 

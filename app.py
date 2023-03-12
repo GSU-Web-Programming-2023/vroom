@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import jsonify
 
 app = Flask(
     __name__,
@@ -38,18 +39,23 @@ def api():
                 db.session.commit()
                 return { 'user' : user.username }
             else:
-                return { 'Error' : 'User does not exist' }
+                return {'error': 'That user does not exist'}
         elif "register" == data['postType']:
             username = data['username']
             password = data['password']
-            new_user = User(username=username, password=password)
-            db.session.add(new_user)
-            new_user.is_logged_in = True
-            db.session.commit()
+            try:
+                new_user = User(username=username, password=password)
+                db.session.add(new_user)
+                db.session.commit()
+            except Exception as e:
+                if "UNIQUE constraint failed" in str(e):
+                    return {'error': 'A player with that username already exists.'}
+                else:
+                    return {'error': str(e)}
             return { 'user' : new_user.username }
         else:
-            return { "Error" : "What are you doing?" }
-    return { "Error" : "What are you doing?" }
+            return {'error': 'What are you doing?'}
+    return {'error': 'What are you doing?'}
 
 if __name__ == '__main__':
     app.run()

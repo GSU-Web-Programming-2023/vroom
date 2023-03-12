@@ -107,11 +107,6 @@ div.hud > * {
     height: 100%;
 }
 
-.form-message {
-    display: none;
-    color: red;
-}
-
 .canvas
 {
     position: fixed;
