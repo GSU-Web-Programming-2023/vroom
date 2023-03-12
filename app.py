@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import jsonify
 
 app = Flask(
     __name__,
@@ -19,7 +18,7 @@ class User(db.Model):
     password = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
-        return f'ID: {self.id}, Name {self.name}'
+        return f'ID: {self.id}, Name {self.username}'
 
 @app.route('/')
 def home():

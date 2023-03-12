@@ -1,4 +1,4 @@
-window.addEventListener('load', function() {
+function startTimer() {
     var hours = 00; 
     var minutes = 00; 
     var seconds = 00; 
@@ -37,4 +37,4 @@ window.addEventListener('load', function() {
             appendHours.innerHTML = hours;
         }
     }, 1000)
-});
+}

@@ -1,3 +1,7 @@
+* {
+    transition: all 0.3s ease;
+}
+
 @font-face {
     font-family: 'cyberpunk';
     src: url('fonts/cyberpunk.ttf') format('truetype');
@@ -7,7 +11,10 @@ html, body {
     background-color: #333;
 }
 
-div.hud > * {
+.hud{
+    opacity: 0;
+}
+.hud > * {
     z-index: 750;
     position: absolute;
     color: white;
@@ -17,7 +24,7 @@ div.hud > * {
 
 @media (max-width: 900px) {
     .hud {
-        display: none;
+        display: none !important;
     }
 }
 

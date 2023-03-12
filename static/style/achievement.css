@@ -102,7 +102,7 @@ html, body {
     position: absolute;
     width: 225px;
     top: calc((50px - 50%));
-    left: 105px;
+    left: 100px;
     text-align: center;
     white-space: pre-wrap;
     word-wrap: break-word;
