@@ -83,7 +83,7 @@ div.hud > * {
 
 #chat-bubble {
     width: 60vw;
-    word-break: break-all;
+    word-break: break-word;
     word-wrap: break-word;
     display: block;
     text-align: center;
