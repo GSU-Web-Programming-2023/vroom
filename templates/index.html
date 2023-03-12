@@ -10,6 +10,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <!-- Login or Register -->
+    <div class="landing-page">
+        <div class="login">
+            <form action="">
+                <label for="username">Username: </label>
+                <input id="username" type="text">
+                <label for="password">Password: </label>
+                <input id="password" type="text">
+                <button type="button" onclick="login();">Login</button>
+                <span class="form-message"></span>
+            </form>
+        </div>
+        <div class="register">
+            <form action="">
+                <label for="username">Username: </label>
+                <input id="username" type="text">
+                <label for="password">Password: </label>
+                <input id="password" type="text">
+                <label for="password2">Confirm Password: </label>
+                <input id="password2" type="text">
+                <button type="button" onclick="register();">Register</button>
+                <span class="form-message"></span>
+            </form>
+        </div>
+    </div>
+
     <!-- HUD -->
     <div class="hud">
         <div class="top-left">

@@ -1,3 +1,75 @@
+// For next time: Create a user and try to log in
+function validateLogin(username) {
+  const url = 'http://localhost:5000/api/endpoint/';
+  const data = {
+    postType : 'validate-login',
+    username : username
+  };
+  response = fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+      if (response['logged_in']) {
+        let elem = document.getElementsByClassName('landing-page')
+        elem.style.display = none;
+      }
+    }
+  ).catch(error => console.error(error));
+}
+
+function login () {
+  const url = 'http://localhost:5000/api/endpoint/';
+  let username = document.getElementById('username').value;
+  let password = document.getElementById('password').value;
+  const data = {
+    postType : 'login',
+    username : username,
+    password : password
+  };
+
+  response = fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => validateLogin(username))
+  .catch(error => console.error(error));
+}
+
+function register () {
+  const url = 'http://localhost:5000/api/endpoint/';
+  let username = document.getElementById('username').value;
+  let password = document.getElementById('password').value;
+  let password2 = document.getElementById('password2').value;
+
+  if (password === password2) {
+    const data = {
+      postType : 'register',
+      username : username,
+      password : password
+    };
+
+    response = fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => console.log(response))
+    .catch(error => console.error(error));
+  } else {
+    let message = document.getElementsByClassName('form-message');
+    message.innerHTML = "Your passwords do not match. Please try again.";
+    message.style.display = "block";
+  }
+}
 
 let chatBubble = document.getElementById('chat-bubble');
 
@@ -46,18 +118,18 @@ window.addEventListener('load', function() {
   });
 });
 
-// POST request
-window.addEventListener('load', function() {
-  const url = 'http://localhost:5000/api/endpoint/';
-  const data = { name : 'Judah Paul' };
+// // Example POST request
+// window.addEventListener('load', function() {
+//   const url = 'http://localhost:5000/api/endpoint/';
+//   const data = { name : 'Judah Paul' };
 
-  response = fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => console.log(response))
-  .catch(error => console.error(error));
-});
+//   response = fetch(url, {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(data)
+//   })
+//   .then(response => console.log(response))
+//   .catch(error => console.error(error));
+// });
