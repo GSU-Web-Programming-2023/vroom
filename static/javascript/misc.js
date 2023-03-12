@@ -1,26 +1,3 @@
-function validateLogin(username) {
-  const url = 'http://localhost:5000/api/endpoint/';
-  const data = {
-    postType : 'validate-login',
-    username : username
-  };
-  response = fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(data => {
-      if (data['logged_in']) {
-        let elem = document.getElementById('landing-page');
-        elem.style.display = "none";
-      }
-    }
-  ).catch(error => console.error(error));
-}
-
 function login () {
   const url = 'http://localhost:5000/api/endpoint/';
   let username = document.getElementById('username1').value;
@@ -38,8 +15,12 @@ function login () {
     },
     body: JSON.stringify(data)
   })
-  .then(response => validateLogin(username))
-  .catch(error => console.error(error));
+  .then(response => response.json())
+  .then(data => {
+      console.log("Welcome back {data['username']}")
+      let elem = document.getElementById('landing-page');
+      elem.style.display = "none";
+    }).catch(error => console.error(error));
 }
 
 function register () {

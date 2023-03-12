@@ -16,7 +16,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
-    is_logged_in = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f'ID: {self.id}, Name {self.name}'
@@ -37,7 +36,7 @@ def api():
             if exists:
                 user.is_logged_in = True
                 db.session.commit()
-                return { 'logged_in' : user.is_logged_in }
+                return { 'user' : user.username }
             else:
                 return { 'Error' : 'User does not exist' }
         elif "register" == data['postType']:
@@ -47,11 +46,7 @@ def api():
             db.session.add(new_user)
             new_user.is_logged_in = True
             db.session.commit()
-            return { 'registered' : new_user.username }
-        elif "validate-login" == data['postType']:
-            username = data['username']
-            user = User.query.filter_by(username=username).first()
-            return { 'logged_in' : user.is_logged_in }
+            return { 'user' : new_user.username }
         else:
             return { "Error" : "What are you doing?" }
     return { "Error" : "What are you doing?" }
