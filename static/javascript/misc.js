@@ -20,7 +20,7 @@ function login () {
       console.log("Welcome back {data['username']}")
       let elem = document.getElementById('landing-page');
       elem.style.display = "none";
-    }).catch(error => console.error(error));
+    }).catch(error => alert(error));
 }
 
 function register () {
@@ -44,13 +44,11 @@ function register () {
       body: JSON.stringify(data)
     })
     .then(response => {
-        if (response['logged_in']) {
-          let elem = document.getElementByClassName('landing-page')
-          elem.style.display = "none";
-        }
+        let elem = document.getElementByClassName('landing-page')
+        elem.style.display = "none";
       }
     )
-    .catch(error => console.error(error));
+    .catch(error => alert(error));
   } else {
     let message = document.getElementsByClassName('form-message');
     message.innerHTML = "Your passwords do not match. Please try again.";
