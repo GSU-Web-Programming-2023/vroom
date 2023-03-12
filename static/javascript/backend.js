@@ -84,7 +84,7 @@ function register () {
             landing.style.opacity = "0";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
-            startimer();
+            startTimer();
             achievement("1,000 &ndash; Hello World!");
             }
         }).catch(error => alert(error));
