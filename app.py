@@ -2,12 +2,9 @@ from flask import Flask, render_template, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-app = Flask(
-    __name__,
-    template_folder='templates',
-    static_folder='static'
-)
+app = Flask(__name__, template_folder='templates', static_folder='static')
 
+# Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -20,7 +17,8 @@ class User(db.Model):
     def __repr__(self):
         return f'ID: {self.id}, Name {self.username}'
 
-@app.route('/')
+# Routes
+@app.route('/', methods = ['GET'])
 def home():
     return render_template('index.html')
 
