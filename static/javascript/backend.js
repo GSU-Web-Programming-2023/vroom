@@ -14,6 +14,16 @@
 //   .catch(error => console.error(error));
 // });
 
+let loginForm = document.getElementById('login-form');
+let registerForm = document.getElementById('register-form');
+
+loginForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+});
+registerForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+});
+
 function login () {
     const url = 'http://localhost:5000/api/endpoint/';
     let username = document.getElementById('username1').value;
