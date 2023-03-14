@@ -18,12 +18,11 @@ window.addEventListener('load', function() {
 window.addEventListener('load', function() {
   document.addEventListener('keypress', function(event) {
       if (event.key === 'c') {
-      // toggle the display of the element with id "myElement"
       let controls = document.getElementById("hud-controls");
-      if (controls.style.display === "none") {
-        controls.style.display = "block";
+      if (controls.style.opacity === "0") {
+        controls.style.opacity = "1";
       } else {
-        controls.style.display = "none";
+        controls.style.opacity = "0";
       }
     }
   });
@@ -32,13 +31,12 @@ window.addEventListener('load', function() {
 // Hide HUD Minimap when M is pressed
 window.addEventListener('load', function() {
   document.addEventListener('keypress', function(event) {
-      if (event.key === 'm') {
-        // toggle the display of the element with id "myElement"
-        let controls = document.getElementById("minimap");
-        if (controls.style.display === "none") {
-          controls.style.display = "block";
+        if (event.key === 'm') {
+        let minimap = document.getElementById("minimap");
+        if (minimap.style.opacity === "0") {
+          minimap.style.opacity = "1";
         } else {
-          controls.style.display = "none";
+          minimap.style.opacity = "0";
         }
       }
     });

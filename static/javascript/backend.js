@@ -53,6 +53,10 @@ function login () {
             let landing = document.getElementById('landing-page');
             landing.style.opacity = "0";
             landing.style.display = "none";
+            let hudControls = document.getElementById('hud-controls');
+            hudControls.style.opacity = "1";
+            let miniMap = document.getElementById('minimap');
+            minimap.style.opacity = "1";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
             startTimer();
@@ -94,6 +98,10 @@ function register () {
             let landing = document.getElementById('landing-page');
             landing.style.opacity = "0";
             landing.style.display = "none";
+            let hudControls = document.getElementById('hud-controls');
+            hudControls.style.opacity = "1";
+            let miniMap = document.getElementById('minimap');
+            minimap.style.opacity = "1";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
             startTimer();
