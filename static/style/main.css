@@ -11,6 +11,15 @@ html, body {
     background-color: #333;
 }
 
+.canvas
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .hud{
     opacity: 0;
 }
@@ -113,7 +122,15 @@ html, body {
     width: 100%;
     height: 100%;
     text-align: center;
+    align-items: center;
     display: flex;
+}
+
+@media (max-width: 990px) {
+    #landing-page {
+        display: block;
+        height: 160vh;
+    }
 }
 
 #landing-page > * {
@@ -135,13 +152,9 @@ form > *, .login > *, .register > * {
     margin-block: 0.5em;
 }
 
-.canvas
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+hr {
+    width: 60%;
+    margin: auto;
 }
 
 button {
@@ -170,7 +183,6 @@ button:active {
 }
 
 input[type="text"] {
-    width: 100%;
     padding: 8px 12px;
     margin: 8px 0;
     box-sizing: border-box;
