@@ -52,6 +52,7 @@ function login () {
             console.log(`Welcome back ${data['user']}`)
             let landing = document.getElementById('landing-page');
             landing.style.opacity = "0";
+            landing.style.display = "none";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
             startTimer();
@@ -92,6 +93,7 @@ function register () {
             console.log(`${data['user']} just registered`)
             let landing = document.getElementById('landing-page');
             landing.style.opacity = "0";
+            landing.style.display = "none";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
             startTimer();

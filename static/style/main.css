@@ -112,6 +112,27 @@ html, body {
     z-index: 2000;
     width: 100%;
     height: 100%;
+    text-align: center;
+    display: flex;
+}
+
+#landing-page > * {
+    padding: 2em;
+    width: 60%;
+    margin: auto;
+    margin-block: 2em;
+}
+
+.login {
+    margin-bottom: 2em;
+}
+
+#login-header, #register-header {
+    font-size: 16pt;
+}
+
+form > *, .login > *, .register > * {
+    margin-block: 0.5em;
 }
 
 .canvas
@@ -121,4 +142,46 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+button {
+    background-color: #3474eb; /* Change the color to your preference */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    padding: 12px 24px;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #0d4ec5; /* Change the color to your preference */
+    transform: translateY(-2px); /* Adds a slight upward movement on hover */
+}
+
+button:active {
+    background-color: #0d4ec5; /* Change the color to your preference */
+    transform: translateY(0); /* Resets the movement on click */
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.603);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
