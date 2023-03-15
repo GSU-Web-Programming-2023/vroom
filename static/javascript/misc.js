@@ -6,11 +6,12 @@ window.addEventListener('load', function() {
     let timer = setInterval(function() {
       if (opacity <= 0.1) {
         clearInterval(timer);
-        chatBubble.style.display = 'none';
+        chatBubble.style.opacity = '0';
       }
       chatBubble.style.opacity = opacity;
       opacity -= opacity * 0.1;
     }, 15);
+    i = 0;
   });
 });
 
