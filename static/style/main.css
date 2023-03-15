@@ -111,6 +111,19 @@ html, body {
     opacity: 0;
 }
 
+.page-title {
+    color: white;
+    width: fit-content !important;
+    top: 0;
+    left: calc(50vw - 74.4px);
+    font-size: xx-large;
+    font-family: 'cyberpunk';
+    position: absolute;
+    z-index: 2500;
+    padding: 0 !important;
+    margin: 1em 0 0 0 !important;
+}
+
 #landing-page {
     padding: 0;
     margin: 0;
@@ -130,6 +143,9 @@ html, body {
     #landing-page {
         display: block;
         height: 160vh;
+    }
+    .login {
+        transform: translateY(55px);
     }
 }
 
