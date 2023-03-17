@@ -284,6 +284,7 @@ form > *, .login > *, .register > * {
 hr {
     width: 40%;
     margin: auto;
+    border-style: hidden;
 }
 
 .animated-hr {
