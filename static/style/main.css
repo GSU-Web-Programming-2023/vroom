@@ -7,9 +7,94 @@
     src: url('fonts/cyberpunk.ttf') format('truetype');
 }
 
+.cyberpunk {
+    font-family: 'cyberpunk';
+}
+
 html, body {
     background-color: #333;
 }
+
+/* MARGIN AND PADDING */
+.m-1 { margin: 0.25rem; }
+.mx-1 { margin-left: 0.25rem; margin-right: 0.25rem; }
+.my-1 { margin-top: 0.25rem; margin-bottom: 0.25rem; }
+.mt-1 { margin-top: 0.25rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.ml-1 { margin-left: 0.25rem; }
+.mr-1 { margin-right: 0.25rem; }
+
+.m-2 { margin: 0.5rem; }
+.mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
+.my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.ml-2 { margin-left: 0.5rem; }
+.mr-2 { margin-right: 0.5rem; }
+
+.m-3 { margin: 1rem; }
+.mx-3 { margin-left: 1rem; margin-right: 1rem; }
+.my-3 { margin-top: 1rem; margin-bottom: 1rem; }
+.mt-3 { margin-top: 1rem; }
+.mb-3 { margin-bottom: 1rem; }
+.ml-3 { margin-left: 1rem; }
+.mr-3 { margin-right: 1rem; }
+
+.m-4 { margin: 1.25rem; }
+.mx-4 { margin-left: 1.25rem; margin-right: 1.25rem; }
+.my-4 { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+.mt-4 { margin-top: 1.25rem; }
+.mb-4 { margin-bottom: 1.25rem; }
+.ml-4 { margin-left: 1.25rem; }
+.mr-4 { margin-right: 1.25rem; }
+
+.m-5 { margin: 1.5rem; }
+.mx-5 { margin-left: 1.5rem; margin-right: 1.5rem; }
+.my-5 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
+.mt-5 { margin-top: 1.5rem; }
+.mb-5 { margin-bottom: 1.5rem; }
+.ml-5 { margin-left: 1.5rem; }
+.mr-5 { margin-right: 1.5rem; }
+
+.p-1 { padding: 0.25rem; }
+.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.pt-1 { padding-top: 0.25rem; }
+.pb-1 { padding-bottom: 0.25rem; }
+.pl-1 { padding-left: 0.25rem; }
+.pr-1 { padding-right: 0.25rem; }
+
+.p-2 { padding: 0.5rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.pt-2 { padding-top: 0.5rem; }
+.pb-2 { padding-bottom: 0.5rem; }
+.pl-2 { padding-left: 0.5rem; }
+.pr-2 { padding-right: 0.5rem; }
+
+.p-3 { padding: 1rem; }
+.px-3 { padding-left: 1rem; padding-right: 1rem; }
+.py-3 { padding-top: 1rem; padding-bottom: 1rem; }
+.pt-3 { padding-top: 1rem; }
+.pb-3 { padding-bottom: 1rem; }
+.pl-3 { padding-left: 1rem; }
+.pr-3 { padding-right: 1rem; }
+
+.p-4 { padding: 1.25rem; }
+.px-4 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.py-4 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+.pt-4 { padding-top: 1.25rem; }
+.pb-4 { padding-bottom: 1.25rem; }
+.pl-4 { padding-left: 1.25rem; }
+.pr-4 { padding-right: 1.25rem; }
+
+.p-5 { padding: 1.5rem; }
+.px-5 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.py-5 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.pt-5 { padding-top: 1.5rem; }
+.pb-5 { padding-bottom: 1.5rem; }
+.pl-5 { padding-left: 1.5rem; }
+.pr-5 { padding-right: 1.5rem; }
 
 .canvas
 {
@@ -20,6 +105,30 @@ html, body {
     height: 100%;
 }
 
+.fade-in {
+    opacity: 0;
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.fade-in-slow {
+    opacity: 0;
+    animation-name: fade-in;
+    animation-delay: 2s;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
 .hud{
     opacity: 0;
 }
@@ -32,7 +141,7 @@ html, body {
 }
 
 @media (max-width: 900px) {
-    .hud {
+    .mobile-hide {
         display: none !important;
     }
 }
@@ -94,7 +203,6 @@ html, body {
 #spedometer {
     margin-right: 20px;
     font-size: 70px;
-    font-family: cyberpunk;
 }
 
 #chat-bubble {
@@ -117,7 +225,6 @@ html, body {
     top: 0;
     left: calc(50vw - 74.4px);
     font-size: xx-large;
-    font-family: 'cyberpunk';
     position: absolute;
     z-index: 2500;
     padding: 0 !important;
@@ -149,6 +256,12 @@ html, body {
     }
 }
 
+@media (max-width: 990px) {
+    .mobile-hide {
+        display: none;
+    }
+}
+
 #landing-page > * {
     padding: 2em;
     width: 60%;
@@ -161,7 +274,7 @@ html, body {
 }
 
 #login-header, #register-header {
-    font-size: 16pt;
+    font-size: 18pt;
 }
 
 form > *, .login > *, .register > * {
@@ -169,33 +282,31 @@ form > *, .login > *, .register > * {
 }
 
 hr {
-    width: 60%;
+    width: 40%;
     margin: auto;
 }
+
 .animated-hr {
     width: 0;
     height: 0.5px;
     background-color: white;
     position: relative;
     margin: 20px auto;
-    animation-name: grow;
+    animation-name: animated-hr;
     animation-duration: 1s;
     animation-fill-mode: forwards;
   }
-  
-  @keyframes grow {
+
+@keyframes animated-hr {
     from {
-      width: 0;
-      left: 0;
-      /* left: 50%;
-      transform: translateX(-50%); */
+        width: 0;
+        left: 0;
     }
     to {
-      width: 40%;
-      left: 0;
-      transform: translateX(0);
+        width: 40%;
+        left: 0;
     }
-  }  
+}
 
 button {
     background-color: #3474eb; /* Change the color to your preference */
@@ -205,7 +316,7 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin-block: 1em;
     cursor: pointer;
     padding: 12px 24px;
     border-radius: 4px;

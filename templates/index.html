@@ -9,11 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <!-- Login or Register -->
+    <!-- Login / Register -->
     <div id="landing-page">
-        <h2 class="page-title">VROOM</h2>
-        <div class="login">
-            <span id="login-header">Login Here</span><br><hr class="animated-hr"><br>
+        <h2 class="page-title fade-in cyberpunk">VROOM</h2>
+        <div class="login fade-in">
+            <hr class="animated-hr"><br>
+            <span id="login-header" class="cyberpunk">Login Here!</span>
+            <br><br>
             <form action="" id="login-form">
                 <label for="username1">Username: </label><br>
                 <input id="username1" type="text" required><br>
@@ -21,9 +23,12 @@
                 <input id="password1" type="text" required><br>
                 <button onclick="login();">Login</button>
             </form>
+            <hr class="animated-hr mobile-hide">
         </div>
-        <div class="register">
-            <span id="register-header">New Here? Register Now!</span><br><hr class="animated-hr"><br>
+        <div class="register fade-in">
+            <hr class="animated-hr"><br>
+            <span id="register-header" class="cyberpunk">New Here?<br>Register Now!</span>
+            <br><br>
             <form action="" id="register-form">
                 <label for="username2">Username: </label><br>
                 <input id="username2" type="text" required><br>
@@ -33,10 +38,11 @@
                 <input id="password3" type="text" required><br>
                 <button onclick="register();">Register</button>
             </form>
+            <hr class="animated-hr mobile-hide">
         </div>
     </div>
     <!-- HUD -->
-    <div class="hud">
+    <div class="hud mobile-hide">
         <div class="top-left">
             <div id="timer">
                 <span>Time in game:&nbsp;</span>
@@ -74,7 +80,7 @@
             <span id="chat-bubble"></span>
         </div>
         <div class="bottom-right">
-            <span id="spedometer">99mph</span>
+            <span id="spedometer" class="cyberpunk">99mph</span>
         </div>
     </div>
     <!-- HUD JS -->
@@ -82,7 +88,7 @@
     <script src="{{ url_for('static', filename='javascript/hud/typeWriter.js') }}" async></script>
     <script src="{{ url_for('static', filename='javascript/hud/achievement.js') }}" async></script>
     <!-- GAME JS -->
-    <canvas class="canvas js-canvas"></canvas>
+    <canvas class="canvas js-canvas fade-in-slow"></canvas>
     <script src="{{ url_for('static', filename='javascript/bundle.js') }}"></script>
     <!-- OTHER JS -->
     <script src="{{ url_for('static', filename='javascript/backend.js') }}" async></script>
