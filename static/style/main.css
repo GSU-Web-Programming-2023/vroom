@@ -103,6 +103,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
+    display: none;
 }
 
 .fade-in {
@@ -115,7 +116,6 @@ html, body {
 .fade-in-slow {
     opacity: 0;
     animation-name: fade-in;
-    animation-delay: 2s;
     animation-duration: 2s;
     animation-fill-mode: forwards;
 }
@@ -128,7 +128,7 @@ html, body {
       opacity: 1;
     }
   }
-  
+
 .hud{
     opacity: 0;
 }
@@ -237,7 +237,8 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #00000061;
+    background: url("https://media3.giphy.com/media/qGS2Wbjr0SJWg/giphy.gif?cid=ecf05e47a6ng4xyz1ob60bxavgxtc3ze2u8sl8fvxobl3khd&rid=giphy.gif&ct=g");
+    background-size: cover;
     z-index: 2000;
     width: 100%;
     height: 100%;

@@ -49,6 +49,8 @@ function login () {
           if ('error' in data) {
               alert(data['error']);
           } else {
+            let game = document.getElementById('game');
+            game.style.display = 'block';
             console.log(`Welcome back ${data['user']}`)
             let landing = document.getElementById('landing-page');
             landing.style.opacity = "0";
@@ -94,6 +96,8 @@ function register () {
             if ('error' in data) {
                 alert(data['error']);
             } else {
+            let game = document.getElementById('game');
+            game.style.display = 'block';
             console.log(`${data['user']} just registered`)
             let landing = document.getElementById('landing-page');
             landing.style.opacity = "0";
