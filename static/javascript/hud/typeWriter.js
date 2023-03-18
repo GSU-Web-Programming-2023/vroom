@@ -17,11 +17,11 @@ function typeWriter(text) {
     // add a slight delay between each character typed
     setTimeout(typeWriter, Math.floor(Math.random() * 100), text);
   } else {
-    // make the text disappear after about 4 seconds
+    // make the text disappear after about 5 seconds
     setTimeout(() => {
       span.style.opacity = "0";
       i = 0;
-    }, 4000);
+    }, 5000);
   }
 }
 

@@ -58,10 +58,11 @@ function login () {
             let hudControls = document.getElementById('hud-controls');
             hudControls.style.opacity = "1";
             let miniMap = document.getElementById('minimap');
-            minimap.style.opacity = "1";
+            miniMap.style.opacity = "1";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
             startTimer();
+            setTimeout(function () {typeWriter("Day 0...");}, 2000);
           }
         }).catch(error => alert(error));
     }
@@ -105,11 +106,12 @@ function register () {
             let hudControls = document.getElementById('hud-controls');
             hudControls.style.opacity = "1";
             let miniMap = document.getElementById('minimap');
-            minimap.style.opacity = "1";
+            miniMap.style.opacity = "1";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
             startTimer();
             achievement("1,000 &ndash; Hello World!");
+            setTimeout(function () {typeWriter("Day 0...");}, 2000);
             }
         }).catch(error => alert(error));
       } else {
