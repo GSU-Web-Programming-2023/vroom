@@ -237,7 +237,7 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    background: url("https://media3.giphy.com/media/qGS2Wbjr0SJWg/giphy.gif?cid=ecf05e47a6ng4xyz1ob60bxavgxtc3ze2u8sl8fvxobl3khd&rid=giphy.gif&ct=g");
+    background: url("https://media1.giphy.com/media/Y9ycx1SlA7UV7vqFRD/giphy.gif?cid=ecf05e47poxwlhb5qcxb30upxdjxapcjft6flr5z88dr446z&rid=giphy.gif&ct=g") no-repeat center center fixed;
     background-size: cover;
     z-index: 2000;
     width: 100%;
