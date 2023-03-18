@@ -112,8 +112,8 @@ function register () {
             achievement("1,000 &ndash; Hello World!");
             }
         }).catch(error => alert(error));
-        } else {
-        alert("Your passwords do not match. Please try again.");
-        }
+      } else {
+      alert("Your passwords do not match. Please try again.");
+      }
     }
 }

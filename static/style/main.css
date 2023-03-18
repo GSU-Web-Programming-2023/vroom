@@ -294,12 +294,12 @@ hr {
     background-color: white;
     position: relative;
     margin: 20px auto;
-    animation-name: animated-hr;
+    animation-name: grow-h;
     animation-duration: 1s;
     animation-fill-mode: forwards;
   }
 
-@keyframes animated-hr {
+@keyframes grow-h {
     from {
         width: 0;
         left: 0;
@@ -307,6 +307,24 @@ hr {
     to {
         width: 40%;
         left: 0;
+    }
+}
+
+.separator {
+    width: 1px !important;
+    height: 60%;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: white;
+    animation: grow-v 1s ease;
+}
+
+@keyframes grow-v {
+    from {
+        height: 0;
+    }
+    to {
+        height: 60%;
     }
 }
 
