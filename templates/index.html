@@ -84,6 +84,14 @@
             <span id="spedometer" class="cyberpunk">99mph</span>
         </div>
     </div>
+    <!-- Pause Menu -->
+    <div id="pause-menu">
+        <div class="card">
+            <input id="user" type="hidden" value="">
+            <div class="pause-menu-option" onclick="save();">Save Game</div>
+            <div class="pause-menu-option" onclick="location.reload();">Logout</div>
+        </div>
+    </div>
     <!-- HUD JS -->
     <script src="{{ url_for('static', filename='javascript/hud/timer.js') }}" async></script>
     <script src="{{ url_for('static', filename='javascript/hud/typeWriter.js') }}" async></script>

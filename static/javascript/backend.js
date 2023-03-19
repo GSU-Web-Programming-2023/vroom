@@ -16,6 +16,7 @@
 
 let loginForm = document.getElementById('login-form');
 let registerForm = document.getElementById('register-form');
+let username;
 
 loginForm.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -49,6 +50,9 @@ function login () {
           if ('error' in data) {
               alert(data['error']);
           } else {
+            username = data['user'];
+            let user = document.getElementById('user');
+            user.value = username;
             let game = document.getElementById('game');
             game.style.display = 'block';
             console.log(`Welcome back ${data['user']}`)
@@ -61,8 +65,15 @@ function login () {
             miniMap.style.opacity = "1";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
+            let hours = document.getElementById("hours");
+            let minutes = document.getElementById("minutes");
+            let seconds = document.getElementById("seconds");
+            hours.textContent = data["hours"];
+            minutes.textContent = data["minutes"];
+            seconds.textContent = data["seconds"];
             startTimer();
-            setTimeout(function () {typeWriter("Day 0...");}, 2000);
+            setInterval(function () {save()}, 10000); // Autosave
+            setTimeout(function () {typeWriter("Day 0...");}, 3000);
           }
         }).catch(error => alert(error));
     }
@@ -97,6 +108,9 @@ function register () {
             if ('error' in data) {
                 alert(data['error']);
             } else {
+            username = data['user'];
+            let user = document.getElementById('user');
+            user.value = username;
             let game = document.getElementById('game');
             game.style.display = 'block';
             console.log(`${data['user']} just registered`)
@@ -110,12 +124,45 @@ function register () {
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
             startTimer();
+            setInterval(function () {save()}, 10000); // Autosave
             achievement("1,000 &ndash; Hello World!");
-            setTimeout(function () {typeWriter("Day 0...");}, 2000);
+            setTimeout(function () {typeWriter("Day 0...");}, 3000);
             }
         }).catch(error => alert(error));
       } else {
       alert("Your passwords do not match. Please try again.");
       }
     }
+}
+
+function save () {
+  const url = 'http://localhost:5000/api/endpoint/';
+
+  let username = document.getElementById('user').value;
+  let hours = document.getElementById('hours').textContent;
+  let minutes = document.getElementById('minutes').textContent;
+  let seconds = document.getElementById('seconds').textContent;
+
+  const data = {
+    postType : 'save',
+    username: username,
+    hours : hours,
+    minutes : minutes,
+    seconds : seconds
+  };
+  response = fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+      if ('error' in data) {
+          alert(data['error']);
+      } else {
+        console.log(data)
+      }
+    }).catch(error => alert(error));
 }

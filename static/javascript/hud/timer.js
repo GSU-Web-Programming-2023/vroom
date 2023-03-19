@@ -1,7 +1,7 @@
 function startTimer() {
-    var hours = 00; 
-    var minutes = 00; 
-    var seconds = 00; 
+    let hours = document.getElementById("hours").textContent;
+    let minutes = document.getElementById("minutes").textContent;
+    let seconds = document.getElementById("seconds").textContent;
     var appendSeconds = document.getElementById("seconds")
     var appendMinutes = document.getElementById("minutes")
     var appendHours = document.getElementById("hours")

@@ -13,6 +13,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+    seconds_in_game = db.Column(db.Integer, nullable=False, default=0)
 
     def __repr__(self):
         return f'ID: {self.id}, Name {self.username}'
@@ -31,10 +32,17 @@ def api():
             password = data['password']
             user = User.query.filter_by(username=username, password=password).first()
             exists = user is not None
+            hours, seconds_remainder = divmod(user.seconds_in_game, 3600)
+            minutes, seconds = divmod(seconds_remainder, 60)
+            response = { 
+                'user' : user.username,
+                'hours' : hours,
+                'minutes' : minutes,
+                'seconds' : seconds
+            }
             if exists:
-                user.is_logged_in = True
                 db.session.commit()
-                return { 'user' : user.username }
+                return response
             else:
                 return {'error': 'A user with that username and password does not exist.'}
         elif "register" == data['postType']:
@@ -50,6 +58,16 @@ def api():
                 else:
                     return {'error': str(e)}
             return { 'user' : new_user.username }
+        elif "save" == data['postType']:
+            username = data["username"]
+            hours = data["hours"]
+            minutes = data["minutes"]
+            seconds = data["seconds"]
+            user = User.query.filter_by(username=username).first()
+            secondsTotal = int(seconds) + (int(hours)*3600) + (int(minutes)*60)
+            user.seconds_in_game = secondsTotal
+            db.session.commit()
+            return { 'user' : user.username, 'saved' : True }
         else:
             return {'error': 'What are you doing?'}
     return {'error': 'What are you doing?'}

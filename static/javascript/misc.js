@@ -42,3 +42,17 @@ window.addEventListener('load', function() {
       }
     });
   });
+
+// Show/Hide Pause Menu
+window.addEventListener('load', function() {
+  document.addEventListener('keypress', function(event) {
+    if (event.key === 'p') {
+      let menu = document.getElementById("pause-menu");
+      if (menu.style.display === "none") {
+        menu.style.display = "flex";
+      } else {
+        menu.style.display = "none";
+      }
+    }
+  });
+});
