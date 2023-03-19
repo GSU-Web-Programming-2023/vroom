@@ -15,7 +15,7 @@ window.addEventListener('load', function() {
   });
 });
 
-// Hide HUD controls when C is pressed
+// Show/Hide HUD controls when C is pressed
 window.addEventListener('load', function() {
   document.addEventListener('keypress', function(event) {
       if (event.key === 'c') {
@@ -29,7 +29,7 @@ window.addEventListener('load', function() {
   });
 });
 
-// Hide HUD Minimap when M is pressed
+// Show/Hide HUD Minimap when M is pressed
 window.addEventListener('load', function() {
   document.addEventListener('keypress', function(event) {
         if (event.key === 'm') {
@@ -43,11 +43,12 @@ window.addEventListener('load', function() {
     });
   });
 
-// Show/Hide Pause Menu
+// Show/Hide Pause Menu when M is pressed
 window.addEventListener('load', function() {
+  let menu = document.getElementById("pause-menu");
+  menu.style.display = "none";
   document.addEventListener('keypress', function(event) {
     if (event.key === 'p') {
-      let menu = document.getElementById("pause-menu");
       if (menu.style.display === "none") {
         menu.style.display = "flex";
       } else {
