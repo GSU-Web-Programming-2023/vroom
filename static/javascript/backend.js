@@ -51,8 +51,11 @@ function login () {
               alert(data['error']);
           } else {
             username = data['user'];
-            let user = document.getElementById('user');
-            user.value = username;
+            let user_elem = document.getElementById('user');
+            user_elem.value = username;
+            user_id = data['user-id'];
+            let user_id_elem = document.getElementById('user-id');
+            user_id_elem.value = user_id;
             let game = document.getElementById('game');
             game.style.display = 'block';
             console.log(`Welcome back ${data['user']}`)
@@ -72,7 +75,7 @@ function login () {
             minutes.textContent = data["minutes"];
             seconds.textContent = data["seconds"];
             startTimer();
-            setInterval(function () {save()}, 10000); // Autosave
+            setInterval(function () {save()}, 4000); // Autosave every 4 seconds
             setTimeout(function () {typeWriter("Day 0...");}, 3000);
           }
         }).catch(error => alert(error));
@@ -109,8 +112,11 @@ function register () {
                 alert(data['error']);
             } else {
             username = data['user'];
-            let user = document.getElementById('user');
-            user.value = username;
+            let user_elem = document.getElementById('user');
+            user_elem.value = username;
+            user_id = data['user-id'];
+            let user_id_elem = document.getElementById('user-id');
+            user_id_elem.value = user_id;
             let game = document.getElementById('game');
             game.style.display = 'block';
             console.log(`${data['user']} just registered`)
@@ -124,8 +130,7 @@ function register () {
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
             startTimer();
-            setInterval(function () {save()}, 10000); // Autosave
-            achievement("1,000 &ndash; Hello World!");
+            setInterval(function () {save()}, 4000); // Autosave every 4 seconds
             setTimeout(function () {typeWriter("Day 0...");}, 3000);
             }
         }).catch(error => alert(error));
@@ -162,7 +167,12 @@ function save () {
       if ('error' in data) {
           alert(data['error']);
       } else {
-        console.log(data)
+        console.log(data);
+
+        // Check for Achievements
+        if (data['logins'] == 1 && !data['earnedA1']) {
+          achievement(1);
+        }
       }
     }).catch(error => alert(error));
 }
