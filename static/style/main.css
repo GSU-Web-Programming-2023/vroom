@@ -231,8 +231,8 @@ html, body {
 
 .card {
     position: relative;
-    background-color: #333;
     padding: 1em;
+    background-color: #645f5fbd;
 }
 
 .pause-menu-option {
@@ -241,6 +241,11 @@ html, body {
     background-color: #959595;
     padding: 1em;
     font-family: monospace;
+}
+
+.pause-menu-option:hover {
+    background-color: #7c7c7c; /* Change the color to your preference */
+    transform: translateY(-2px); /* Adds a slight upward movement on hover */
 }
 
 .achievement-banner {
