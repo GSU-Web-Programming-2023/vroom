@@ -193,11 +193,8 @@ html, body {
 }
 
 #minimap {
-    max-width: 6em;
-    max-height: 6em;
-    border-radius: 300px;
-    padding: 6em 4.5em;
-    background-color: #00000061;
+    border-radius: 200px;
+    background-color: #0000003d;
 }
 
 #spedometer {
@@ -241,6 +238,7 @@ html, body {
     background-color: #959595;
     padding: 1em;
     font-family: monospace;
+    cursor: pointer;
 }
 
 .pause-menu-option:hover {

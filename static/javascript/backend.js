@@ -68,6 +68,8 @@ function login () {
             miniMap.style.opacity = "1";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
+            let pauseMenu = document.getElementById('pause-menu');
+            pauseMenu.style.display = "none";
             let hours = document.getElementById("hours");
             let minutes = document.getElementById("minutes");
             let seconds = document.getElementById("seconds");
@@ -129,6 +131,8 @@ function register () {
             miniMap.style.opacity = "1";
             let hud = document.getElementsByClassName('hud')[0];
             hud.style.opacity = "1";
+            let pauseMenu = document.getElementById('pause-menu');
+            pauseMenu.style.display = "none";
             startTimer();
             setInterval(function () {save()}, 4000); // Autosave every 4 seconds
             setTimeout(function () {typeWriter("Day 0...");}, 3000);
