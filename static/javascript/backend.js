@@ -174,5 +174,5 @@ function save () {
           achievement(1);
         }
       }
-    }).catch(error => alert(error));
+    }).catch(error => console.log(error));
 }
