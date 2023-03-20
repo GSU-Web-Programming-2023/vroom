@@ -28,6 +28,9 @@ import carBackLightsBrakeSource from '../models/car/backLightsBrake.glb'
 import carBackLightsReverseSource from '../models/car/backLightsReverse.glb'
 import carAntenaSource from '../models/car/antena.glb'
 
+import elonSource from '../models/npcs/elon.glb'
+import elonCollisionSource from '../models/npcs/elonCollision.glb'
+
 export default class Resources extends EventEmitter
 {
     constructor()
@@ -61,7 +64,10 @@ export default class Resources extends EventEmitter
             { name: 'carWheel', source: carWheelSource },
             { name: 'carBackLightsBrake', source: carBackLightsBrakeSource },
             { name: 'carBackLightsReverse', source: carBackLightsReverseSource },
-            { name: 'carAntena', source: carAntenaSource }
+            { name: 'carAntena', source: carAntenaSource },
+            
+            { name: 'elon', source: elonSource },
+            { name: 'elonCollision', source: elonCollisionSource }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>

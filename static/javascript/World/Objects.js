@@ -36,18 +36,24 @@ export default class Objects
                 offset: new THREE.Vector3(0, 0, 0),
                 mass: 0
             },
+            {
+                base: this.resources.items.elon.scene,
+                collision: this.resources.items.elonCollision.scene,
+                offset: new THREE.Vector3(0, 0, 2),
+                mass: 15
+            },
             // {
             //     base: this.resources.items.dynamicSphereBase.scene,
             //     collision: this.resources.items.dynamicSphereCollision.scene,
             //     offset: new THREE.Vector3(0, 0, 0),
             //     mass: 2
             // },
-            {
-                base: this.resources.items.dynamicBoxBase.scene,
-                collision: this.resources.items.dynamicBoxCollision.scene,
-                offset: new THREE.Vector3(0, 0, 2),
-                mass: 2
-            },
+            // {
+            //     base: this.resources.items.dynamicBoxBase.scene,
+            //     collision: this.resources.items.dynamicBoxCollision.scene,
+            //     offset: new THREE.Vector3(0, 0, 2),
+            //     mass: 2
+            // },
             // {
             //     base: this.resources.items.dynamicBoxBase.scene,
             //     collision: this.resources.items.dynamicBoxCollision.scene,
