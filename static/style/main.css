@@ -225,6 +225,8 @@ html, body {
     top: 0;
     margin: 0;
     padding: 0;
+    align-items: center;
+    justify-content: center;
 }
 
 .card {
@@ -234,10 +236,11 @@ html, body {
 }
 
 .pause-menu-option {
-    font-size: large;
-    color: black;
-    background-color: white;
-    margin-bottom: 1em;
+    font-size: x-large;
+    color: #ffffff;
+    background-color: #959595;
+    padding: 1em;
+    font-family: monospace;
 }
 
 .achievement-banner {
