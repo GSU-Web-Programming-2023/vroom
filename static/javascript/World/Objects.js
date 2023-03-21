@@ -39,8 +39,8 @@ export default class Objects
             {
                 base: this.resources.items.elon.scene,
                 collision: this.resources.items.elonCollision.scene,
-                offset: new THREE.Vector3(0, 0, 2),
-                mass: 15
+                offset: new THREE.Vector3(-7, -5, 0),
+                mass: 10
             },
             // {
             //     base: this.resources.items.dynamicSphereBase.scene,
