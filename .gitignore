@@ -7,6 +7,9 @@ env
 # Parcel cache
 .cache
 
+# sqlite3
+instance
+
 # Python Cache
 __pycache__
 
