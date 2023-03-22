@@ -28,8 +28,11 @@ import carBackLightsBrakeSource from '../models/car/backLightsBrake.glb'
 import carBackLightsReverseSource from '../models/car/backLightsReverse.glb'
 import carAntenaSource from '../models/car/antena.glb'
 
-import elonSource from '../models/npcs/elon.glb'
-import elonCollisionSource from '../models/npcs/elonCollision.glb'
+import elonSource from '../models/npcs/elon/base.glb'
+import elonCollisionSource from '../models/npcs/elon/collision.glb'
+
+import pebbleSource from '../models/pebble/base.glb'
+import pebbleCollisionSource from '../models/pebble/collision.glb'
 
 export default class Resources extends EventEmitter
 {
@@ -67,7 +70,10 @@ export default class Resources extends EventEmitter
             { name: 'carAntena', source: carAntenaSource },
             
             { name: 'elon', source: elonSource },
-            { name: 'elonCollision', source: elonCollisionSource }
+            { name: 'elonCollision', source: elonCollisionSource },
+
+            { name: 'pebble', source: pebbleSource },
+            { name: 'pebbleCollision', source: pebbleCollisionSource }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>

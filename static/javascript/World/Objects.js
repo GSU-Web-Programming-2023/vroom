@@ -42,6 +42,12 @@ export default class Objects
                 offset: new THREE.Vector3(-7, -5, 0),
                 mass: 10
             },
+            {
+                base: this.resources.items.pebble.scene,
+                collision: this.resources.items.pebbleCollision.scene,
+                offset: new THREE.Vector3(-3, -3, 6),
+                mass: 50
+            },
             // {
             //     base: this.resources.items.dynamicSphereBase.scene,
             //     collision: this.resources.items.dynamicSphereCollision.scene,
@@ -55,30 +61,41 @@ export default class Objects
             //     mass: 2
             // },
             // {
-            //     base: this.resources.items.dynamicBoxBase.scene,
-            //     collision: this.resources.items.dynamicBoxCollision.scene,
-            //     offset: new THREE.Vector3(0, 0, 4),
-            //     mass: 2
-            // },
-            // {
-            //     base: this.resources.items.dynamicComplexBase.scene,
-            //     collision: this.resources.items.dynamicComplexCollision.scene,
-            //     offset: new THREE.Vector3(0, 0, 4),
-            //     mass: 2
-            // },
-            // {
             //     base: this.resources.items.dynamicComplexBase.scene,
             //     collision: this.resources.items.dynamicComplexCollision.scene,
             //     offset: new THREE.Vector3(0, 0, 7),
             //     mass: 2
             // },
-            // {
-            //     base: this.resources.items.dynamicComplexBase.scene,
-            //     collision: this.resources.items.dynamicComplexCollision.scene,
-            //     offset: new THREE.Vector3(3, 3, 3),
-            //     mass: 2
-            // }
         ]
+
+        // Define the initial position of the first object
+        let x = 0;
+        let y = 0;
+        let z = 0;
+
+        // Loop to append 100 object to the list
+        for (let i = 0; i < 100; i++) {
+            // Define a random distance between 50 and 70 units
+            const distance = Math.floor(Math.random() * 71) + 40;
+
+            // Define a random angle between 0 and 2 * PI radians
+            const angle = Math.random() * 2 * Math.PI;
+
+            // Calculate the x and y offsets for the object using the distance and angle
+            const xOffset = distance * Math.cos(angle);
+            const yOffset = distance * Math.sin(angle);
+
+            // Create a new object with the current position
+            const object = {
+                base: this.resources.items.pebble.scene,
+                collision: this.resources.items.pebbleCollision.scene,
+                offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                mass: 50
+            };
+
+            // Append the object to the list
+            this.list.push(object);
+        }
     }
 
     setParsers()
