@@ -78,7 +78,7 @@ function login () {
             seconds.textContent = data["seconds"];
             startTimer();
             setInterval(function () {save()}, 4000); // Autosave every 4 seconds
-            setTimeout(function () {typeWriter("Day 0...");}, 3000);
+            setTimeout(function () {typeWriter(`Welcome back ${data['user']}`);}, 3000);
           }
         }).catch(error => alert(error));
     }
@@ -113,29 +113,28 @@ function register () {
             if ('error' in data) {
                 alert(data['error']);
             } else {
-            username = data['user'];
-            let user_elem = document.getElementById('user');
-            user_elem.value = username;
-            user_id = data['user-id'];
-            let user_id_elem = document.getElementById('user-id');
-            user_id_elem.value = user_id;
-            let game = document.getElementById('game');
-            game.style.display = 'block';
-            console.log(`${data['user']} just registered`)
-            let landing = document.getElementById('landing-page');
-            landing.style.opacity = "0";
-            landing.style.display = "none";
-            let hudControls = document.getElementById('hud-controls');
-            hudControls.style.opacity = "1";
-            let miniMap = document.getElementById('minimap');
-            miniMap.style.opacity = "1";
-            let hud = document.getElementsByClassName('hud')[0];
-            hud.style.opacity = "1";
-            let pauseMenu = document.getElementById('pause-menu');
-            pauseMenu.style.display = "none";
-            startTimer();
-            setInterval(function () {save()}, 4000); // Autosave every 4 seconds
-            setTimeout(function () {typeWriter("Day 0...");}, 3000);
+              username = data['user'];
+              let user_elem = document.getElementById('user');
+              user_elem.value = username;
+              user_id = data['user-id'];
+              let user_id_elem = document.getElementById('user-id');
+              user_id_elem.value = user_id;
+              let game = document.getElementById('game');
+              game.style.display = 'block';
+              console.log(`${data['user']} just registered`)
+              let landing = document.getElementById('landing-page');
+              landing.style.opacity = "0";
+              landing.style.display = "none";
+              let hudControls = document.getElementById('hud-controls');
+              hudControls.style.opacity = "1";
+              let miniMap = document.getElementById('minimap');
+              miniMap.style.opacity = "1";
+              let hud = document.getElementsByClassName('hud')[0];
+              hud.style.opacity = "1";
+              let pauseMenu = document.getElementById('pause-menu');
+              pauseMenu.style.display = "none";
+              startTimer();
+              setInterval(function () {save()}, 4000); // Autosave every 4 seconds
             }
         }).catch(error => alert(error));
       } else {
