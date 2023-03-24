@@ -14,23 +14,23 @@ export default class Floor {
 
     // Texture
     let texture = new THREE.TextureLoader();
-    this.updateMaterial = () => {
-        texture.load('../../static/images/floor_texture.jpg', (loadedTexture) => {
+    this.updateMaterial = function() {
+        texture.load('../../static/images/floor_texture.jpg', function(loadedTexture) {
             loadedTexture.wrapS = THREE.RepeatWrapping;
             loadedTexture.wrapT = THREE.RepeatWrapping;
-            loadedTexture.repeat.set(100, 100);
+            loadedTexture.repeat.set(100, 100); // Set a high number of repetitions
             loadedTexture.needsUpdate = true;
 
             this.material.uniforms.tBackground.value = loadedTexture;
             this.material.needsUpdate = true;
 
             // Create the geometry in the onLoad callback function
-            this.geometry = new THREE.PlaneBufferGeometry(loadedTexture.image.width, loadedTexture.image.height, 50, 50);
+            this.geometry = new THREE.PlaneBufferGeometry(1000, 1000, 50, 50); // Increase the size of the plane geometry
             this.mesh = new THREE.Mesh(this.geometry, this.material);
             this.mesh.frustumCulled = false;
             this.container.add(this.mesh);
-        });
-    };
+        }.bind(this));
+    }.bind(this);
 
     this.updateMaterial();
 

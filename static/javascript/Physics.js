@@ -120,7 +120,7 @@ export default class Physics
         this.car.options.wheelHeight = 0.24
         this.car.options.wheelSuspensionStiffness = 25
         this.car.options.wheelSuspensionRestLength = 0.1
-        this.car.options.wheelFrictionSlip = 5
+        this.car.options.wheelFrictionSlip = 1000
         this.car.options.wheelDampingRelaxation = 1.8
         this.car.options.wheelDampingCompression = 1.5
         this.car.options.wheelMaxSuspensionForce = 100000
@@ -131,8 +131,8 @@ export default class Physics
         this.car.options.controlsSteeringSpeed = 0.005
         this.car.options.controlsSteeringMax = Math.PI * 0.17
         this.car.options.controlsSteeringQuad = false
-        this.car.options.controlsAcceleratinMaxSpeed = 0.018
-        this.car.options.controlsAcceleratinMaxSpeedBoost = 0.11
+        this.car.options.controlsAcceleratinMaxSpeed = 0.078
+        this.car.options.controlsAcceleratinMaxSpeedBoost = 0.14
         this.car.options.controlsAcceleratingSpeed = 2
         this.car.options.controlsAcceleratingSpeedBoost = 3.5
         this.car.options.controlsAcceleratingQuad = true
@@ -348,6 +348,7 @@ export default class Physics
                 case 'ArrowRight':
                 case 'd':
                     this.car.controls.actions.right = true
+                    this.car.controls.steering = 0
                     break
 
                 case 'ArrowDown':
@@ -359,6 +360,7 @@ export default class Physics
                 case 'q':
                 case 'a':
                     this.car.controls.actions.left = true
+                    this.car.controls.steering = 0
                     break
 
                 case ' ':
@@ -384,6 +386,7 @@ export default class Physics
                 case 'ArrowRight':
                 case 'd':
                     this.car.controls.actions.right = false
+                    this.car.controls.steering = 0
                     break
 
                 case 'ArrowDown':
@@ -395,6 +398,7 @@ export default class Physics
                 case 'q':
                 case 'a':
                     this.car.controls.actions.left = false
+                    this.car.controls.steering = 0
                     break
 
                 case ' ':
