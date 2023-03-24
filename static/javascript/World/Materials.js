@@ -40,7 +40,7 @@ export default class Materials
         // Setup
         this.shades = {}
         this.shades.items = {}
-        this.shades.indirectColor = '#d04500'
+        this.shades.indirectColor = '#000000'
 
         this.shades.uniforms = {
             uIndirectDistanceAmplitude: 1,
@@ -112,8 +112,8 @@ export default class Materials
     setFloorShadow()
     {
         this.items.floorShadow = new FloorShadowMaterial()
-        this.items.floorShadow.depthWrite = false
-        this.items.floorShadow.shadowColor = '#d04500'
+        this.items.floorShadow.depthWrite = true
+        this.items.floorShadow.shadowColor = '#000000'
         this.items.floorShadow.uniforms.uShadowColor.value = new THREE.Color(this.items.floorShadow.shadowColor)
 
         this.items.floorShadow.updateMaterials = () =>

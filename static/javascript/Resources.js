@@ -31,9 +31,6 @@ import carAntenaSource from '../models/car/antena.glb'
 import elonSource from '../models/npcs/elon/base.glb'
 import elonCollisionSource from '../models/npcs/elon/collision.glb'
 
-import pebbleSource from '../models/pebble/base.glb'
-import pebbleCollisionSource from '../models/pebble/collision.glb'
-
 export default class Resources extends EventEmitter
 {
     constructor()
@@ -70,10 +67,7 @@ export default class Resources extends EventEmitter
             { name: 'carAntena', source: carAntenaSource },
             
             { name: 'elon', source: elonSource },
-            { name: 'elonCollision', source: elonCollisionSource },
-
-            { name: 'pebble', source: pebbleSource },
-            { name: 'pebbleCollision', source: pebbleCollisionSource }
+            { name: 'elonCollision', source: elonCollisionSource }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>

@@ -41,14 +41,18 @@ export default class Camera
         this.instance.up.set(0, 0, 1)
         this.instance.position.copy(this.basePosition)
         this.instance.lookAt(new THREE.Vector3())
-
+    
+        // Set the camera's field of view
+        this.instance.fov = 60; // adjust as needed
+        this.instance.updateProjectionMatrix();
+    
         // Resize event
         this.sizes.on('resize', () =>
         {
             this.instance.aspect = this.sizes.viewport.width / this.sizes.viewport.height
             this.instance.updateProjectionMatrix()
         })
-
+    
         // Time tick
         this.time.on('tick', () =>
         {
@@ -57,13 +61,14 @@ export default class Camera
                 this.position.x += (this.target.x - this.position.x) * this.easing
                 this.position.y += (this.target.y - this.position.y) * this.easing
                 this.position.z += (this.target.z - this.position.z) * this.easing
-
+    
                 this.instance.position.copy(this.position).add(this.basePosition)
-
+    
                 this.instance.lookAt(this.position)
             }
         })
     }
+    
 
     setOrbitControls()
     {

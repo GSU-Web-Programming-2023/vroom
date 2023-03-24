@@ -93,6 +93,7 @@ export default class Physics
         // this.floor.body.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), - Math.PI * 0.5)
 
         this.world.addBody(this.floor.body)
+        
     }
 
     setCar()
