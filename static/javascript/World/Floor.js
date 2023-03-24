@@ -25,7 +25,7 @@ export default class Floor {
             this.material.needsUpdate = true;
 
             // Create the geometry in the onLoad callback function
-            this.geometry = new THREE.PlaneBufferGeometry(loadedTexture.image.width / 10, loadedTexture.image.height / 10, 50, 50);
+            this.geometry = new THREE.PlaneBufferGeometry(loadedTexture.image.width, loadedTexture.image.height, 50, 50);
             this.mesh = new THREE.Mesh(this.geometry, this.material);
             this.mesh.frustumCulled = false;
             this.container.add(this.mesh);
