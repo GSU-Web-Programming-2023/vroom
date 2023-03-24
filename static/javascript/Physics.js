@@ -120,7 +120,7 @@ export default class Physics
         this.car.options.wheelHeight = 0.24
         this.car.options.wheelSuspensionStiffness = 25
         this.car.options.wheelSuspensionRestLength = 0.1
-        this.car.options.wheelFrictionSlip = 1.7
+        this.car.options.wheelFrictionSlip = 2.4
         this.car.options.wheelDampingRelaxation = 1.8
         this.car.options.wheelDampingCompression = 1.5
         this.car.options.wheelMaxSuspensionForce = 100000
