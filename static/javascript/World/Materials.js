@@ -44,8 +44,8 @@ export default class Materials
 
         this.shades.uniforms = {
             uIndirectDistanceAmplitude: 1,
-            uIndirectDistanceStrength: 0.7,
-            uIndirectDistancePower: 2.0,
+            uIndirectDistanceStrength: 0.5,
+            uIndirectDistancePower: 1.5,
             uIndirectAngleStrength: 1.5,
             uIndirectAngleOffset: 0.6,
             uIndirectAnglePower: 1.0,

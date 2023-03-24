@@ -40,7 +40,13 @@ export default class Objects
                 base: this.resources.items.elon.scene,
                 collision: this.resources.items.elonCollision.scene,
                 offset: new THREE.Vector3(-7, -5, 0),
-                mass: 15
+                mass: 25
+            },
+            {
+                base: this.resources.items.tree.scene,
+                collision: this.resources.items.treeCollision.scene,
+                offset: new THREE.Vector3(-2, -9, 0),
+                mass: 100
             },
             // {
             //     base: this.resources.items.dynamicSphereBase.scene,
@@ -61,6 +67,36 @@ export default class Objects
             //     mass: 2
             // },
         ]
+
+        // Spawn 150 trees
+        // Define the initial position of the first object
+        let x = 0;
+        let y = 0;
+        let z = 0;
+
+        // Loop to append 150 object to the list
+        for (let i = 0; i < 150; i++) {
+            // Define a random distance between 50 and 70 units
+            const distance = Math.floor(Math.random() * 71) + 40;
+
+            // Define a random angle between 0 and 2 * PI radians
+            const angle = Math.random() * 2 * Math.PI;
+
+            // Calculate the x and y offsets for the object using the distance and angle
+            const xOffset = distance * Math.cos(angle);
+            const yOffset = distance * Math.sin(angle);
+
+            // Create a new object with the current position
+            const object = {
+                base: this.resources.items.tree.scene,
+                collision: this.resources.items.treeCollision.scene,
+                offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                mass: 100
+            };
+
+            // Append the object to the list
+            this.list.push(object);
+        }
     }
 
     setParsers()
@@ -180,7 +216,6 @@ export default class Objects
             }
         }
 
-
         // Recenter
         if(center.length() > 0)
         {
@@ -194,6 +229,7 @@ export default class Objects
 
         return container
     }
+
 
     add(_options)
     {
