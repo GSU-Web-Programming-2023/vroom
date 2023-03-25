@@ -68,14 +68,14 @@ export default class Objects
             // },
         ]
 
-        // Spawn 150 trees
+        // Spawn 50 trees
         // Define the initial position of the first object
         let x = 0;
         let y = 0;
         let z = 0;
 
-        // Loop to append 150 object to the list
-        for (let i = 0; i < 150; i++) {
+        // Loop to append 50 object to the list
+        for (let i = 0; i < 50; i++) {
             // Define a random distance between 50 and 70 units
             const distance = Math.floor(Math.random() * 71) + 40;
 
