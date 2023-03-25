@@ -39,7 +39,7 @@ export default class Objects
             {
                 base: this.resources.items.elon.scene,
                 collision: this.resources.items.elonCollision.scene,
-                offset: new THREE.Vector3(-7, -5, 0),
+                offset: new THREE.Vector3(-7, -11, 0),
                 mass: 25
             },
             {
@@ -74,8 +74,8 @@ export default class Objects
         let y = 0;
         let z = 0;
 
-        // Loop to append 50 object to the list
-        for (let i = 0; i < 50; i++) {
+        // Loop to append 25 object to the list
+        for (let i = 0; i < 25; i++) {
             // Define a random distance between 50 and 70 units
             const distance = Math.floor(Math.random() * 71) + 40;
 
