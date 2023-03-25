@@ -50,7 +50,7 @@ class Achievement(db.Model):
     def __repr__(self):
         return f'{self.name} &ndash; {self.description}'
 
-def create_default_achievement():
+def create_achievements():
     achievement = Achievement.query.filter_by(id=1).first()
     if achievement is None:
         achievement = Achievement(name='Hello World', description='Log in for the first time.')
@@ -60,7 +60,7 @@ def create_default_achievement():
 # Routes
 @app.route('/', methods = ['GET'])
 def home():
-    create_default_achievement()
+    create_achievements()
     return render_template('index.html')
 
 @app.route('/api/endpoint/', methods = ['POST'])
