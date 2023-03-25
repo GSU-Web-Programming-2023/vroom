@@ -15,6 +15,7 @@ export default class Car
         this.renderer = _options.renderer
         this.camera = _options.camera
         this.debug = _options.debug
+        this.speedometer = document.getElementById('speedometer');
 
         // Set up
         this.container = new THREE.Object3D()
@@ -43,8 +44,7 @@ export default class Car
         this.movement.localAcceleration = new THREE.Vector3()
 
         // Time tick
-        this.time.on('tick', () =>
-        {
+        this.time.on('tick', () => {
             // Movement
             const movementSpeed = new THREE.Vector3()
             movementSpeed.copy(this.chassis.object.position).sub(this.chassis.oldPosition)
@@ -53,6 +53,11 @@ export default class Car
 
             this.movement.localSpeed = this.movement.speed.clone().applyAxisAngle(new THREE.Vector3(0, 0, 1), - this.chassis.object.rotation.z)
             this.movement.localAcceleration = this.movement.acceleration.clone().applyAxisAngle(new THREE.Vector3(0, 0, 1), - this.chassis.object.rotation.z)
+
+            // Update speedometer
+            const speed = this.movement.localSpeed.length() * 300 // convert m/s to mph
+            const speedometerValue = Math.min(Math.max(speed, 0), 140) // clamp between 0 and 140
+            this.speedometer.textContent = speedometerValue.toFixed(0) + "mph"
         })
     }
 
