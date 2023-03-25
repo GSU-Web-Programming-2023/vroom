@@ -50,34 +50,14 @@ function login () {
           if ('error' in data) {
               alert(data['error']);
           } else {
-            username = data['user'];
-            let user_elem = document.getElementById('user');
-            user_elem.value = username;
-            user_id = data['user-id'];
-            let user_id_elem = document.getElementById('user-id');
-            user_id_elem.value = user_id;
-            let game = document.getElementById('game');
-            game.style.display = 'block';
-            console.log(`Welcome back ${data['user']}`)
-            let landing = document.getElementById('landing-page');
-            landing.style.opacity = "0";
-            landing.style.display = "none";
-            let hudControls = document.getElementById('hud-controls');
-            hudControls.style.opacity = "1";
-            let miniMap = document.getElementById('minimap');
-            miniMap.style.opacity = "1";
-            let hud = document.getElementsByClassName('hud')[0];
-            hud.style.opacity = "1";
-            let pauseMenu = document.getElementById('pause-menu');
-            pauseMenu.style.display = "none";
             let hours = document.getElementById("hours");
             let minutes = document.getElementById("minutes");
             let seconds = document.getElementById("seconds");
             hours.textContent = data["hours"];
             minutes.textContent = data["minutes"];
             seconds.textContent = data["seconds"];
-            startTimer();
-            setInterval(function () {save()}, 4000); // Autosave every 4 seconds
+            loadGame(data);
+            console.log(`${data['user']} just logged in`)
             setTimeout(function () {typeWriter(`Welcome back ${data['user']}`);}, 3000);
           }
         }).catch(error => alert(error));
@@ -113,28 +93,8 @@ function register () {
             if ('error' in data) {
                 alert(data['error']);
             } else {
-              username = data['user'];
-              let user_elem = document.getElementById('user');
-              user_elem.value = username;
-              user_id = data['user-id'];
-              let user_id_elem = document.getElementById('user-id');
-              user_id_elem.value = user_id;
-              let game = document.getElementById('game');
-              game.style.display = 'block';
-              console.log(`${data['user']} just registered`)
-              let landing = document.getElementById('landing-page');
-              landing.style.opacity = "0";
-              landing.style.display = "none";
-              let hudControls = document.getElementById('hud-controls');
-              hudControls.style.opacity = "1";
-              let miniMap = document.getElementById('minimap');
-              miniMap.style.opacity = "1";
-              let hud = document.getElementsByClassName('hud')[0];
-              hud.style.opacity = "1";
-              let pauseMenu = document.getElementById('pause-menu');
-              pauseMenu.style.display = "none";
-              startTimer();
-              setInterval(function () {save()}, 4000); // Autosave every 4 seconds
+              console.log(`${data['user']} just registered`);
+              loadGame(data);
             }
         }).catch(error => alert(error));
       } else {
@@ -178,4 +138,29 @@ function save () {
         }
       }
     }).catch(error => console.log(error));
+}
+
+function loadGame(data) {
+  username = data['user'];
+  let user_elem = document.getElementById('user');
+  user_elem.value = username;
+  user_id = data['user-id'];
+  let user_id_elem = document.getElementById('user-id');
+  user_id_elem.value = user_id;
+  let game = document.getElementById('game');
+  game.style.display = 'block';
+  let landing = document.getElementById('landing-page');
+  landing.style.opacity = "0";
+  landing.style.display = "none";
+  let hudControls = document.getElementById('hud-controls');
+  hudControls.style.opacity = "1";
+  let miniMap = document.getElementById('minimap');
+  miniMap.style.opacity = "1";
+  let hud = document.getElementsByClassName('hud')[0];
+  hud.style.opacity = "1";
+  let pauseMenu = document.getElementById('pause-menu');
+  pauseMenu.style.display = "none";
+  startTimer();
+  save()
+  setInterval(function () {save()}, 4000); // Autosave every 4 seconds
 }
