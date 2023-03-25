@@ -340,25 +340,27 @@ export default class Physics
             switch(_event.key)
             {
                 case 'ArrowUp':
-                case 'z':
                 case 'w':
+                case 'W':
                     this.car.controls.actions.up = true
                     break
 
                 case 'ArrowRight':
                 case 'd':
+                case 'D':
                     this.car.controls.actions.right = true
                     this.car.controls.steering = 0
                     break
 
                 case 'ArrowDown':
                 case 's':
+                case 'S':
                     this.car.controls.actions.down = true
                     break
 
                 case 'ArrowLeft':
-                case 'q':
                 case 'a':
+                case 'A':
                     this.car.controls.actions.left = true
                     this.car.controls.steering = 0
                     break
@@ -378,8 +380,8 @@ export default class Physics
             switch(_event.key)
             {
                 case 'ArrowUp':
-                case 'z':
                 case 'w':
+                case 'W':
                     this.car.controls.actions.up = false
                     break
 
@@ -391,12 +393,13 @@ export default class Physics
 
                 case 'ArrowDown':
                 case 's':
+                case 'S':
                     this.car.controls.actions.down = false
                     break
 
                 case 'ArrowLeft':
-                case 'q':
                 case 'a':
+                case 'A':
                     this.car.controls.actions.left = false
                     this.car.controls.steering = 0
                     break
@@ -410,6 +413,7 @@ export default class Physics
                     break
 
                 case 'r':
+                case 'R':
                     this.car.recreate()
                     break
             }
