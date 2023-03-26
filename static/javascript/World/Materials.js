@@ -113,7 +113,7 @@ export default class Materials
     {
         this.items.floorShadow = new FloorShadowMaterial()
         this.items.floorShadow.depthWrite = true
-        this.items.floorShadow.shadowColor = '#d04500'
+        this.items.floorShadow.shadowColor = '#000000'
         this.items.floorShadow.uniforms.uShadowColor.value = new THREE.Color(this.items.floorShadow.shadowColor)
 
         this.items.floorShadow.updateMaterials = () =>

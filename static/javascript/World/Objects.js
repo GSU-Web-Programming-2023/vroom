@@ -8,6 +8,7 @@ export default class Objects
         this.time = _options.time
         this.resources = _options.resources
         this.materials = _options.materials
+        this.shadows = _options.shadows
         this.physics = _options.physics
         this.debug = _options.debug
 
@@ -202,7 +203,6 @@ export default class Objects
             // Create clone mesh with original material
             const mesh = _mesh.clone()
             mesh.material = _mesh.material
-
             return mesh
         }
     }
@@ -302,6 +302,28 @@ export default class Objects
             object.container.position.copy(object.collision.body.position)
             object.container.quaternion.copy(object.collision.body.quaternion)
         })
+
+        // Apply Shadows
+        const bbox = new THREE.Box3().setFromObject(object.container)
+        const size = bbox.getSize(new THREE.Vector3())
+        
+        if (object.container.name === 'staticDemo') {
+            for (const child of object.container.children) {
+                const childBBox = new THREE.Box3().setFromObject(child)
+                const childSize = childBBox.getSize(new THREE.Vector3())
+                this.shadows.add(child, { 
+                    sizeX: childSize.x, 
+                    sizeY: childSize.z, 
+                    offsetZ: 0.3 
+                })
+            }
+        } else {
+            this.shadows.add(object.container, { 
+                sizeX: size.x, 
+                sizeY: size.z, 
+                offsetZ: 0.3 
+            })
+        }              
 
         // Save
         this.items.push(object)

@@ -14,8 +14,8 @@ export default class Shadows
 
         // Set up
         this.alpha = 0.5
-        this.maxDistance = 3
-        this.distancePower = 2
+        this.maxDistance = 3.75
+        this.distancePower = 1.5
         this.zFightingDistance = 0.001
         this.color = '#000000'
         this.wireframeVisible = false
@@ -59,7 +59,7 @@ export default class Shadows
     setSun()
     {
         this.sun = {}
-        this.sun.position = new THREE.Vector3(3, 0, 3)
+        this.sun.position = new THREE.Vector3(2.2, 0, 3)
         this.sun.vector = new THREE.Vector3()
         this.sun.helper = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 1, 0xffffff, 0.1, 0.4)
         this.sun.helper.visible = false
