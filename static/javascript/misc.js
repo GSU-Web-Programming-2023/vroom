@@ -3,7 +3,6 @@ function fadeOut(element) {
   const fadeEffect = setInterval(() => {
     if (opacity < 0.1) {
       clearInterval(fadeEffect);
-      element.style.display = 'none';
     } else {
       opacity -= 0.1;
       element.style.opacity = opacity;
