@@ -42,13 +42,20 @@ export default class Objects
                 base: this.resources.items.elon.scene,
                 collision: this.resources.items.elonCollision.scene,
                 offset: new THREE.Vector3(-7, -11, 0),
-                mass: 25
+                mass: 45
             },
             {
-                name: 'tree1',
+                name: 'crashSite',
+                base: this.resources.items.crashSite.scene,
+                collision: this.resources.items.crashSiteCollision.scene,
+                offset: new THREE.Vector3(-20, -11, 0),
+                mass: 100
+            },
+            {
+                name: 'tree',
                 base: this.resources.items.tree.scene,
                 collision: this.resources.items.treeCollision.scene,
-                offset: new THREE.Vector3(-2, -9, 0),
+                offset: new THREE.Vector3(-7, -7, 0),
                 mass: 100
             },
             // {
@@ -74,36 +81,46 @@ export default class Objects
             // },
         ]
 
-        // Spawn 50 trees
-        // Define the initial position of the first object
-        let x = 0;
-        let y = 0;
-        let z = 0;
-
-        // Loop to append 25 object to the list
-        for (let i = 0; i < 25; i++) {
-            // Define a random distance between 50 and 70 units
-            const distance = Math.floor(Math.random() * 71) + 40;
-
+        // Spawn 75 objects in random locations
+        for (let i = 0; i < 75; i++) {
+            // Define a random distance between 30 and 70 meters
+            const distance = Math.floor(Math.random() * 71) + 30;
+        
             // Define a random angle between 0 and 2 * PI radians
             const angle = Math.random() * 2 * Math.PI;
-
+        
             // Calculate the x and y offsets for the object using the distance and angle
             const xOffset = distance * Math.cos(angle);
             const yOffset = distance * Math.sin(angle);
+        
+            // Initial Position
+            let object;
+            let x = 0;
+            let y = 0;
+            let z = 0;
 
-            // Create a new object with the current position
-            const object = {
-                name: `tree${i}`,
-                base: this.resources.items.tree.scene,
-                collision: this.resources.items.treeCollision.scene,
-                offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
-                mass: 100
-            };
-
+            const rand = Math.random();
+            if (rand < 0.6) { // 60% chance for rocks
+                object = {
+                    name: `rock${i}`,
+                    base: this.resources.items.rock.scene,
+                    collision: this.resources.items.rockCollision.scene,
+                    offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                    mass: 100
+                };
+            } else { // 40% chance for trees
+                object = {
+                    name: `tree${i}`,
+                    base: this.resources.items.tree.scene,
+                    collision: this.resources.items.treeCollision.scene,
+                    offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                    mass: 100
+                };
+            }
+        
             // Append the object to the list
             this.list.push(object);
-        }
+        }  
     }
 
     setParsers()

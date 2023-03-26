@@ -34,6 +34,12 @@ import elonCollisionSource from '../models/npcs/elon/collision.glb'
 import treeSource from '../models/tree/base.glb'
 import treeCollisionSource from '../models/tree/collision.glb'
 
+import rockSource from '../models/rock/base.glb'
+import rockCollisionSource from '../models/rock/collision.glb'
+
+import crashSiteSource from '../models/crashSite/base.glb'
+import crashSiteCollisionSource from '../models/crashSite/collision.glb'
+
 export default class Resources extends EventEmitter
 {
     constructor()
@@ -73,7 +79,13 @@ export default class Resources extends EventEmitter
             { name: 'elonCollision', source: elonCollisionSource },
 
             { name: 'tree', source: treeSource },
-            { name: 'treeCollision', source: treeCollisionSource }
+            { name: 'treeCollision', source: treeCollisionSource },
+
+            { name: 'rock', source: rockSource },
+            { name: 'rockCollision', source: rockCollisionSource },
+
+            { name: 'crashSite', source: crashSiteSource },
+            { name: 'crashSiteCollision', source: crashSiteCollisionSource }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>
