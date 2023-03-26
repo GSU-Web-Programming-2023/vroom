@@ -24,7 +24,7 @@
     "parcel-plugin-asset-copier": "^1.0.0",
     "parcel-plugin-static-files-copy": "^2.1.2",
     "shx": "^0.3.2",
-    "three": "^0.106.2",
+    "three": "^0.111",
     "three-orbit-controls": "^82.1.0",
     "webpack-cli": "^5.0.1"
   },
@@ -38,6 +38,7 @@
     "file-loader": "^6.2.0",
     "gsap": "^2.1.2",
     "raw-loader": "^4.0.2",
+    "stats.js": "^0.17.0",
     "three-gltf-loader": "^1.111.0",
     "webpack": "^5.76.0"
   }

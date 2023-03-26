@@ -31,6 +31,7 @@ export default class
         this.setMaterials()
         this.setFloor()
         this.setShadows()
+        this.setLights()
         this.setPhysics()
         this.setObjects()
         this.setCar()
@@ -70,6 +71,15 @@ export default class
         this.container.add(this.shadows.container)
     }
 
+    setLights() {
+        this.ambientLight = new THREE.AmbientLight(0xffffff, 4);
+        this.container.add(this.ambientLight);
+    
+        this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        this.directionalLight.position.set(1, 1, 1);
+        this.container.add(this.directionalLight);
+    }
+    
     setPhysics()
     {
         this.physics = new Physics({

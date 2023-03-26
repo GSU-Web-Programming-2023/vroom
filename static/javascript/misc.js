@@ -57,3 +57,18 @@ window.addEventListener('load', function() {
     }
   });
 });
+
+// Show/Hide Debug Menu when ` is pressed
+window.addEventListener('load', function() {
+  let menu = document.querySelector(".dg.ac");
+  menu.style.display = "none";
+  document.addEventListener('keypress', function(event) {
+    if (event.key === '\`') {
+      if (menu.style.display === "none") {
+        menu.style.display = "block";
+      } else {
+        menu.style.display = "none";
+      }
+    }
+  });
+});

@@ -175,9 +175,9 @@ export default class Objects
         this.parsers.default = {}
         this.parsers.default.apply = (_mesh) =>
         {
-            // Create clone mesh with normal material
+            // Create clone mesh with original material
             const mesh = _mesh.clone()
-            mesh.material = new THREE.MeshNormalMaterial()
+            mesh.material = _mesh.material
 
             return mesh
         }
