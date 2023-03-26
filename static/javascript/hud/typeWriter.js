@@ -1,8 +1,8 @@
-const span = document.getElementById("chat-bubble");
+const span = document.getElementById("dialogue");
 let typing = false;
 span.i = 0; // Initialize i as a property of span
 
-async function typeWriter(text, delay = 50) {
+async function typeWriter(text, delay = 30) {
   if (span.i == 0) {
     span.style.opacity = "0";
     span.innerHTML = "";
@@ -30,6 +30,11 @@ async function triggerDialogue(dialogue) {
     await typeWriter(text);
   }
   typing = false; // Set typing flag to false
+
+  // Fade out after 5 seconds
+  setTimeout(() => {
+    fadeOut(span);
+  }, 5000);
 }
 
 // // Example of how to use triggerDialogue()

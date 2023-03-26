@@ -1,17 +1,21 @@
-// Hide chat bubble when clicked
-let chatBubble = document.getElementById('chat-bubble');
+function fadeOut(element) {
+  let opacity = 1;
+  const fadeEffect = setInterval(() => {
+    if (opacity < 0.1) {
+      clearInterval(fadeEffect);
+      element.style.display = 'none';
+    } else {
+      opacity -= 0.1;
+      element.style.opacity = opacity;
+    }
+  }, 50);
+}
+
+// Hide dialogue when clicked
+let dialogue = document.getElementById('dialogue');
 window.addEventListener('load', function() {
-  chatBubble.addEventListener('click', function(event) {
-    let opacity = 1;
-    let timer = setInterval(function() {
-      if (opacity <= 0.1) {
-        clearInterval(timer);
-        chatBubble.style.opacity = '0';
-      }
-      chatBubble.style.opacity = opacity;
-      opacity -= opacity * 0.1;
-    }, 15);
-    i = 0;
+  dialogue.addEventListener('click', function(event) {
+    fadeOut(this);
   });
 });
 
