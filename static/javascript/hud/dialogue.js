@@ -25,7 +25,7 @@ async function triggerDialogue(dialogue) {
   span.i = 0; // Reset i
   await typeWriter(dialogue[0]); // Say first piece of dialogue
   for (const text of dialogue.slice(1)) { // Say the rest
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second
+    await new Promise(resolve => setTimeout(resolve, 2000)); // Wait for 2 second
     span.i = 0; // Reset i
     await typeWriter(text);
   }
