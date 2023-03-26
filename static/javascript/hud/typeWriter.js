@@ -1,31 +1,38 @@
 const span = document.getElementById("chat-bubble");
+let typing = false;
+span.i = 0; // Initialize i as a property of span
 
-let i = 0;
-function typeWriter(text) {
-  if (i == 0) {
+async function typeWriter(text, delay = 50) {
+  if (span.i == 0) {
     span.style.opacity = "0";
     span.innerHTML = "";
   }
   span.style.opacity = "1";
-  if (i < text.length) {
-    if (text.charAt(i) === ' '){
+  while (span.i < text.length) {
+    if (text.charAt(span.i) === ' '){
         span.innerHTML += "&nbsp;";
     } else {
-      span.innerText += text.charAt(i);
+      span.innerText += text.charAt(span.i);
     }
-    i++;
-    // add a slight delay between each character typed
-    setTimeout(typeWriter, Math.floor(Math.random() * 100), text);
-  } else {
-    // make the text disappear after about 5 seconds
-    setTimeout(() => {
-      span.style.opacity = "0";
-      i = 0;
-    }, 5000);
+    span.i++;
+    await new Promise(resolve => setTimeout(resolve, delay));
   }
 }
 
-// Example of how to user typeWriter()
-// window.addEventListener('load', function() {
-//   typeWriter("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Pretty useful for testing the character limit of npc dialogue text.");
+async function triggerDialogue(dialogue) {
+  if (typing) return; // Check if already typing
+  typing = true;
+  span.i = 0; // Reset i
+  await typeWriter(dialogue[0]); // Say first piece of dialogue
+  for (const text of dialogue.slice(1)) { // Say the rest
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second
+    span.i = 0; // Reset i
+    await typeWriter(text);
+  }
+  typing = false; // Set typing flag to false
+}
+
+// // Example of how to use triggerDialogue()
+// window.addEventListener('load', async function() {
+//   await triggerDialogue(["Hello, how are you today?", "I'm doing well, thank you for asking.", "That's great to hear!"]);
 // });

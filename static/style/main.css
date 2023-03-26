@@ -204,13 +204,15 @@ html, body {
 
 #chat-bubble {
     width: 60vw;
-    word-break: break-word;
-    word-wrap: break-word;
     display: block;
     text-align: center;
     font-size: xx-large;
     font-family: 'Courier New', Courier, monospace;
-}
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-line;
+  }  
 
 #pause-menu {
     background-color: #00000061;

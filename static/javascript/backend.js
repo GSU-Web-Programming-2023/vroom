@@ -58,7 +58,6 @@ function login () {
             seconds.textContent = data["seconds"];
             loadGame(data);
             console.log(`${data['user']} just logged in`)
-            setTimeout(function () {typeWriter(`Welcome back ${data['user']}`);}, 3000);
           }
         }).catch(error => alert(error));
     }
@@ -162,5 +161,5 @@ function loadGame(data) {
   pauseMenu.style.display = "none";
   startTimer();
   save()
-  setInterval(function () {save()}, 4000); // Autosave every 4 seconds
+  setInterval(() => {save()}, 4000); // Autosave every 4 seconds
 }
