@@ -38,7 +38,7 @@ export default class Objects
                 mass: 0
             },
             {
-                name: 'elon',
+                name: 'elonNPC', // NPC in the name is used to trigger dialogue in Car.js
                 base: this.resources.items.elon.scene,
                 collision: this.resources.items.elonCollision.scene,
                 offset: new THREE.Vector3(-7, -11, 0),
@@ -262,7 +262,18 @@ export default class Objects
         }
         return null; // return null if the object is not found
     }
-    
+
+    getNPCs() {
+        let npcs = [];
+        for (const object of this.items) {
+          if (object.container.name.includes("NPC")) {
+            npcs.push(object.container);
+          }
+        }
+        return npcs;
+    }
+      
+
     add(_options)
     {
         const object = {}
