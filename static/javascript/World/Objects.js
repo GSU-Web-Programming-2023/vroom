@@ -30,6 +30,7 @@ export default class Objects
         // Objects options list
         this.list = [
             {
+                name: 'staticDemo',
                 base: this.resources.items.staticDemoBase.scene,
                 collision: this.resources.items.staticDemoCollision.scene,
                 floorShadowTexture: this.resources.items.staticDemoFloorShadowTexture,
@@ -37,30 +38,35 @@ export default class Objects
                 mass: 0
             },
             {
+                name: 'elon',
                 base: this.resources.items.elon.scene,
                 collision: this.resources.items.elonCollision.scene,
                 offset: new THREE.Vector3(-7, -11, 0),
                 mass: 25
             },
             {
+                name: 'tree1',
                 base: this.resources.items.tree.scene,
                 collision: this.resources.items.treeCollision.scene,
                 offset: new THREE.Vector3(-2, -9, 0),
                 mass: 100
             },
             // {
+            //     name: 'sphere',
             //     base: this.resources.items.dynamicSphereBase.scene,
             //     collision: this.resources.items.dynamicSphereCollision.scene,
             //     offset: new THREE.Vector3(0, 0, 0),
             //     mass: 2
             // },
             // {
+            //     name: 'box',
             //     base: this.resources.items.dynamicBoxBase.scene,
             //     collision: this.resources.items.dynamicBoxCollision.scene,
             //     offset: new THREE.Vector3(0, 0, 2),
             //     mass: 2
             // },
             // {
+            //     name: 'complex',
             //     base: this.resources.items.dynamicComplexBase.scene,
             //     collision: this.resources.items.dynamicComplexCollision.scene,
             //     offset: new THREE.Vector3(0, 0, 7),
@@ -88,6 +94,7 @@ export default class Objects
 
             // Create a new object with the current position
             const object = {
+                name: `tree${i}`,
                 base: this.resources.items.tree.scene,
                 collision: this.resources.items.treeCollision.scene,
                 offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
@@ -230,7 +237,15 @@ export default class Objects
         return container
     }
 
-
+    getObjectByName(name) {
+        for(const object of this.items) {
+            if(object.container.name === name) {
+                return object.container;
+            }
+        }
+        return null; // return null if the object is not found
+    }
+    
     add(_options)
     {
         const object = {}
@@ -238,6 +253,7 @@ export default class Objects
         // Container
         object.container = this.getConvertedMesh(_options.base.children, _options)
         object.container.position.copy(_options.offset)
+        object.container.name = _options.name
         this.container.add(object.container)
 
         // Create physics object

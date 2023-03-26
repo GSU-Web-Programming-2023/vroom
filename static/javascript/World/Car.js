@@ -37,14 +37,14 @@ export default class Car
         // Set Triggers for coming into close proximity with NPCs
         this.time.on('tick', () => {
             // ELon
-            const elon = this.objects.getConvertedMesh(this.resources.items.elon.scene.children);
+            const elon = this.objects.getObjectByName('elon');
             if (elon) {
-                const elonPosition = elon.position.clone().add(new THREE.Vector3(-7, -11, 0)); // Offset from Objects.js
+                const elonPosition = elon.position.clone();
                 const distance = this.chassis.object.position.distanceTo(elonPosition);
                 if (distance < 5) {
                     const dialogue = [
                     "[Elon]: Hey! You there! Come here...",
-                    "[Elon]: It would appear my 'genius' engineers have stranded me here on this god-forsaken planet...",
+                    "[Elon]: It appears my 'genius' engineers have stranded me here on this god-forsaken planet...",
                     "[Elon]: We're gonna have to rewrite the whole stack if we're going to get off this rock...",
                     "[Elon]: Somewhere in this wasteland you should be able to locate my AI assistant, X1-42069...",
                     "[Elon]: Find him. He'll know what to do..."
