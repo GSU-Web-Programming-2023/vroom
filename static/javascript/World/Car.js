@@ -35,25 +35,24 @@ export default class Car
         this.setTransformControls()
 
         // Set Triggers for coming into close proximity with NPCs
+        let elontalkedTo = false;
         this.time.on('tick', () => {
             // ELon
             const elon = this.objects.getObjectByName('elon');
             if (elon) {
                 const elonPosition = elon.position.clone();
                 const distance = this.chassis.object.position.distanceTo(elonPosition);
-                if (distance < 5) {
+                if (distance < 5 && !elontalkedTo) {
                     const dialogue = [
-                    "[Elon]: Hey! You there! Come here...",
-                    "[Elon]: It appears my 'genius' engineers have stranded me here on this god-forsaken planet...",
-                    "[Elon]: We're gonna have to rewrite the whole stack if we're going to get off this rock...",
-                    "[Elon]: Somewhere in this wasteland you should be able to locate my AI assistant, X1-42069...",
-                    "[Elon]: Find him. He'll know what to do..."
+                        "[Elon]: Hey! You there! Come here...",
+                        "[Elon]: It appears my 'genius' engineers have stranded me here on this god-foresaken planet...",
+                        "[Elon]: We're gonna have to rewrite the whole stack if we're going to get off this rock...",
+                        "[Elon]: Somewhere in this wasteland you should be able to locate my AI assistant, X1-42069...",
+                        "[Elon]: Find him. He'll know what to do..."
                     ];
                     triggerDialogue(dialogue);
-                    // Trigger npc_talked_to or something...
+                    elontalkedTo = true;
                 }
-            } else {
-                console.log('Elon not found');
             }
         });        
     }
