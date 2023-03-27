@@ -340,7 +340,7 @@ export default class Car
             "elon": [
                 "[Elon] Hey! You there! Come make yourself useful...",
                 "[Elon] It appears my 'genius' engineers have stranded me here on this rock...",
-                "[Elon] Sigh...we're gonna have to rewrite the whole stack if we're going to get outta here..",
+                "[Elon] Sigh...we're gonna have to rewrite the whole stack if we're gonna get outta here..",
                 "[Elon] Locate my AI assistant, XB1-420-69...",
                 "[Elon] Find him. Surely he'll know what to do..."
             ],
