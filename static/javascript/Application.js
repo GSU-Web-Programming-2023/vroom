@@ -195,7 +195,7 @@ export default class Application
             // Add a container div for the stats panels
             const statsContainer = document.createElement('div');
             statsContainer.setAttribute('id', 'stats-container');
-            statsContainer.style.display = 'flex';
+            statsContainer.style.display = perfFolder.closed ? 'none' : 'flex';
             statsContainer.style.flexDirection = 'row';
             statsContainer.style.justifyContent = 'space-between';
             statsContainer.style.alignItems = 'center';
@@ -220,6 +220,7 @@ export default class Application
             perfFolder.domElement.addEventListener('click', () => {
                 statsContainer.style.display = perfFolder.closed ? 'none' : 'flex';
             });
+            document.querySelector("body > div.dg.ac > div > ul > li:nth-child(3) > div > ul > li").click();
         }
       
         // Update stats on each tick
