@@ -43,8 +43,9 @@ export default class Car
                 "[Elon] Somewhere around here you should be able to locate my AI assistant, XB1-42069...",
                 "[Elon] Find him. He'll know what to do..."
             ],
-            "npc2": [
-            // dialogue for npc2
+            "xb1": [
+                "[XB1] bzzzt... I am XB1-42069... bzzzt...",
+                "[XB1] bzzzt... How may I assist you?.. bzzzt...",
             ],
             // more NPCs and their dialogues
         };

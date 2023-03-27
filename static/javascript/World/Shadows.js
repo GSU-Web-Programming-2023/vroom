@@ -14,8 +14,8 @@ export default class Shadows
 
         // Set up
         this.alpha = 0.5
-        this.maxDistance = 3.75
-        this.distancePower = 1.5
+        this.maxDistance = 10
+        this.distancePower = 1
         this.zFightingDistance = 0.001
         this.color = '#000000'
         this.wireframeVisible = false
@@ -31,6 +31,7 @@ export default class Shadows
             this.debugFolder.add(this, 'alpha').step(0.01).min(0).max(1)
             this.debugFolder.add(this, 'maxDistance').step(0.01).min(0).max(10)
             this.debugFolder.add(this, 'distancePower').step(0.01).min(1).max(5)
+            this.debugFolder.add(this, 'zFightingDistance').step(0.01).min(1).max(5)
             this.debugFolder.add(this, 'wireframeVisible').name('wireframeVisible').onChange(() =>
             {
                 for(const _shadow of this.items)
@@ -59,7 +60,7 @@ export default class Shadows
     setSun()
     {
         this.sun = {}
-        this.sun.position = new THREE.Vector3(2.2, 0, 3)
+        this.sun.position = new THREE.Vector3(0.4, 1, 10)
         this.sun.vector = new THREE.Vector3()
         this.sun.helper = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, 0, 0), 1, 0xffffff, 0.1, 0.4)
         this.sun.helper.visible = false

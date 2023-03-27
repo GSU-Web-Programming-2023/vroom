@@ -31,6 +31,9 @@ import carAntenaSource from '../models/car/antena.glb'
 import elonSource from '../models/npcs/elon/base.glb'
 import elonCollisionSource from '../models/npcs/elon/collision.glb'
 
+import xb1Source from '../models/npcs/xb1/base.glb'
+import xb1CollisionSource from '../models/npcs/xb1/collision.glb'
+
 import treeSource from '../models/tree/base.glb'
 import treeCollisionSource from '../models/tree/collision.glb'
 
@@ -77,6 +80,9 @@ export default class Resources extends EventEmitter
             
             { name: 'elon', source: elonSource },
             { name: 'elonCollision', source: elonCollisionSource },
+            
+            { name: 'xb1', source: xb1Source },
+            { name: 'xb1Collision', source: xb1CollisionSource },
 
             { name: 'tree', source: treeSource },
             { name: 'treeCollision', source: treeCollisionSource },

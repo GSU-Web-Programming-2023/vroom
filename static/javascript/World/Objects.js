@@ -46,6 +46,13 @@ export default class Objects
                 mass: 45
             },
             {
+                name: 'xb1NPC', // NPC in the name is used to trigger dialogue in Car.js
+                base: this.resources.items.xb1.scene,
+                collision: this.resources.items.xb1Collision.scene,
+                offset: new THREE.Vector3(-13, -3, 0),
+                mass: 45
+            },
+            {
                 name: 'crashSite',
                 base: this.resources.items.crashSite.scene,
                 collision: this.resources.items.crashSiteCollision.scene,
