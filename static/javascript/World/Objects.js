@@ -57,7 +57,7 @@ export default class Objects
                 base: this.resources.items.crashSite.scene,
                 collision: this.resources.items.crashSiteCollision.scene,
                 offset: new THREE.Vector3(-20, -11, 0),
-                mass: 100
+                mass: 200
             },
             {
                 name: 'tree',
