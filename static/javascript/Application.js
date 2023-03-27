@@ -129,8 +129,8 @@ export default class Application
 
         this.passes.glowsPass = new ShaderPass(GlowsPass)
         this.passes.glowsPass.color = '#ffcfe0'
-        this.passes.glowsPass.material.uniforms.uPosition.value = new THREE.Vector2(1, 0.5)
-        this.passes.glowsPass.material.uniforms.uRadius.value = 0.7
+        this.passes.glowsPass.material.uniforms.uPosition.value = new THREE.Vector2(0.989, 0.117)
+        this.passes.glowsPass.material.uniforms.uRadius.value = 0
         this.passes.glowsPass.material.uniforms.uColor.value = new THREE.Color(this.passes.glowsPass.color)
         this.passes.glowsPass.material.uniforms.uAlpha.value = 0.55
 

@@ -62,11 +62,11 @@ export default class Car
                 position = npc.position.clone();
                 distance = this.chassis.object.position.distanceTo(position);
             
-                // Check if the player is close enough to trigger dialogue
-                if (distance < 5 && !talkedTo) {
-                    triggerDialogue(currentDialogue);
-                    talkedTo = true;
-                }
+                // Proximity trigger dialogue
+                // if (distance < 5 && !talkedTo) {
+                //     triggerDialogue(currentDialogue);
+                //     talkedTo = true;
+                // }
             
                 // Handle F keypress to trigger dialogue
                 document.removeEventListener('keypress', handleInteract); // Remove previous event listener

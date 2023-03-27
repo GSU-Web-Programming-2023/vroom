@@ -49,7 +49,7 @@ export default class Objects
                 name: 'xb1NPC', // NPC in the name is used to trigger dialogue in Car.js
                 base: this.resources.items.xb1.scene,
                 collision: this.resources.items.xb1Collision.scene,
-                offset: new THREE.Vector3(-13, -3, 0),
+                offset: new THREE.Vector3(-15, -7, 0),
                 mass: 45
             },
             {
