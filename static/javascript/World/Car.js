@@ -338,15 +338,15 @@ export default class Car
         // Set Triggers for coming into close proximity with NPCs
         const npcDialogues = {
             "elon": [
-                "[Elon] Hey! You there! Come here...",
-                "[Elon] It appears my 'genius' engineers have stranded me here on this god-foresaken planet...",
-                "[Elon] Sigh...we're gonna have to rewrite the whole stack if we're going to get off this rock...",
-                "[Elon] Somewhere around here you should be able to locate my AI assistant, XB1-42069...",
-                "[Elon] Find him. He'll know what to do..."
+                "[Elon] Hey! You there! Come make yourself useful...",
+                "[Elon] It appears my 'genius' engineers have stranded me here on this rock...",
+                "[Elon] Sigh...we're gonna have to rewrite the whole stack if we're going to get outta here..",
+                "[Elon] Locate my AI assistant, XB1-420-69...",
+                "[Elon] Find him. Surely he'll know what to do..."
             ],
             "xb1": [
-                "[XB1] bzzzt... I am XB1-42069... bzzzt...",
-                "[XB1] bzzzt... How may I assist you?.. bzzzt...",
+                "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
+                "[XB1] ..bzzt..",
             ],
             // more NPCs and their dialogues
         };
