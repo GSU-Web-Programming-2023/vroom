@@ -5,6 +5,8 @@ export default class Car
 {
     constructor(_options)
     {
+        this.car = {}
+
         // Options
         this.time = _options.time
         this.resources = _options.resources
@@ -35,6 +37,7 @@ export default class Car
         this.setTransformControls()
         this.setProximityIndicator()
         this.setNPCDialogue()
+        this.initAudio()
     }
 
     setMovement()
@@ -381,4 +384,82 @@ export default class Car
             }
         });  
     }
+
+    initAudio() {
+        // Add the sound object to the car object
+        this.car.sound = {
+            brake: new Howl({
+                src: ['static/sounds/car-brake.mp3'],
+                loop: false,
+                volume: 0.2
+            }),
+            boost: new Howl({
+                src: ['static/sounds/car-boost.mp3'],
+                loop: true,
+                volume: 0
+            }),
+            idle: new Howl({
+                src: ['static/sounds/car-idle.mp3'],
+                loop: true,
+                volume: 0
+            }),
+            engineStart: new Howl({
+                src: ['static/sounds/car-engine-start.mp3'],
+                volume: 0.4,
+                onend: () => {
+                    this.car.sound.idle.play();
+                }
+            })
+        };
+    
+        this.car.engineStartPlayed = false;
+        this.car.brakeSoundPlayed = false;
+    
+        this.car.crossfade = (sound1, sound2, duration) => {
+            sound1.fade(sound1.volume(), 0, duration);
+            sound2.fade(sound2.volume(), 0.3, duration);
+        };
+    
+        this.car.setSound = () => {
+            // Engine Start
+            if (this.physics.car.controls.actions.up || this.physics.car.controls.actions.down) {
+                if (!this.car.engineStartPlayed) {
+                    this.car.sound.engineStart.play();
+                    this.car.engineStartPlayed = true;
+                }
+            }
+            
+            // Boost sound
+            if (this.physics.car.controls.actions.boost) {
+                if (!this.car.sound.boost.playing()) {
+                    this.car.crossfade(this.car.sound.idle, this.car.sound.boost, 100);
+                    this.car.sound.boost.play();
+                }
+            } else {
+                if (this.car.sound.boost.playing()) {
+                    this.car.crossfade(this.car.sound.boost, this.car.sound.idle, 100);
+                    this.car.sound.boost.pause();
+                }
+            }
+    
+            // Brake sound
+            if (this.physics.car.controls.actions.brake && !this.car.brakeSoundPlayed) {
+                this.car.sound.brake.play();
+                this.car.brakeSoundPlayed = true;
+            } else if (!this.physics.car.controls.actions.brake) {
+                this.car.sound.brake.stop();
+                this.car.brakeSoundPlayed = false;
+            }
+        };
+    
+        // Call the setSound function on each tick
+        this.time.on('tick', () => {
+            this.car.setSound();
+        });
+    
+        // Start the idle sound after the engine sound has played
+        this.car.sound.engineStart.once('end', () => {
+            this.car.sound.idle.play();
+        });
+    }    
 }
