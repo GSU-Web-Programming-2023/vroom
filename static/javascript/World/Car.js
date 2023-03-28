@@ -340,6 +340,8 @@ export default class Car
     setNPCDialogue() {
         // Set Triggers for coming into close proximity with NPCs
         const npcDialogues = {
+            // Make the names the same as in the Object.js class but lowercase and without 'NPC'
+            // Will not work otherwise
             "elon": [
                 "[Elon] Hey! You there! Come make yourself useful...",
                 "[Elon] It appears my 'genius' engineers have stranded me here on this rock...",
@@ -351,12 +353,15 @@ export default class Car
                 "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
                 "[XB1] ..bzzt..",
             ],
+            "spyballoon": [
+                "[Balloon] Just a totally normal weather balloon, nothing to see here...",
+            ],
             // more NPCs and their dialogues
         };
         
         const npcs = this.objects.getNPCs();
         npcs.forEach(npc => {
-            let talkedTo = false;
+            // let talkedTo = false;
             let position = npc.position.clone();
             let distance = this.chassis.object.position.distanceTo(position);
             let currentDialogue = npcDialogues[npc.name.toLowerCase().replace('npc', '')];
@@ -379,6 +384,7 @@ export default class Car
         
             function handleInteract(event) {
                 if (event.key === 'f' && distance < 5) {
+                    console.log(npc.name.toLowerCase().replace('npc', ''))
                     triggerDialogue(currentDialogue);
                 }
             }
@@ -417,7 +423,7 @@ export default class Car
     
         this.car.crossfade = (sound1, sound2, duration) => {
             sound1.fade(sound1.volume(), 0, duration);
-            sound2.fade(sound2.volume(), 0.3, duration);
+            sound2.fade(sound2.volume(), 0.5, duration);
         };
     
         this.car.setSound = () => {

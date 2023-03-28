@@ -53,6 +53,13 @@ export default class Objects
                 mass: 45
             },
             {
+                name: 'spyBalloonNPC', // NPC in the name is used to trigger dialogue in Car.js
+                base: this.resources.items.spyBalloon.scene,
+                collision: this.resources.items.spyBalloonCollision.scene,
+                offset: new THREE.Vector3(10, -12, -2),
+                mass: 0
+            },
+            {
                 name: 'crashSite',
                 base: this.resources.items.crashSite.scene,
                 collision: this.resources.items.crashSiteCollision.scene,

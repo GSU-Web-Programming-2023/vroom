@@ -43,6 +43,9 @@ import rockCollisionSource from '../models/rock/collision.glb'
 import crashSiteSource from '../models/crashSite/base.glb'
 import crashSiteCollisionSource from '../models/crashSite/collision.glb'
 
+import spyBalloonSource from '../models/npcs/spyBalloon/base.glb'
+import spyBalloonCollisionSource from '../models/npcs/spyBalloon/collision.glb'
+
 export default class Resources extends EventEmitter
 {
     constructor()
@@ -91,7 +94,10 @@ export default class Resources extends EventEmitter
             { name: 'rockCollision', source: rockCollisionSource },
 
             { name: 'crashSite', source: crashSiteSource },
-            { name: 'crashSiteCollision', source: crashSiteCollisionSource }
+            { name: 'crashSiteCollision', source: crashSiteCollisionSource },
+
+            { name: 'spyBalloon', source: spyBalloonSource },
+            { name: 'spyBalloonCollision', source: spyBalloonCollisionSource }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>

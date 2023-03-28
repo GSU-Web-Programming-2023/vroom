@@ -175,7 +175,7 @@ function loadGame(data) {
     game.style.display = 'block';
     hud.style.opacity = '1';
     hud.style.display = 'block';
-    debugMenuEventListener();
+    setTimeout(() => {debugMenuEventListener();}, 1000);
   }, 3000);
 }
 
