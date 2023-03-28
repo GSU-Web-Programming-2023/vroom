@@ -212,6 +212,7 @@ html, body {
 .achievements-pane {
     height: 80%;
     padding: 1em;
+    overflow: scroll;
 }
 
 .achievement {
@@ -219,6 +220,14 @@ html, body {
     border: solid 1px;
     text-align: center;
     font-family: monospace;
+}
+
+.achievement:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.achievements-pane::-webkit-scrollbar {
+    display: none;
 }
 
 #dialogue {
