@@ -13,6 +13,7 @@
 
 html, body {
     background-color: #333;
+    overflow: hidden;
 }
 
 /* MARGIN AND PADDING */
@@ -210,9 +211,11 @@ html, body {
 }
 
 .achievements-pane {
-    height: 80%;
+    height: 100%;
+    width: 20%;
     padding: 1em;
     overflow: scroll;
+    background: linear-gradient(45deg, transparent, #7ba4ff) !important;
 }
 
 .achievement {
@@ -269,6 +272,13 @@ html, body {
     padding: 1em;
     font-family: monospace;
     cursor: pointer;
+    text-align: center;
+}
+
+@media (min-width: 990px) {
+    .pause-menu-option {
+        width: 375px;
+    }
 }
 
 .pause-menu-option:hover {
