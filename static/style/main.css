@@ -136,7 +136,7 @@ html, body {
 .fade-in-slow {
     opacity: 0;
     animation-name: fade-in;
-    animation-duration: 1.5s;
+    animation-duration: 2s;
     animation-fill-mode: forwards;
 }
 
@@ -151,7 +151,8 @@ html, body {
 
 .hud{
     display: none;
-    transition: ease-in-out;
+    transition: ease;
+    animation-duration: 1.5s;
 }
 .hud > * {
     z-index: 750;
