@@ -133,8 +133,8 @@ export default class Physics
         this.car.options.controlsSteeringQuad = false
         this.car.options.controlsAcceleratinMaxSpeed = 0.069
         this.car.options.controlsAcceleratinMaxSpeedBoost = 0.14
-        this.car.options.controlsAcceleratingSpeed = 2
-        this.car.options.controlsAcceleratingSpeedBoost = 3.5
+        this.car.options.controlsAcceleratingSpeed = 1.5
+        this.car.options.controlsAcceleratingSpeedBoost = 3
         this.car.options.controlsAcceleratingQuad = false
         this.car.options.controlsBrakeStrength = 0.45
 
@@ -580,6 +580,8 @@ export default class Physics
             this.car.debugFolder.add(this.car.options, 'controlsSteeringQuad').name('controlsSteeringQuad')
             this.car.debugFolder.add(this.car.options, 'controlsAcceleratingSpeed').step(0.001).min(0).max(30).name('controlsAcceleratingSpeed')
             this.car.debugFolder.add(this.car.options, 'controlsAcceleratingSpeedBoost').step(0.001).min(0).max(30).name('controlsAcceleratingSpeedBoost')
+            this.car.debugFolder.add(this.car.options, 'controlsAcceleratinMaxSpeed').step(0.001).min(0).max(30).name('controlsAcceleratinMaxSpeed')
+            this.car.debugFolder.add(this.car.options, 'controlsAcceleratinMaxSpeedBoost').step(0.001).min(0).max(30).name('controlsAcceleratinMaxSpeedBoost')
             this.car.debugFolder.add(this.car.options, 'controlsAcceleratingQuad').name('controlsAcceleratingQuad')
             this.car.debugFolder.add(this.car.options, 'controlsBrakeStrength').step(0.001).min(0).max(5).name('controlsBrakeStrength')
             this.car.debugFolder.add(this.car, 'recreate')

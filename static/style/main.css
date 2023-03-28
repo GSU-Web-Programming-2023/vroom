@@ -14,7 +14,16 @@
 html, body {
     background: url('../images/loading.gif') no-repeat center center fixed;
     background-color: black !important;
+    background-size: 150px;
     overflow: hidden;
+}
+
+#loading {
+    position: absolute;
+    top: 62%;
+    left: calc(50% - 55px);
+    font-family: monospace;
+    font-size: x-large;
 }
 
 #game {
