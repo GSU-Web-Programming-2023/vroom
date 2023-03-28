@@ -94,7 +94,9 @@
             <input id="user-id" type="hidden" value="">
             <div class="pause-menu-option" onclick="save();location.reload();">Save & Quit</div>
         </div>
-        <div class="card achievements-pane"></div>
+        <div class="card achievements-pane">
+            <span style="margin: 0 auto 1em;width: fit-content;display: block;font-family: monospace;font-size: x-large;">Achievements</span>
+        </div>
     </div>
     <!-- HUD JS -->
     <script src="{{ url_for('static', filename='javascript/hud/timer.js') }}" async></script>
