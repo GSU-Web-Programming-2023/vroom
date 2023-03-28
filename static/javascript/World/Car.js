@@ -426,6 +426,7 @@ export default class Car
                 if (!this.car.engineStartPlayed) {
                     this.car.sound.engineStart.play();
                     this.car.engineStartPlayed = true;
+                    this.car.crossfade(this.car.sound.boost, this.car.sound.idle, 100);
                 }
             }
             
@@ -450,16 +451,19 @@ export default class Car
                 this.car.sound.brake.stop();
                 this.car.brakeSoundPlayed = false;
             }
+
+            if (this.movement.localSpeed.length() < 0.01) {
+                this.car.sound.idle.pause();
+            } else {
+                if (!this.car.sound.idle.playing()) {
+                    this.car.sound.idle.play();
+                }
+            }
         };
     
         // Call the setSound function on each tick
         this.time.on('tick', () => {
             this.car.setSound();
-        });
-    
-        // Start the idle sound after the engine sound has played
-        this.car.sound.engineStart.once('end', () => {
-            this.car.sound.idle.play();
         });
     }    
 }
