@@ -286,11 +286,7 @@ html, body {
     margin: 0;
     padding: 0;
     align-items: center;
-    justify-content: space-between;
-}
-
-.settings {
-    margin-left: 20%;
+    justify-content: space-around;
 }
 
 .card {
