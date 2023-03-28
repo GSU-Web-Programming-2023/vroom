@@ -233,11 +233,11 @@ html, body {
 }
 
 .achievements-pane {
-    height: 90%;
+    height: 100%;
     width: 25%;
-    padding: 1em;
+    padding: 1.35em;
     overflow: scroll;
-    background: linear-gradient(45deg, transparent, #7ba4ff) !important;
+    background: linear-gradient(1deg, #6a6a6a7a, #95a1dd) !important;
 }
 
 .achievement-trophy > i{
@@ -285,7 +285,11 @@ html, body {
     margin: 0;
     padding: 0;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+}
+
+.settings {
+    margin-left: 20%;
 }
 
 .card {
