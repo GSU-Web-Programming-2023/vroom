@@ -55,10 +55,15 @@ function login () {
             for (achievement of achievements) {
               aPane.innerHTML += `
                 <div class='achievement'>
+                  <div class="aIcon">
+                    <i class="fa-solid fa-trophy"></i>
+                  </div>
+                  <div class="aContent">
                     <div class='aName'>${achievement.name}</div>
                     <hr class='animated-hr aHr'>
                     <div class='aDescription'>${achievement.description}</div>
                     <div class='aId'>${achievement.id}</div>
+                  </div>
                 </div>
               `;
             }

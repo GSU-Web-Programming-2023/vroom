@@ -210,6 +210,21 @@ html, body {
     margin-block: 0.5em !important;
 }
 
+.aIcon {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75em;
+    border-inline-end: solid 1px;
+}
+
+.aContent > * {
+    padding-inline: 1em;
+}
+
+.aContent {
+    flex: auto;
+}
+
 .achievements-pane {
     height: 100%;
     width: 20%;
@@ -223,6 +238,8 @@ html, body {
     border: solid 1px;
     text-align: center;
     font-family: monospace;
+    display: flex;
+    animation: fade-in 0.5s ease;
 }
 
 .achievement:not(:last-child) {
