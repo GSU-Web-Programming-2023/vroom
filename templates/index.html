@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-wBvMdfn4y8CJ5o5X9lKkWid+npIgxcAeILtKjFLt+Vk2zvOFo20jJ2YYX9Y46bR8ZG+V7bEGJcEruak7BqDY/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -92,6 +93,14 @@
             <input id="user" type="hidden" value="">
             <input id="user-id" type="hidden" value="">
             <div class="pause-menu-option" onclick="save();location.reload();">Save & Quit</div>
+        </div>
+        <div class="card achievements-pane">
+            <div class="achievement">
+                <div class="aName">Hello World</div>
+                <hr class="animated-hr aHr">
+                <div class="aDescription">Login for the first time.</div>
+                <div class="aId">1</div>
+            </div>
         </div>
     </div>
     <!-- HUD JS -->
