@@ -431,7 +431,8 @@ export default class Car
             }
             
             // Boost sound
-            if (this.physics.car.controls.actions.boost) {
+            if ((this.physics.car.controls.actions.boost && this.physics.car.controls.actions.up) || 
+                (this.physics.car.controls.actions.boost && this.physics.car.controls.actions.down)) {
                 if (!this.car.sound.boost.playing()) {
                     this.car.crossfade(this.car.sound.idle, this.car.sound.boost, 100);
                     this.car.sound.boost.play();
