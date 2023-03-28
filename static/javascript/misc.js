@@ -49,10 +49,13 @@ window.addEventListener('load', function() {
 // Show/Hide Pause Menu when P is pressed
 function togglePauseMenu(){
   let menu = document.getElementById("pause-menu");
+  let hud = document.querySelector(".hud");
   if (menu.style.display === "none") {
     menu.style.display = "flex";
+    hud.style.opacity = "0";
   } else {
     menu.style.display = "none";
+    hud.style.opacity = "1";
   }
 }
 

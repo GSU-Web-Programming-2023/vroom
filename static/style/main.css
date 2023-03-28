@@ -142,6 +142,7 @@ html, body {
 
 .hud{
     display: none;
+    transition: ease-in-out;
 }
 .hud > * {
     z-index: 750;
@@ -237,7 +238,7 @@ html, body {
     width: 25%;
     padding: 1.35em;
     overflow: scroll;
-    background: linear-gradient(45deg, #6a6a6a00, #937c74fc) !important;
+    background: linear-gradient(100deg, #d782649e, #838d99) !important;
 }
 
 .achievement-trophy > i{
