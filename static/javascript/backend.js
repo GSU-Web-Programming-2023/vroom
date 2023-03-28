@@ -50,23 +50,6 @@ function login () {
           if ('error' in data) {
               alert(data['error']);
           } else {
-            let aPane = document.getElementsByClassName("achievements-pane")[0];
-            let achievements = data['achievements'];
-            for (achievement of achievements) {
-              aPane.innerHTML += `
-                <div class='achievement'>
-                  <div class="aIcon">
-                    <i class="fa-solid fa-trophy"></i>
-                  </div>
-                  <div class="aContent">
-                    <div class='aName'>${achievement.name}</div>
-                    <hr class='animated-hr aHr'>
-                    <div class='aDescription'>${achievement.description}</div>
-                    <div class='aId'>${achievement.id}</div>
-                  </div>
-                </div>
-              `;
-            }
             let hours = document.getElementById("hours");
             let minutes = document.getElementById("minutes");
             let seconds = document.getElementById("seconds");
@@ -74,6 +57,7 @@ function login () {
             minutes.textContent = data["minutes"];
             seconds.textContent = data["seconds"];
             loadGame(data);
+            loadAchievements(data);
             console.log(`${data['user']} just logged in`);
           }
         }).catch(error => alert(error));
@@ -193,4 +177,24 @@ function loadGame(data) {
     hud.style.display = 'block';
     debugMenuEventListener();
   }, 3000);
+}
+
+function loadAchievements(data) {
+  let aPane = document.querySelector(".achievements-pane");
+  let achievements = data['achievements'];
+  for (let achievement of achievements) {
+    aPane.innerHTML += `
+      <div class='achievement'>
+        <div class="aIcon">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+        <div class="aContent">
+          <div class='aName'>${achievement.name}</div>
+          <hr class='animated-hr aHr'>
+          <div class='aDescription'>${achievement.description}</div>
+          <div class='aId'>${achievement.id}</div>
+        </div>
+      </div>
+    `;
+  }
 }

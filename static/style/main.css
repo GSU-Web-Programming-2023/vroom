@@ -240,6 +240,10 @@ html, body {
     background: linear-gradient(45deg, transparent, #7ba4ff) !important;
 }
 
+.achievement-trophy > i{
+    transform: translate(15px, 15px);
+}
+
 .achievement {
     padding: 0.5em;
     border: solid 1px;

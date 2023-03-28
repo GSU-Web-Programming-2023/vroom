@@ -137,10 +137,15 @@ def api():
             return response
         elif "achievement" == data['postType']:
             user = User.query.filter_by(id=int(data['user_id'])).first()
-            achievement = Achievement.query.filter_by(id=int(data['achievement_id'])).first()
-            user.earn_achievement(achievement)
+            achievement_obj = Achievement.query.filter_by(id=int(data['achievement_id'])).first()
+            user.earn_achievement(achievement_obj)
             db.session.commit()
-            return {'achievement': repr(achievement)}
+            achievement = {
+                'id': achievement_obj.id,
+                'name': achievement_obj.name,
+                'description': achievement_obj.description,
+            }
+            return {'achievement': achievement}
         else:
             return {'error': 'What are you doing?'}
     return {'error': 'What are you doing?'}
