@@ -151,7 +151,7 @@ export default class Physics
             this.car.chassis.shape = new CANNON.Box(new CANNON.Vec3(this.car.options.chassisDepth * 0.5, this.car.options.chassisWidth * 0.5, this.car.options.chassisHeight * 0.5))
 
             this.car.chassis.body = new CANNON.Body({ mass: this.car.options.chassisMass })
-            this.car.chassis.body.position.set(0, 0, 3)
+            this.car.chassis.body.position.set(0, 0, 1)
             this.car.chassis.body.addShape(this.car.chassis.shape, this.car.options.chassisOffset)
             this.car.chassis.body.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), - Math.PI * 0.5)
 

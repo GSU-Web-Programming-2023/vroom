@@ -426,7 +426,7 @@ export default class Car
                 if (!this.car.engineStartPlayed) {
                     this.car.sound.engineStart.play();
                     this.car.engineStartPlayed = true;
-                    this.car.crossfade(this.car.sound.boost, this.car.sound.idle, 100);
+                    this.car.sound.idle.play();
                 }
             }
             
@@ -442,16 +442,20 @@ export default class Car
                     this.car.sound.boost.pause();
                 }
             }
-    
+        
             // Brake sound
-            if (this.physics.car.controls.actions.brake && !this.car.brakeSoundPlayed) {
+            if (this.physics.car.controls.actions.brake && !this.car.brakeSoundPlayed && this.movement.localSpeed.length() > 0.01) {
                 this.car.sound.brake.play();
                 this.car.brakeSoundPlayed = true;
             } else if (!this.physics.car.controls.actions.brake) {
                 this.car.sound.brake.stop();
                 this.car.brakeSoundPlayed = false;
             }
-
+        
+            // Adjust the volume of the idle sound based on speed
+            const speedVolume = Math.min(0.5, this.movement.localSpeed.length());
+            this.car.sound.idle.volume(speedVolume);
+        
             if (this.movement.localSpeed.length() < 0.01) {
                 this.car.sound.idle.pause();
             } else {
@@ -459,11 +463,11 @@ export default class Car
                     this.car.sound.idle.play();
                 }
             }
-        };
+        };        
     
         // Call the setSound function on each tick
         this.time.on('tick', () => {
             this.car.setSound();
         });
-    }    
+    }
 }

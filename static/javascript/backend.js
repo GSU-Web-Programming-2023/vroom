@@ -157,6 +157,11 @@ function save () {
 }
 
 function loadGame(data) {
+  // load webpack bundle file to start the game
+  const script = document.createElement('script');
+  script.src = 'static/javascript/bundle.js';
+  document.body.appendChild(script);
+  // do stuff with user data
   username = data['user'];
   let user_elem = document.getElementById('user');
   user_elem.value = username;
@@ -164,19 +169,27 @@ function loadGame(data) {
   let user_id_elem = document.getElementById('user-id');
   user_id_elem.value = user_id;
   let game = document.getElementById('game');
-  game.style.display = 'block';
+  game.style.opacity = '0';
+  game.style.visibility = 'visible';
   let landing = document.getElementById('landing-page');
-  landing.style.opacity = "0";
-  landing.style.display = "none";
+  landing.style.opacity = '0';
+  landing.style.visibility = 'hidden';
   let hudControls = document.getElementById('hud-controls');
-  hudControls.style.opacity = "1";
+  hudControls.style.opacity = '1';
   let miniMap = document.getElementById('minimap');
-  miniMap.style.opacity = "1";
+  miniMap.style.opacity = '1';
   let hud = document.getElementsByClassName('hud')[0];
-  hud.style.opacity = "1";
   let pauseMenu = document.getElementById('pause-menu');
-  pauseMenu.style.display = "none";
+  pauseMenu.style.display = 'none';
   startTimer();
-  save()
-  setInterval(() => {save()}, 4000); // Autosave every 4 seconds
+  save();
+  // Autosave every 4 seconds
+  setInterval(() => {save()}, 4000);
+
+  setTimeout(() => {
+    game.style.opacity = '1';
+    game.style.display = 'block';
+    hud.style.opacity = '1';
+    hud.style.display = 'block';
+  }, 3000);
 }

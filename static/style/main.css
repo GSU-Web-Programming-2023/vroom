@@ -12,9 +12,16 @@
 }
 
 html, body {
-    background-color: #333;
+    background: url('../images/loading.gif') no-repeat center center fixed;
+    background-color: black !important;
     overflow: hidden;
 }
+
+#game {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}  
 
 /* MARGIN AND PADDING */
 .m-0 { margin: 0 !important; }
@@ -120,7 +127,7 @@ html, body {
 .fade-in-slow {
     opacity: 0;
     animation-name: fade-in;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
     animation-fill-mode: forwards;
 }
 
@@ -134,7 +141,7 @@ html, body {
   }
 
 .hud{
-    opacity: 0;
+    display: none;
 }
 .hud > * {
     z-index: 750;
@@ -226,8 +233,8 @@ html, body {
 }
 
 .achievements-pane {
-    height: 100%;
-    width: 20%;
+    height: 90%;
+    width: 25%;
     padding: 1em;
     overflow: scroll;
     background: linear-gradient(45deg, transparent, #7ba4ff) !important;
@@ -263,6 +270,7 @@ html, body {
   }  
 
 #pause-menu {
+    display: none;
     background-color: #00000061;
     position: absolute;
     z-index: 1000;
@@ -280,6 +288,10 @@ html, body {
     position: relative;
     padding: 1em;
     background-color: #645f5fbd;
+}
+
+.pause-menu-option:not(:last-child) {
+    margin-bottom: 1em;
 }
 
 .pause-menu-option {
@@ -325,7 +337,7 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    background: url("https://media1.giphy.com/media/Y9ycx1SlA7UV7vqFRD/giphy.gif?cid=ecf05e47poxwlhb5qcxb30upxdjxapcjft6flr5z88dr446z&rid=giphy.gif&ct=g") no-repeat center center fixed;
+    background: url("../images/landing.gif") no-repeat center center fixed;
     background-size: cover;
     z-index: 2000;
     width: 100%;

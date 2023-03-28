@@ -46,32 +46,37 @@ window.addEventListener('load', function() {
     });
   });
 
-// Show/Hide Pause Menu when M is pressed
-window.addEventListener('load', function() {
+// Show/Hide Pause Menu when P is pressed
+function togglePauseMenu(){
   let menu = document.getElementById("pause-menu");
-  menu.style.display = "none";
+  if (menu.style.display === "none") {
+    menu.style.display = "flex";
+  } else {
+    menu.style.display = "none";
+  }
+}
+
+window.addEventListener('load', function() {
   document.addEventListener('keypress', function(event) {
     if (event.key === 'p') {
-      if (menu.style.display === "none") {
-        menu.style.display = "flex";
-      } else {
-        menu.style.display = "none";
-      }
+      togglePauseMenu();
     }
   });
 });
 
 // Show/Hide Debug Menu when ` is pressed
 window.addEventListener('load', function() {
-  let menu = document.querySelector(".dg.ac");
-  menu.style.display = "none";
-  document.addEventListener('keypress', function(event) {
-    if (event.key === '\`') {
-      if (menu.style.display === "none") {
-        menu.style.display = "block";
-      } else {
-        menu.style.display = "none";
+  let debugMenu = document.querySelector(".dg.ac");
+  if (debugMenu) {
+    debugMenu.style.display = "none";
+    document.addEventListener('keypress', function(event) {
+      if (event.key === '\`') {
+        if (debugMenu.style.display === "none") {
+          debugMenu.style.display = "block";
+        } else {
+          debugMenu.style.display = "none";
+        }
       }
-    }
-  });
+    });
+  }
 });
