@@ -65,7 +65,7 @@ window.addEventListener('load', function() {
 });
 
 // Show/Hide Debug Menu when ` is pressed
-window.addEventListener('load', function() {
+function debugMenuEventListener() {
   let debugMenu = document.querySelector(".dg.ac");
   if (debugMenu) {
     debugMenu.style.display = "none";
@@ -79,4 +79,4 @@ window.addEventListener('load', function() {
       }
     });
   }
-});
+}
