@@ -439,7 +439,7 @@ export default class Car
             } else {
                 if (this.car.sound.boost.playing()) {
                     this.car.crossfade(this.car.sound.boost, this.car.sound.idle, 100);
-                    this.car.sound.boost.pause();
+                    this.car.sound.boost.stop();
                 }
             }
         
@@ -451,6 +451,22 @@ export default class Car
                 this.car.sound.brake.stop();
                 this.car.brakeSoundPlayed = false;
             }
+
+            // Honk sound
+            document.addEventListener('keydown', (event) => {
+                let honkHelper = document.querySelector('#honkHelper');
+                if (event.key === 'h' && honkHelper.value == 'false') {
+                    let honkSound = new Howl({src: ['static/sounds/car-honk.mp3'], volume: 0.5, loop: false});
+                    honkSound.play();
+                    honkHelper.value = 'true';
+                }
+            });
+            document.addEventListener('keyup', (event) => {
+                if (event.key === 'h') {
+                    let honkHelper = document.querySelector('#honkHelper');
+                    honkHelper.value = 'false';
+                }
+            });
         
             // Adjust the volume of the idle sound based on speed
             const speedVolume = Math.min(0.7, this.movement.localSpeed.length());
