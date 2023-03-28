@@ -453,7 +453,7 @@ export default class Car
             }
         
             // Adjust the volume of the idle sound based on speed
-            const speedVolume = Math.min(0.5, this.movement.localSpeed.length());
+            const speedVolume = Math.min(0.7, this.movement.localSpeed.length());
             this.car.sound.idle.volume(speedVolume);
         
             if (this.movement.localSpeed.length() < 0.01) {
