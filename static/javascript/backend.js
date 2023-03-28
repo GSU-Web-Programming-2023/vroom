@@ -50,6 +50,18 @@ function login () {
           if ('error' in data) {
               alert(data['error']);
           } else {
+            let aPane = document.getElementsByClassName("achievements-pane")[0];
+            let achievements = data['achievements'];
+            for (achievement of achievements) {
+              aPane.innerHTML += `
+                <div class='achievement'>
+                    <div class='aName'>${achievement.name}</div>
+                    <hr class='animated-hr aHr'>
+                    <div class='aDescription'>${achievement.description}</div>
+                    <div class='aId'>${achievement.id}</div>
+                </div>
+              `;
+            }
             let hours = document.getElementById("hours");
             let minutes = document.getElementById("minutes");
             let seconds = document.getElementById("seconds");
@@ -57,7 +69,7 @@ function login () {
             minutes.textContent = data["minutes"];
             seconds.textContent = data["seconds"];
             loadGame(data);
-            console.log(`${data['user']} just logged in`)
+            console.log(`${data['user']} just logged in`);
           }
         }).catch(error => alert(error));
     }

@@ -63,7 +63,7 @@ def home():
     create_achievements()
     return render_template('index.html')
 
-@app.route('/api/endpoint/', methods = ['POST'])
+@app.route('/api/endpoint/', methods=['POST'])
 def api():
     data = request.get_json()
     if "postType" in data:
@@ -75,12 +75,24 @@ def api():
             if exists:
                 hours, seconds_remainder = divmod(user.seconds_in_game, 3600)
                 minutes, seconds = divmod(seconds_remainder, 60)
-                response = { 
-                    'user' : user.username,
-                    'user-id' : user.id,
-                    'hours' : hours,
-                    'minutes' : minutes,
-                    'seconds' : seconds
+
+                # Retrieve achievements belonging to the user
+                user_achievements = user.achievements.all()
+                aList = []
+                for a in user_achievements:
+                    aList.append({
+                        'id': a.id,
+                        'name': a.name,
+                        'description': a.description
+                    })
+
+                response = {
+                    'user': user.username,
+                    'user-id': user.id,
+                    'hours': hours,
+                    'minutes': minutes,
+                    'seconds': seconds,
+                    'achievements': aList
                 }
                 user.logins += 1
                 db.session.commit()
