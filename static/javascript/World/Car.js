@@ -60,7 +60,7 @@ export default class Car
             this.movement.localAcceleration = this.movement.acceleration.clone().applyAxisAngle(new THREE.Vector3(0, 0, 1), - this.chassis.object.rotation.z)
 
             // Update speedometer
-            const speed = this.movement.localSpeed.length() * 300 // convert m/s to mph
+            const speed = this.movement.localSpeed.length() * 334 // convert speed units to mph
             this.speedometer.textContent = speed.toFixed(0) + "mph"
         })
     }
