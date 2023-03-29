@@ -3,11 +3,11 @@
 ## Overview
 
 This document outlines the control flow for the THREE.js portion of the app (starting from index.js). The app consists of the following components:
-- [Application.js](#application-js)
-- [Resources.js](#resources-js)
-- [Camera.js](#camera-js)
-- [Physics.js](#physics-js)
-- [World.js](#world-js)
+- [Application.js](#applicationjs)
+- [Resources.js](#resourcesjs)
+- [Camera.js](#camerajs)
+- [Physics.js](#physicsjs)
+- [World.js](#worldjs)
 
 ## Application.js
 
