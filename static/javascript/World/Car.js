@@ -428,7 +428,32 @@ export default class Car
         this.car.engineStartPlayed = false;
         this.car.brakeSoundPlayed = false;
     
+        const keyDownHandler = (event) => {
+            let honkHelper = document.querySelector('#honkHelper');
+            if (event.key === 'h' && honkHelper.value == 'false') {
+                let honkSound = new Howl({src: ['static/sounds/car-honk.mp3'], volume: 0.5, loop: false, preload: true});
+                honkSound.play();
+                honkHelper.value = 'true';
+            }
+        };
+
+        const keyUpHandler = (event) => {
+            if (event.key === 'h') {
+                let honkHelper = document.querySelector('#honkHelper');
+                honkHelper.value = 'false';
+            }
+        };
+
         this.car.setSound = () => {
+            // Honk sound
+            // Remove the event listeners before adding new ones
+            document.removeEventListener('keydown', keyDownHandler);
+            document.removeEventListener('keyup', keyUpHandler);
+
+            // Add the event listeners back
+            document.addEventListener('keydown', keyDownHandler);
+            document.addEventListener('keyup', keyUpHandler);
+
             // Engine Start
             if (this.physics.car.controls.actions.up || this.physics.car.controls.actions.down) {
                 if (!this.car.engineStartPlayed) {
@@ -460,22 +485,6 @@ export default class Car
                 this.car.sound.brake.stop();
                 this.car.brakeSoundPlayed = false;
             }
-
-            // Honk sound
-            document.addEventListener('keydown', (event) => {
-                let honkHelper = document.querySelector('#honkHelper');
-                if (event.key === 'h' && honkHelper.value == 'false') {
-                    let honkSound = new Howl({src: ['static/sounds/car-honk.mp3'], volume: 0.5, loop: false});
-                    honkSound.play();
-                    honkHelper.value = 'true';
-                }
-            });
-            document.addEventListener('keyup', (event) => {
-                if (event.key === 'h') {
-                    let honkHelper = document.querySelector('#honkHelper');
-                    honkHelper.value = 'false';
-                }
-            });
         
             // Adjust the volume of the idle sound based on speed
             const speedVolume = Math.min(0.7, this.movement.localSpeed.length());
