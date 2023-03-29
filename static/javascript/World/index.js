@@ -75,7 +75,7 @@ export default class
         this.ambientLight = new THREE.AmbientLight(0xffffff, 3);
         this.container.add(this.ambientLight);
     
-        this.directionalLight = new THREE.DirectionalLight(0xffffff, 3);
+        this.directionalLight = new THREE.DirectionalLight(0xffffff, 3.5);
         this.directionalLight.position.set(10, 2.6, 30);
         this.container.add(this.directionalLight);
 

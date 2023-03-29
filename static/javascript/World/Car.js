@@ -61,8 +61,7 @@ export default class Car
 
             // Update speedometer
             const speed = this.movement.localSpeed.length() * 300 // convert m/s to mph
-            const speedometerValue = Math.min(Math.max(speed, 0), 140) // clamp between 0 and 140
-            this.speedometer.textContent = speedometerValue.toFixed(0) + "mph"
+            this.speedometer.textContent = speed.toFixed(0) + "mph"
         })
     }
 
