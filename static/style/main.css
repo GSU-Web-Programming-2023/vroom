@@ -26,6 +26,26 @@ html, body {
     font-size: x-large;
 }
 
+#loading:after {
+    content: ' .';
+    animation: ellipsis 1s infinite;
+  }
+  
+  @keyframes ellipsis {
+    0% {
+      content: '.';
+    }
+    33% {
+      content: '..';
+    }
+    66% {
+      content: '...';
+    }
+    100% {
+      content: '.';
+    }
+  }
+
 #game {
     display: none;
     opacity: 0;
