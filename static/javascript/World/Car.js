@@ -397,21 +397,25 @@ export default class Car
             brake: new Howl({
                 src: ['static/sounds/car-brake.mp3'],
                 loop: false,
-                volume: 0.2
+                volume: 0.2,
+                preload: true // preload the audio data
             }),
             boost: new Howl({
                 src: ['static/sounds/car-boost.mp3'],
                 loop: true,
-                volume: 0
+                volume: 0.4,
+                preload: true // preload the audio data
             }),
             idle: new Howl({
                 src: ['static/sounds/car-idle.mp3'],
                 loop: true,
-                volume: 0
+                volume: 0.4,
+                preload: true // preload the audio data
             }),
             engineStart: new Howl({
                 src: ['static/sounds/car-engine-start.mp3'],
                 volume: 0.4,
+                preload: true, // preload the audio data
                 onend: () => {
                     this.car.sound.idle.play();
                 }
@@ -420,11 +424,6 @@ export default class Car
     
         this.car.engineStartPlayed = false;
         this.car.brakeSoundPlayed = false;
-    
-        this.car.crossfade = (sound1, sound2, duration) => {
-            sound1.fade(sound1.volume(), 0, duration);
-            sound2.fade(sound2.volume(), 0.5, duration);
-        };
     
         this.car.setSound = () => {
             // Engine Start
@@ -440,12 +439,12 @@ export default class Car
             if ((this.physics.car.controls.actions.boost && this.physics.car.controls.actions.up) || 
                 (this.physics.car.controls.actions.boost && this.physics.car.controls.actions.down)) {
                 if (!this.car.sound.boost.playing()) {
-                    this.car.crossfade(this.car.sound.idle, this.car.sound.boost, 100);
                     this.car.sound.boost.play();
+                    this.car.sound.idle.pause();
                 }
             } else {
                 if (this.car.sound.boost.playing()) {
-                    this.car.crossfade(this.car.sound.boost, this.car.sound.idle, 100);
+                    this.car.sound.idle.play();
                     this.car.sound.boost.stop();
                 }
             }
