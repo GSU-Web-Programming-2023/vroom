@@ -57,7 +57,7 @@ The Resources class is responsible for loading and managing various resources su
   - Load dynamic complex resources.
   - Load car resources.
   - Load Elon resources.
-  - Load Xbox resources.
+  - Load Xb1 resources.
   - Load tree resources.
   - Load rock resources.
   - Load crash site resources.
