@@ -18,6 +18,7 @@ export default class Objects
 
         this.setList()
         this.setParsers()
+        this.setNPCMovement()
 
         // Add all objects from the list
         for(const _options of this.list)
@@ -63,7 +64,7 @@ export default class Objects
                 name: 'spyBalloonNPC', // NPC in the name is used to trigger dialogue in Car.js
                 base: this.resources.items.spyBalloon.scene,
                 collision: this.resources.items.spyBalloonCollision.scene,
-                offset: new THREE.Vector3(10, -12, -2),
+                offset: new THREE.Vector3(10, -12, 4),
                 mass: 0
             },
             {
@@ -275,6 +276,72 @@ export default class Objects
         return container
     }
 
+    setNPCMovement() {
+        this.npcMovementPatterns = {
+          'elonNPC': {
+            type: 'still'
+          },
+          'xb1NPC': {
+            type: 'still'
+          },
+          'r2d2NPC': {
+            type: 'still'
+          },
+          'spyBalloonNPC': {
+            type: 'pingPong',
+            axis: 'y',
+            distance: 20,
+            speed: 0.1,
+            initialPosition: null
+          }
+        };
+        
+        this.time.on('tick', () => {
+          for (const npcName in this.npcMovementPatterns) {
+            const npcObject = this.getObjectByName(npcName);
+        
+            if (npcObject) {
+              // Apply the movement pattern to the corresponding NPC
+              this.applyMovementPattern(npcObject, this.npcMovementPatterns[npcName]);
+            }
+          }
+        });
+      }
+      
+      applyMovementPattern(npcObject, movementPattern) {
+        const object = this.items.find(item => item.container === npcObject);
+        if (!object || !npcObject.position) return;
+      
+        if (movementPattern.type === 'still') {
+          // Do nothing; the NPC will remain stationary.
+        } else if (movementPattern.type === 'pingPong' && movementPattern.axis && movementPattern.distance && movementPattern.speed) {
+          // Bounce back and forth resembling a pacing effect
+          if (!movementPattern.initialPosition) {
+            movementPattern.initialPosition = npcObject.position.clone();
+          }
+          const startPosition = movementPattern.initialPosition.clone();
+          const targetPosition = movementPattern.initialPosition.clone();
+          targetPosition[movementPattern.axis] += movementPattern.distance;
+      
+          const pingPong = (t) => {
+            return t - Math.floor(t / 2) * 2;
+          };
+      
+          const t = (Date.now() * 0.001 * movementPattern.speed) % 2;
+          let lerpFactor = pingPong(t);
+          if (lerpFactor > 1) {
+            lerpFactor = 2 - lerpFactor;
+          }
+      
+          npcObject.position.lerpVectors(startPosition, targetPosition, lerpFactor);
+      
+          // Update the physics body position
+          object.collision.body.position.copy(npcObject.position);
+          object.collision.body.quaternion.copy(npcObject.quaternion);
+        }
+        // Add more movement types here as needed
+    }      
+      
     getObjectByName(name) {
         for(const object of this.items) {
             if(object.container.name === name) {
