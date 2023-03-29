@@ -72,12 +72,20 @@ export default class
     }
 
     setLights() {
-        this.ambientLight = new THREE.AmbientLight(0xffffff, 5);
+        this.ambientLight = new THREE.AmbientLight(0xffffff, 3);
         this.container.add(this.ambientLight);
     
-        this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        this.directionalLight.position.set(1, 1, 1);
+        this.directionalLight = new THREE.DirectionalLight(0xffffff, 3);
+        this.directionalLight.position.set(10, 2.6, 30);
         this.container.add(this.directionalLight);
+
+        let folder = this.debugFolder.addFolder('lights');
+        folder.addColor(this.ambientLight, 'color').name('ambientLightColor');
+        folder.add(this.ambientLight, 'intensity').step(0.01).min(0).max(10).name('ambientLightIntensity');
+        folder.add(this.directionalLight, 'intensity').step(0.01).min(0).max(10).name('directionalLightIntensity');
+        folder.add(this.directionalLight.position, 'x').step(0.01).min(- 30).max(30).name('directionalLightX');
+        folder.add(this.directionalLight.position, 'y').step(0.01).min(- 30).max(30).name('directionalLightY');
+        folder.add(this.directionalLight.position, 'z').step(0.01).min(0).max(30).name('directionalLightZ');
     }
     
     setPhysics()
