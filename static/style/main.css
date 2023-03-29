@@ -194,7 +194,7 @@ html, body {
     left: 0;
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1380px) {
     .bottom-middle {
         transform: translateX(-40%);
     }
