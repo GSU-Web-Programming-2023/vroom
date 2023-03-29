@@ -353,6 +353,9 @@ export default class Car
                 "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
                 "[XB1] ..bzzt..",
             ],
+            "r2d2": [
+                "[R2] ..@@@>>?>?????>..//..",
+            ],
             "spyballoon": [
                 "[Balloon] Just a totally normal weather balloon, nothing to see here...",
             ],
