@@ -421,6 +421,11 @@ export default class Car
                 onend: () => {
                     this.car.sound.idle.play();
                 }
+            }),
+            collision: new Howl({
+                src: ['static/sounds/collision.mp3'],
+                volume: 0.4,
+                preload: true, // preload the audio data
             })
         };
     
@@ -486,7 +491,7 @@ export default class Car
             }
         
             // Adjust the volume of the idle sound based on speed
-            const speedVolume = Math.min(0.7, this.movement.localSpeed.length());
+            let speedVolume = Math.min(0.7, this.movement.localSpeed.length());
             this.car.sound.idle.volume(speedVolume);
         
             if (this.movement.localSpeed.length() < 0.01) {
@@ -496,11 +501,22 @@ export default class Car
                     this.car.sound.idle.play();
                 }
             }
-        };        
+        };
+
+        // Add a collision event listener
+        this.physics.car.chassis.body.addEventListener('collide', (event) => {
+            if (this.movement.localSpeed.length() > 0.1) {
+                // Adjust the volume of the idle sound based on speed
+                let speedVolume = Math.min(0.6, this.movement.localSpeed.length());
+                this.car.sound.collision.volume(speedVolume);
+                this.car.sound.collision.play();
+            }
+        });
     
         // Call the setSound function on each tick
         this.time.on('tick', () => {
             this.car.setSound();
         });
+
     }
 }

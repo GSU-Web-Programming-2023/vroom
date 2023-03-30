@@ -351,6 +351,14 @@ export default class Objects
         return null; // return null if the object is not found
     }
 
+    getObjects() {
+        let objects = [];
+        for (const object of this.items) {
+            objects.push(object.container);
+        }
+        return objects;
+    }
+
     getNPCs() {
         let npcs = [];
         for (const object of this.items) {
