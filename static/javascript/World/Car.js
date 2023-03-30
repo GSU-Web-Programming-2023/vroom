@@ -455,8 +455,6 @@ export default class Car
                 this.car.sound.collision.volume(speedVolume);
                 
                 if (!this.car.sound.collision.playing()) {
-                    setTimeout(() => {this.car.sound.collision.play()}, 500);
-                } else {
                     this.car.sound.collision.play();
                 }
             }
