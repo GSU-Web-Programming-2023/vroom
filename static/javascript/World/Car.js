@@ -509,7 +509,10 @@ export default class Car
                 // Adjust the volume of the idle sound based on speed
                 let speedVolume = Math.min(0.6, this.movement.localSpeed.length());
                 this.car.sound.collision.volume(speedVolume);
-                this.car.sound.collision.play();
+                
+                if (!this.car.sound.collision.playing()) {
+                    this.car.sound.collision.play();
+                }
             }
         });
     
