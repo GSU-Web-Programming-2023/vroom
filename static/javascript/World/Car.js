@@ -448,15 +448,29 @@ export default class Car
             }
         };
 
+        const collisionHandler = (event) => {
+            if (this.movement.localSpeed.length() > 0.1) {
+                // Adjust the volume of the idle sound based on speed
+                let speedVolume = Math.min(0.6, this.movement.localSpeed.length());
+                this.car.sound.collision.volume(speedVolume);
+                
+                if (!this.car.sound.collision.playing()) {
+                    this.car.sound.collision.play();
+                }
+            }
+        }
+
         this.car.setSound = () => {
             // Honk sound
             // Remove the event listeners before adding new ones
             document.removeEventListener('keydown', keyDownHandler);
             document.removeEventListener('keyup', keyUpHandler);
+            this.physics.car.chassis.body.removeEventListener('collide', collisionHandler);
 
             // Add the event listeners back
             document.addEventListener('keydown', keyDownHandler);
             document.addEventListener('keyup', keyUpHandler);
+            this.physics.car.chassis.body.addEventListener('collide', collisionHandler);
 
             // Engine Start
             if (this.physics.car.controls.actions.up || this.physics.car.controls.actions.down) {
@@ -502,19 +516,6 @@ export default class Car
                 }
             }
         };
-
-        // Add a collision event listener
-        this.physics.car.chassis.body.addEventListener('collide', (event) => {
-            if (this.movement.localSpeed.length() > 0.1) {
-                // Adjust the volume of the idle sound based on speed
-                let speedVolume = Math.min(0.6, this.movement.localSpeed.length());
-                this.car.sound.collision.volume(speedVolume);
-                
-                if (!this.car.sound.collision.playing()) {
-                    this.car.sound.collision.play();
-                }
-            }
-        });
     
         // Call the setSound function on each tick
         this.time.on('tick', () => {
