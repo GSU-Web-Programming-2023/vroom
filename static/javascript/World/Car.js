@@ -449,12 +449,14 @@ export default class Car
         };
 
         const collisionHandler = (event) => {
-            if (this.movement.localSpeed.length() > 0.1) {
+            if (this.movement.localSpeed.length() > 0.05) {
                 // Adjust the volume of the idle sound based on speed
                 let speedVolume = Math.min(0.6, this.movement.localSpeed.length());
                 this.car.sound.collision.volume(speedVolume);
                 
                 if (!this.car.sound.collision.playing()) {
+                    setTimeout(() => {this.car.sound.collision.play()}, 500);
+                } else {
                     this.car.sound.collision.play();
                 }
             }
