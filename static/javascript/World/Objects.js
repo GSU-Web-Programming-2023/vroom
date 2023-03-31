@@ -68,11 +68,18 @@ export default class Objects
                 mass: 0
             },
             {
-                name: 'crashSite',
-                base: this.resources.items.crashSite.scene,
-                collision: this.resources.items.crashSiteCollision.scene,
+                name: 'lander',
+                base: this.resources.items.lander.scene,
+                collision: this.resources.items.landerCollision.scene,
                 offset: new THREE.Vector3(-20, -11, 0),
                 mass: 200
+            },
+            {
+                name: 'rocket',
+                base: this.resources.items.rocket.scene,
+                collision: this.resources.items.rocketCollision.scene,
+                offset: new THREE.Vector3(4, 10, 0),
+                mass: 75
             },
             {
                 name: 'tree',

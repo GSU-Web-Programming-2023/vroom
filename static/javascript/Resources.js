@@ -43,11 +43,14 @@ import treeCollisionSource from '../models/tree/collision.glb'
 import rockSource from '../models/rock/base.glb'
 import rockCollisionSource from '../models/rock/collision.glb'
 
-import crashSiteSource from '../models/crashSite/base.glb'
-import crashSiteCollisionSource from '../models/crashSite/collision.glb'
+import landerSource from '../models/lander/base.glb'
+import landerCollisionSource from '../models/lander/collision.glb'
 
 import spyBalloonSource from '../models/npcs/spyBalloon/base.glb'
 import spyBalloonCollisionSource from '../models/npcs/spyBalloon/collision.glb'
+
+import rocketSource from '../models/rocket/base.glb'
+import rocketCollisionSource from '../models/rocket/collision.glb'
 
 export default class Resources extends EventEmitter
 {
@@ -99,11 +102,14 @@ export default class Resources extends EventEmitter
             { name: 'rock', source: rockSource },
             { name: 'rockCollision', source: rockCollisionSource },
 
-            { name: 'crashSite', source: crashSiteSource },
-            { name: 'crashSiteCollision', source: crashSiteCollisionSource },
+            { name: 'lander', source: landerSource },
+            { name: 'landerCollision', source: landerCollisionSource },
 
             { name: 'spyBalloon', source: spyBalloonSource },
-            { name: 'spyBalloonCollision', source: spyBalloonCollisionSource }
+            { name: 'spyBalloonCollision', source: spyBalloonCollisionSource },
+
+            { name: 'rocket', source: rocketSource },
+            { name: 'rocketCollision', source: rocketCollisionSource }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>
