@@ -9,9 +9,9 @@ import matcapOrangeSource from '../models/matcaps/orange.png'
 import matcapRedSource from '../models/matcaps/red.png'
 import matcapWhiteSource from '../models/matcaps/white.png'
 
-import staticDemoFloorShadowSource from '../models/staticDemo/floor-shadow.png'
-import staticDemoBaseSource from '../models/staticDemo/base.glb'
-import staticDemoCollisionSource from '../models/staticDemo/collision.glb'
+import startingPointFloorShadowSource from '../models/startingPoint/floor-shadow.png'
+import startingPointBaseSource from '../models/startingPoint/base.glb'
+import startingPointCollisionSource from '../models/startingPoint/collision.glb'
 
 import dynamicSphereBaseSource from '../models/dynamicSphere/base.glb'
 import dynamicSphereCollisionSource from '../models/dynamicSphere/collision.glb'
@@ -52,6 +52,9 @@ import spyBalloonCollisionSource from '../models/npcs/spyBalloon/collision.glb'
 import rocketSource from '../models/rocket/base.glb'
 import rocketCollisionSource from '../models/rocket/collision.glb'
 
+import alienSource from '../models/npcs/alien/base.glb'
+import alienCollisionSource from '../models/npcs/alien/collision.glb'
+
 export default class Resources extends EventEmitter
 {
     constructor()
@@ -68,9 +71,9 @@ export default class Resources extends EventEmitter
             { name: 'matcapRed', source: matcapRedSource },
             { name: 'matcapWhite', source: matcapWhiteSource },
 
-            { name: 'staticDemoBase', source: staticDemoBaseSource },
-            { name: 'staticDemoCollision', source: staticDemoCollisionSource },
-            { name: 'staticDemoFloorShadow', source: staticDemoFloorShadowSource },
+            { name: 'startingPointBase', source: startingPointBaseSource },
+            { name: 'startingPointCollision', source: startingPointCollisionSource },
+            { name: 'startingPointFloorShadow', source: startingPointFloorShadowSource },
 
             { name: 'dynamicSphereBase', source: dynamicSphereBaseSource },
             { name: 'dynamicSphereCollision', source: dynamicSphereCollisionSource },
@@ -109,7 +112,10 @@ export default class Resources extends EventEmitter
             { name: 'spyBalloonCollision', source: spyBalloonCollisionSource },
 
             { name: 'rocket', source: rocketSource },
-            { name: 'rocketCollision', source: rocketCollisionSource }
+            { name: 'rocketCollision', source: rocketCollisionSource },
+
+            { name: 'alien', source: alienSource },
+            { name: 'alienCollision', source: alienCollisionSource }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>
@@ -135,8 +141,8 @@ export default class Resources extends EventEmitter
             this.items.matcapWhiteTexture = new THREE.Texture(this.items.matcapWhite)
             this.items.matcapWhiteTexture.needsUpdate = true
 
-            this.items.staticDemoFloorShadowTexture = new THREE.Texture(this.items.staticDemoFloorShadow)
-            this.items.staticDemoFloorShadowTexture.needsUpdate = true
+            this.items.startingPointFloorShadowTexture = new THREE.Texture(this.items.startingPointFloorShadow)
+            this.items.startingPointFloorShadowTexture.needsUpdate = true
 
             // Trigger ready
             this.trigger('ready')

@@ -18,13 +18,13 @@ export default class Objects
 
         this.setList()
         this.setParsers()
-        this.setNPCMovement()
 
         // Add all objects from the list
-        for(const _options of this.list)
+        for(let _options of this.list)
         {
             this.add(_options)
         }
+        this.setNPCMovement()
     }
 
     setList()
@@ -32,40 +32,52 @@ export default class Objects
         // Objects options list
         this.list = [
             {
-                name: 'staticDemo',
-                base: this.resources.items.staticDemoBase.scene,
-                collision: this.resources.items.staticDemoCollision.scene,
-                floorShadowTexture: this.resources.items.staticDemoFloorShadowTexture,
+                name: 'startingPoint', // starting point
+                base: this.resources.items.startingPointBase.scene,
+                collision: this.resources.items.startingPointCollision.scene,
+                floorShadowTexture: this.resources.items.startingPointFloorShadowTexture,
                 offset: new THREE.Vector3(0, 0, 0),
-                mass: 0
+                mass: 50
             },
             {
-                name: 'elonNPC', // NPC in the name is used to trigger dialogue in Car.js
+                name: 'elon',
                 base: this.resources.items.elon.scene,
                 collision: this.resources.items.elonCollision.scene,
                 offset: new THREE.Vector3(-7, -11, 0),
-                mass: 45
+                mass: 45,
+                is_npc: true
             },
             {
-                name: 'xb1NPC', // NPC in the name is used to trigger dialogue in Car.js
+                name: 'xb1',
                 base: this.resources.items.xb1.scene,
                 collision: this.resources.items.xb1Collision.scene,
                 offset: new THREE.Vector3(-55, -25, 0),
-                mass: 45
+                mass: 15,
+                is_npc: true
             },
             {
-                name: 'r2d2NPC', // NPC in the name is used to trigger dialogue in Car.js
+                name: 'r2d2',
                 base: this.resources.items.r2d2.scene,
                 collision: this.resources.items.r2d2Collision.scene,
                 offset: new THREE.Vector3(-54, -24, 0),
-                mass: 45
+                mass: 20,
+                is_npc: true
             },
             {
-                name: 'spyBalloonNPC', // NPC in the name is used to trigger dialogue in Car.js
+                name: 'alien',
+                base: this.resources.items.alien.scene,
+                collision: this.resources.items.alienCollision.scene,
+                offset: new THREE.Vector3(-35, 0, 1),
+                mass: 10,
+                is_npc: true
+            },
+            {
+                name: 'spyBalloon',
                 base: this.resources.items.spyBalloon.scene,
                 collision: this.resources.items.spyBalloonCollision.scene,
                 offset: new THREE.Vector3(10, -12, 4),
-                mass: 0
+                mass: 0,
+                is_npc: true
             },
             {
                 name: 'lander',
@@ -86,7 +98,7 @@ export default class Objects
                 base: this.resources.items.tree.scene,
                 collision: this.resources.items.treeCollision.scene,
                 offset: new THREE.Vector3(-7, -7, 0),
-                mass: 100
+                mass: 50
             },
             // {
             //     name: 'sphere',
@@ -111,17 +123,17 @@ export default class Objects
             // },
         ]
 
-        // Spawn 75 objects in random locations
+        // Spawn 75 trees and rocks in random locations
         for (let i = 0; i < 75; i++) {
             // Define a random distance between 30 and 70 meters
-            const distance = Math.floor(Math.random() * 71) + 30;
+            let distance = Math.floor(Math.random() * 71) + 30;
         
             // Define a random angle between 0 and 2 * PI radians
-            const angle = Math.random() * 2 * Math.PI;
+            let angle = Math.random() * 2 * Math.PI;
         
             // Calculate the x and y offsets for the object using the distance and angle
-            const xOffset = distance * Math.cos(angle);
-            const yOffset = distance * Math.sin(angle);
+            let xOffset = distance * Math.cos(angle);
+            let yOffset = distance * Math.sin(angle);
         
             // Initial Position
             let object;
@@ -129,7 +141,7 @@ export default class Objects
             let y = 0;
             let z = 0;
 
-            const rand = Math.random();
+            let rand = Math.random();
             if (rand < 0.6) { // 60% chance for rocks
                 object = {
                     name: `rock${i}`,
@@ -150,7 +162,38 @@ export default class Objects
         
             // Append the object to the list
             this.list.push(object);
-        }  
+        }
+
+        // Spawn 10 aliens in random locations
+        for (let i = 0; i < 10; i++) {
+            // Define a random distance between 30 and 70 meters
+            let distance = Math.floor(Math.random() * 71) + 30;
+
+            // Define a random angle between 0 and 2 * PI radians
+            let angle = Math.random() * 2 * Math.PI;
+
+            // Calculate the x and y offsets for the object using the distance and angle
+            let xOffset = distance * Math.cos(angle);
+            let yOffset = distance * Math.sin(angle);
+
+            // Initial Position
+            let object;
+            let x = 0;
+            let y = 0;
+            let z = 1;
+
+            object = {
+                name: `alien${i}`,
+                base: this.resources.items.alien.scene,
+                collision: this.resources.items.alienCollision.scene,
+                offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                mass: 10,
+                is_npc: true
+            };
+
+            // Append the object to the list
+            this.list.push(object);
+        }
     }
 
     setParsers()
@@ -164,8 +207,8 @@ export default class Objects
                 apply: (_mesh, _options) =>
                 {
                     // Find material
-                    const match = _mesh.name.match(/^shade([a-z]+)_?[0-9]{0,3}?/i)
-                    const materialName = match[1].toLowerCase()
+                    let match = _mesh.name.match(/^shade([a-z]+)_?[0-9]{0,3}?/i)
+                    let materialName = match[1].toLowerCase()
                     let material = this.materials.shades.items[materialName]
 
                     // Default
@@ -175,7 +218,7 @@ export default class Objects
                     }
 
                     // Create clone mesh with new material
-                    const mesh = _options.cloneMesh ? _mesh.clone() : _mesh
+                    let mesh = _options.cloneMesh ? _mesh.clone() : _mesh
                     mesh.material = material
 
                     return mesh
@@ -188,8 +231,8 @@ export default class Objects
                 apply: (_mesh, _options) =>
                 {
                     // Find material
-                    const match = _mesh.name.match(/^pure([a-z]+)_?[0-9]{0,3}?/i)
-                    const materialName = match[1].toLowerCase()
+                    let match = _mesh.name.match(/^pure([a-z]+)_?[0-9]{0,3}?/i)
+                    let materialName = match[1].toLowerCase()
                     let material = this.materials.pures.items[materialName]
 
                     // Default
@@ -199,7 +242,7 @@ export default class Objects
                     }
 
                     // Create clone mesh with new material
-                    const mesh = _options.cloneMesh ? _mesh.clone() : _mesh
+                    let mesh = _options.cloneMesh ? _mesh.clone() : _mesh
                     mesh.material = material
 
                     return mesh
@@ -212,13 +255,13 @@ export default class Objects
                 apply: (_mesh, _options) =>
                 {
                     // Create floor manually because of missing UV
-                    const geometry = new THREE.PlaneBufferGeometry(_mesh.scale.x, _mesh.scale.z, 10, 10)
-                    const material = this.materials.items.floorShadow.clone()
+                    let geometry = new THREE.PlaneBufferGeometry(_mesh.scale.x, _mesh.scale.z, 10, 10)
+                    let material = this.materials.items.floorShadow.clone()
 
                     material.uniforms.tShadow.value = _options.floorShadowTexture
                     material.uniforms.uShadowColor.value = new THREE.Color(this.materials.items.floorShadow.shadowColor)
 
-                    const mesh = new THREE.Mesh(geometry, material)
+                    let mesh = new THREE.Mesh(geometry, material)
 
                     return mesh
                 }
@@ -230,21 +273,20 @@ export default class Objects
         this.parsers.default.apply = (_mesh) =>
         {
             // Create clone mesh with original material
-            const mesh = _mesh.clone()
+            let mesh = _mesh.clone()
             mesh.material = _mesh.material
             return mesh
         }
     }
 
-    getConvertedMesh(_children, _options = {})
-    {
-        const container = new THREE.Object3D()
-        const center = new THREE.Vector3()
+    getConvertedMesh(_children, _options = {}) {
+        let container = new THREE.Object3D()
+        let center = new THREE.Vector3()
 
         // Go through each base child
-        const baseChildren = [..._children]
+        let baseChildren = [..._children]
 
-        for(const _child of baseChildren)
+        for(let _child of baseChildren)
         {
             // Find center
             if(_child.name.match(/^center_?[0-9]{0,3}?/i))
@@ -262,7 +304,7 @@ export default class Objects
                 }
 
                 // Create mesh by applying parser
-                const mesh = parser.apply(_child, _options)
+                let mesh = parser.apply(_child, _options)
 
                 // Add to container
                 container.add(mesh)
@@ -272,7 +314,7 @@ export default class Objects
         // Recenter
         if(center.length() > 0)
         {
-            for(const _child of container.children)
+            for(let _child of container.children)
             {
                 _child.position.sub(center)
             }
@@ -283,74 +325,8 @@ export default class Objects
         return container
     }
 
-    setNPCMovement() {
-        this.npcMovementPatterns = {
-          'elonNPC': {
-            type: 'still'
-          },
-          'xb1NPC': {
-            type: 'still'
-          },
-          'r2d2NPC': {
-            type: 'still'
-          },
-          'spyBalloonNPC': {
-            type: 'pingPong',
-            axis: 'y',
-            distance: 20,
-            speed: 0.1,
-            initialPosition: null
-          }
-        };
-        
-        this.time.on('tick', () => {
-          for (const npcName in this.npcMovementPatterns) {
-            const npcObject = this.getObjectByName(npcName);
-        
-            if (npcObject) {
-              // Apply the movement pattern to the corresponding NPC
-              this.applyMovementPattern(npcObject, this.npcMovementPatterns[npcName]);
-            }
-          }
-        });
-      }
-      
-      applyMovementPattern(npcObject, movementPattern) {
-        const object = this.items.find(item => item.container === npcObject);
-        if (!object || !npcObject.position) return;
-      
-        if (movementPattern.type === 'still') {
-          // Do nothing; the NPC will remain stationary.
-        } else if (movementPattern.type === 'pingPong' && movementPattern.axis && movementPattern.distance && movementPattern.speed) {
-          // Bounce back and forth resembling a pacing effect
-          if (!movementPattern.initialPosition) {
-            movementPattern.initialPosition = npcObject.position.clone();
-          }
-          const startPosition = movementPattern.initialPosition.clone();
-          const targetPosition = movementPattern.initialPosition.clone();
-          targetPosition[movementPattern.axis] += movementPattern.distance;
-      
-          const pingPong = (t) => {
-            return t - Math.floor(t / 2) * 2;
-          };
-      
-          const t = (Date.now() * 0.001 * movementPattern.speed) % 2;
-          let lerpFactor = pingPong(t);
-          if (lerpFactor > 1) {
-            lerpFactor = 2 - lerpFactor;
-          }
-      
-          npcObject.position.lerpVectors(startPosition, targetPosition, lerpFactor);
-      
-          // Update the physics body position
-          object.collision.body.position.copy(npcObject.position);
-          object.collision.body.quaternion.copy(npcObject.quaternion);
-        }
-        // Add more movement types here as needed
-    }      
-      
     getObjectByName(name) {
-        for(const object of this.items) {
+        for(let object of this.items) {
             if(object.container.name === name) {
                 return object.container;
             }
@@ -358,33 +334,48 @@ export default class Objects
         return null; // return null if the object is not found
     }
 
+    getChildObjectByName(object, name) {
+        return object.children.find(child => child.name === name);
+    }
+
     getObjects() {
         let objects = [];
-        for (const object of this.items) {
+        for (let object of this.items) {
             objects.push(object.container);
+        }
+        return objects;
+    }
+
+    getObjectsByName(name) {
+        let objects = [];
+        for(let object of this.items) {
+            if(object.container.name.includes(name)) {
+                objects.push(object.container);
+            }
         }
         return objects;
     }
 
     getNPCs() {
         let npcs = [];
-        for (const object of this.items) {
-          if (object.container.name.includes("NPC")) {
+        for (let object of this.items) {
+          if (object.container.is_npc) {
             npcs.push(object.container);
           }
         }
         return npcs;
-    }
-      
+    }   
 
     add(_options)
     {
-        const object = {}
+        let object = {}
 
         // Container
         object.container = this.getConvertedMesh(_options.base.children, _options)
         object.container.position.copy(_options.offset)
         object.container.name = _options.name
+        object.container.is_npc = _options.is_npc
+        object.container.offset = _options.offset
         this.container.add(object.container)
 
         // Create physics object
@@ -394,7 +385,7 @@ export default class Objects
             mass: _options.mass
         })
 
-        for(const _child of object.container.children)
+        for(let _child of object.container.children)
         {
             _child.position.sub(object.collision.center)
         }
@@ -407,10 +398,10 @@ export default class Objects
         })
 
         // Apply Shadows
-        const bbox = new THREE.Box3().setFromObject(object.container)
-        const size = bbox.getSize(new THREE.Vector3())
+        let bbox = new THREE.Box3().setFromObject(object.container)
+        let size = bbox.getSize(new THREE.Vector3())
         
-        if (object.container.name != 'staticDemo') {
+        if (object.container.name != 'startingPoint') {
             this.shadows.add(object.container, { 
                 sizeX: size.x, 
                 sizeY: size.z, 
@@ -420,5 +411,148 @@ export default class Objects
 
         // Save
         this.items.push(object)
+    }
+
+    setNPCMovement() {
+        this.npcMovementPatterns = {
+          'elon': {
+            type: 'still',
+            animation: 'none',
+          },
+          'xb1': {
+            type: 'still',
+            animation: 'none',
+          },
+          'r2d2': {
+            type: 'still',
+            animation: 'none',
+          },
+          'spyBalloon': {
+            type: 'pingPong',
+            animation: 'none',
+            axis: 'y',
+            distance: 20,
+            speed: 0.1,
+          },
+          'alien': {
+            type: 'pingPong',
+            animation: 'walking',
+            axis: 'y',
+            distance: 5,
+            speed: 0.2,
+          }
+          // Add more movement patterns as needed
+        };
+        
+        
+        let collisionHandler = (item) => {
+            item.collision.body.collided = true
+          }
+          
+          this.time.on('tick', () => {
+            for (let npcName in this.npcMovementPatterns) {
+              for (let item of this.items) {
+                let onCollide = (event) => {
+                  let collidedBody = event.bodyA === item.collision.body ? event.bodyB : event.bodyA;
+                  if (collidedBody && collidedBody.name !== 'ground') {
+                    collisionHandler(item);
+                  }
+                };
+          
+                item.collision.body.removeEventListener('collide', onCollide);
+                item.collision.body.addEventListener('collide', onCollide);
+          
+                if (item.container && item.container.name && item.container.name.includes(npcName)) {
+                  // Check if the NPC has collided with any object except the ground
+                  if (item.collision.body.collided &&
+                      item.collision.body.name !== 'ground') {
+                    // Skip applying movement pattern if collided
+                    continue;
+                  }
+          
+                  // Apply the movement pattern to the corresponding NPC
+                  this.applyMovementPattern(item.container, this.npcMovementPatterns[npcName]);
+                }
+              }
+            }
+          });
+          
+    }
+      
+    applyMovementPattern(npcObject, movementPattern) {
+        let object = this.items.find(item => item.container === npcObject);
+        if (!object || !npcObject.position) return;
+    
+        if (movementPattern.type === 'still') {
+            // Do nothing; the NPC will remain stationary.
+        } else if (movementPattern.type === 'pingPong' &&
+                    movementPattern.axis &&
+                    movementPattern.distance &&
+                    movementPattern.speed) {
+    
+            if (movementPattern.animation === 'walking') {
+                this.animateWalking(npcObject);
+            }
+            // Bounce back and forth resembling a pacing effect
+            movementPattern.initialPosition = npcObject.offset;
+            let startPosition = movementPattern.initialPosition.clone();
+            let targetPosition = movementPattern.initialPosition.clone();
+            targetPosition[movementPattern.axis] += movementPattern.distance;
+    
+            let pingPong = (t) => {
+                return t - Math.floor(t / 2) * 2;
+            };
+    
+            let t = (Date.now() * 0.001 * movementPattern.speed) % 2;
+            var lerpFactor = pingPong(t);
+    
+            // Check if direction has changed
+            let currentDirection = lerpFactor <= 1 ? 1 : -1;
+            if (currentDirection !== movementPattern.previousDirection &&
+                    movementPattern.animation === 'walking') {
+                npcObject.rotateZ(Math.PI); // Rotate 180 degrees
+                movementPattern.previousDirection = currentDirection;
+            }
+    
+            if (lerpFactor > 1) {
+                lerpFactor = 2 - lerpFactor;
+            }
+    
+            npcObject.position.lerpVectors(startPosition, targetPosition, lerpFactor);
+    
+            // Update the physics body position
+            object.collision.body.position.copy(npcObject.position);
+            object.collision.body.quaternion.copy(npcObject.quaternion);
+        }
+        // Add more movement types here as needed
+    }    
+
+    animateWalking(object) {
+        let torso = this.getChildObjectByName(object, 'torso');
+        let leftLegBone = this.getChildObjectByName(object, 'leftLeg');
+        let leftArmBone = this.getChildObjectByName(object, 'leftArm');
+        let rightLegBone = this.getChildObjectByName(object, 'rightLeg');
+        let rightArmBone = this.getChildObjectByName(object, 'rightArm');
+    
+        let time = this.time.elapsed * 0.001; // Convert to seconds
+    
+        let legRotation = Math.sin(time * 4) * 0.2; // Oscillate leg rotation
+        let armRotation = Math.sin(time * 4 + Math.PI * 0.5) * 0.2; // Oscillate arm rotation
+    
+        leftLegBone.rotation.x = legRotation;
+        leftArmBone.rotation.x = armRotation;
+        rightLegBone.rotation.x = -legRotation; // Opposite direction
+        rightArmBone.rotation.x = -armRotation; // Opposite direction
+    
+        // Calculate angle between torso and legs
+        let legAngle = torso.rotation.x;
+    
+        // Apply rotation to legs to match torso angle
+        leftLegBone.rotation.x += legAngle;
+        rightLegBone.rotation.x += legAngle;
+    
+        // Apply rotation to arms to match torso angle
+        leftArmBone.rotation.x -= legAngle;
+        rightArmBone.rotation.x -= legAngle;
     }
 }

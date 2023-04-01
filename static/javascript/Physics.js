@@ -81,21 +81,19 @@ export default class Physics
         this.world.addContactMaterial(this.materials.contacts.floorWheel)
     }
 
-    setFloor()
-    {
+    setFloor() {
         this.floor = {}
         this.floor.body = new CANNON.Body({
             mass: 0,
             shape: new CANNON.Plane(),
             material: this.materials.items.floor
         })
-
-        // this.floor.body.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), - Math.PI * 0.5)
-
+    
+        this.floor.body.name = 'ground'; // Assign a name to the ground's body
+    
         this.world.addBody(this.floor.body)
-        
     }
-
+    
     setCar()
     {
         this.car = {}
@@ -607,7 +605,9 @@ export default class Physics
         collision.body = new CANNON.Body({
             position: new Vec3(_options.offset.x, _options.offset.y, _options.offset.z),
             mass: _options.mass,
-            material: bodyMaterial
+            material: bodyMaterial,
+            name: _options.name,
+            collided: false,
         })
         this.world.addBody(collision.body)
 

@@ -51,7 +51,7 @@ export default class Car
         // Time tick
         this.time.on('tick', () => {
             // Movement
-            const movementSpeed = new THREE.Vector3()
+            let movementSpeed = new THREE.Vector3()
             movementSpeed.copy(this.chassis.object.position).sub(this.chassis.oldPosition)
             this.movement.acceleration = movementSpeed.clone().sub(this.movement.speed)
             this.movement.speed.copy(movementSpeed)
@@ -60,7 +60,7 @@ export default class Car
             this.movement.localAcceleration = this.movement.acceleration.clone().applyAxisAngle(new THREE.Vector3(0, 0, 1), - this.chassis.object.rotation.z)
 
             // Update speedometer
-            const speed = this.movement.localSpeed.length() * 334 // convert speed units to mph
+            let speed = this.movement.localSpeed.length() * 334 // convert speed units to mph
             this.speedometer.textContent = speed.toFixed(0) + "mph"
         })
     }
@@ -112,8 +112,8 @@ export default class Car
             this.antena.speed.x -= this.movement.acceleration.x * this.antena.speedStrength
             this.antena.speed.y -= this.movement.acceleration.y * this.antena.speedStrength
 
-            const position = this.antena.absolutePosition.clone()
-            const pullBack = position.negate().multiplyScalar(position.length() * this.antena.pullBackStrength)
+            let position = this.antena.absolutePosition.clone()
+            let pullBack = position.negate().multiplyScalar(position.length() * this.antena.pullBackStrength)
             this.antena.speed.add(pullBack)
 
             this.antena.speed.x *= 1 - this.antena.damping
@@ -131,7 +131,7 @@ export default class Car
         // Debug
         if(this.debug)
         {
-            const folder = this.debugFolder.addFolder('antena')
+            let folder = this.debugFolder.addFolder('antena')
             folder.open()
 
             folder.add(this.antena, 'speedStrength').step(0.001).min(0).max(50)
@@ -149,7 +149,7 @@ export default class Car
         this.backLightsBrake.material.opacity = 0.5
 
         this.backLightsBrake.object = this.objects.getConvertedMesh(this.resources.items.carBackLightsBrake.scene.children)
-        for(const _child of this.backLightsBrake.object.children)
+        for(let _child of this.backLightsBrake.object.children)
         {
             _child.material = this.backLightsBrake.material
         }
@@ -164,7 +164,7 @@ export default class Car
         this.backLightsReverse.material.opacity = 0.5
 
         this.backLightsReverse.object = this.objects.getConvertedMesh(this.resources.items.carBackLightsReverse.scene.children)
-        for(const _child of this.backLightsReverse.object.children)
+        for(let _child of this.backLightsReverse.object.children)
         {
             _child.material = this.backLightsReverse.material
         }
@@ -208,7 +208,7 @@ export default class Car
 
         for(let i = 0; i < 4; i++)
         {
-            const object = this.wheels.object.clone()
+            let object = this.wheels.object.clone()
 
             this.wheels.items.push(object)
             this.container.add(object)
@@ -219,10 +219,10 @@ export default class Car
         {
             if(!this.transformControls.enabled)
             {
-                for(const _wheelKey in this.physics.car.wheels.bodies)
+                for(let _wheelKey in this.physics.car.wheels.bodies)
                 {
-                    const wheelBody = this.physics.car.wheels.bodies[_wheelKey]
-                    const wheelObject = this.wheels.items[_wheelKey]
+                    let wheelBody = this.physics.car.wheels.bodies[_wheelKey]
+                    let wheelObject = this.wheels.items[_wheelKey]
 
                     wheelObject.position.copy(wheelBody.position)
                     wheelObject.quaternion.copy(wheelBody.quaternion)
@@ -263,7 +263,7 @@ export default class Car
 
         if(this.debug)
         {
-            const folder = this.debugFolder.addFolder('controls')
+            let folder = this.debugFolder.addFolder('controls')
             folder.open()
 
             folder.add(this.transformControls, 'enabled').onChange(() =>
@@ -271,126 +271,6 @@ export default class Car
                 this.transformControls.visible = this.transformControls.enabled
             })
         }
-    }
-
-    setProximityIndicator() {
-        const indicatorGeometry = new THREE.SphereGeometry(0.2, 16, 16);
-        const indicatorMaterial = new THREE.MeshBasicMaterial({
-          color: 0xffff00,
-          transparent: true,
-          opacity: 0.5
-        });
-        const indicatorMesh = new THREE.Mesh(indicatorGeometry, indicatorMaterial);
-        indicatorMesh.position.set(this.chassis.object.position.x, this.chassis.object.position.y, 2.75);
-        this.chassis.object.add(indicatorMesh);
-      
-        let flashing = false;
-      
-        // Time tick
-        this.time.on('tick', () => {
-          const npcs = this.objects.getNPCs();
-          let closestNPC = null;
-          let closestDistance = Infinity;
-      
-          for (const npc of npcs) {
-            const distance = this.chassis.object.position.distanceTo(npc.position);
-            if (distance < closestDistance) {
-              closestDistance = distance;
-              closestNPC = npc;
-            }
-          }
-      
-          if (closestNPC && closestDistance < 5) {
-            indicatorMesh.visible = true;
-      
-            // Flashing effect
-            if (!flashing) {
-              flashing = true;
-              const initialOpacity = indicatorMaterial.opacity;
-              const flashDuration = 500;
-              const flashInterval = 16;
-              const numFlashes = flashDuration / flashInterval;
-              let flashCount = 0;
-      
-              const flash = () => {
-                const progress = flashCount / numFlashes;
-                const easedOpacity = Math.sin(progress * Math.PI);
-                indicatorMaterial.opacity = initialOpacity + (1 - initialOpacity) * easedOpacity;
-      
-                if (flashCount < numFlashes) {
-                  flashCount++;
-                  setTimeout(flash, flashInterval);
-                } else {
-                  indicatorMaterial.opacity = initialOpacity;
-                  flashing = false;
-                }
-              };
-      
-              flash();
-            }
-          } else {
-            indicatorMesh.visible = false;
-            flashing = false;
-            indicatorMaterial.opacity = 0.5;
-          }
-        });
-    }
-    
-    setNPCDialogue() {
-        // Set Triggers for coming into close proximity with NPCs
-        const npcDialogues = {
-            // Make the names the same as in the Object.js class but lowercase and without 'NPC'
-            // Will not work otherwise
-            "elon": [
-                "[Elon] Hey! You there! Come make yourself useful...",
-                "[Elon] It appears my 'genius' engineers have stranded me here on this rock...",
-                "[Elon] Sigh...we're gonna have to rewrite the whole stack if we're gonna get outta here..",
-                "[Elon] Locate my AI assistant, XB1-420-69...",
-                "[Elon] Surely he'll know what to do..."
-            ],
-            "xb1": [
-                "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
-                "[XB1] ..bzzt..",
-            ],
-            "r2d2": [
-                "[R2] ..@@@>>?>?????>..//..",
-            ],
-            "spyballoon": [
-                "[Balloon] Just a totally normal weather balloon, nothing to see here...",
-            ],
-            // more NPCs and their dialogues
-        };
-        
-        const npcs = this.objects.getNPCs();
-        npcs.forEach(npc => {
-            // let talkedTo = false;
-            let position = npc.position.clone();
-            let distance = this.chassis.object.position.distanceTo(position);
-            let currentDialogue = npcDialogues[npc.name.toLowerCase().replace('npc', '')];
-        
-            this.time.on('tick', () => {
-                // Update the position and distance every tick
-                position = npc.position.clone();
-                distance = this.chassis.object.position.distanceTo(position);
-            
-                // Proximity trigger dialogue
-                // if (distance < 5 && !talkedTo) {
-                //     triggerDialogue(currentDialogue);
-                //     talkedTo = true;
-                // }
-            
-                // Handle F keypress to trigger dialogue
-                document.removeEventListener('keypress', handleInteract); // Remove previous event listener
-                document.addEventListener('keypress', handleInteract); // Add new event listener
-            });
-        
-            function handleInteract(event) {
-                if (event.key === 'f' && distance < 5) {
-                    console.log(npc.name.toLowerCase().replace('npc', ''))
-                    triggerDialogue(currentDialogue);
-                }
-            }
-        });  
     }
 
     initAudio() {
@@ -432,7 +312,7 @@ export default class Car
         this.car.engineStartPlayed = false;
         this.car.brakeSoundPlayed = false;
     
-        const keyDownHandler = (event) => {
+        let keyDownHandler = (event) => {
             let honkHelper = document.querySelector('#honkHelper');
             if (event.key === 'h' && honkHelper.value == 'false') {
                 let honkSound = new Howl({src: ['static/sounds/car-honk.mp3'], volume: 0.5, loop: false, preload: true});
@@ -441,14 +321,14 @@ export default class Car
             }
         };
 
-        const keyUpHandler = (event) => {
+        let keyUpHandler = (event) => {
             if (event.key === 'h') {
                 let honkHelper = document.querySelector('#honkHelper');
                 honkHelper.value = 'false';
             }
         };
 
-        const collisionHandler = (event) => {
+        let collisionHandler = (event) => {
             if (this.movement.localSpeed.length() > 0.05) {
                 // Adjust the volume of the idle sound based on speed
                 let speedVolume = Math.min(0.6, this.movement.localSpeed.length());
@@ -522,5 +402,127 @@ export default class Car
             this.car.setSound();
         });
 
+    }
+
+    setProximityIndicator() {
+        let indicatorGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+        let indicatorMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffff00,
+          transparent: true,
+          opacity: 0.5
+        });
+        let indicatorMesh = new THREE.Mesh(indicatorGeometry, indicatorMaterial);
+        indicatorMesh.position.set(this.chassis.object.position.x, this.chassis.object.position.y, 2.75);
+        this.chassis.object.add(indicatorMesh);
+      
+        let flashing = false;
+      
+        // Time tick
+        this.time.on('tick', () => {
+          let npcs = this.objects.getNPCs();
+          let closestNPC = null;
+          let closestDistance = Infinity;
+      
+          for (let npc of npcs) {
+            let distance = this.chassis.object.position.distanceTo(npc.position);
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestNPC = npc;
+            }
+          }
+      
+          if (closestNPC && closestDistance < 5) {
+            indicatorMesh.visible = true;
+      
+            // Flashing effect
+            if (!flashing) {
+              flashing = true;
+              let initialOpacity = indicatorMaterial.opacity;
+              let flashDuration = 500;
+              let flashInterval = 16;
+              let numFlashes = flashDuration / flashInterval;
+              let flashCount = 0;
+      
+              let flash = () => {
+                let progress = flashCount / numFlashes;
+                let easedOpacity = Math.sin(progress * Math.PI);
+                indicatorMaterial.opacity = initialOpacity + (1 - initialOpacity) * easedOpacity;
+      
+                if (flashCount < numFlashes) {
+                  flashCount++;
+                  setTimeout(flash, flashInterval);
+                } else {
+                  indicatorMaterial.opacity = initialOpacity;
+                  flashing = false;
+                }
+              };
+      
+              flash();
+            }
+          } else {
+            indicatorMesh.visible = false;
+            flashing = false;
+            indicatorMaterial.opacity = 0.5;
+          }
+        });
+    }
+    
+    setNPCDialogue() {
+        // Set Triggers for coming into close proximity with NPCs
+        let npcDialogues = {
+            "elon": [
+                "[Elon] Hey! You there! Come make yourself useful...",
+                "[Elon] It appears my 'genius' engineers have stranded me here on this rock...",
+                "[Elon] Sigh...we're gonna have to rewrite the whole stack if we're gonna get outta here..",
+                "[Elon] Locate my AI assistant, XB1-420-69...",
+                "[Elon] Surely he'll know what to do..."
+            ],
+            "xb1": [
+                "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
+                "[XB1] ..bzzt..",
+            ],
+            "r2d2": [
+                "[R2] ..@@@>>?>?????>..//..",
+            ],
+            "spyBalloon": [
+                "[Balloon] Just a totally normal weather balloon, nothing to see here...",
+            ],
+            "alien" : [
+                "[Alien] An acninet etffaric, lset in tmei and scpea...",
+                "[Alien] ...I gmloe with a ymtsre fgorde by arlneis' garce...",
+                "[Alien] ...Mlulietd hseus, eteald in etrces. Waht am I?",
+            ],
+            // more NPCs and their dialogues
+        };
+        
+        let npcs = this.objects.getNPCs();
+        npcs.forEach(npc => {
+            // let talkedTo = false;
+            let position = npc.position.clone();
+            let distance = this.chassis.object.position.distanceTo(position);
+            let currentDialogue = npcDialogues[npc.name.replace(/\d+/g, '')];
+        
+            this.time.on('tick', () => {
+                // Update the position and distance every tick
+                position = npc.position.clone();
+                distance = this.chassis.object.position.distanceTo(position);
+            
+                // Proximity trigger dialogue
+                // if (distance < 5 && !talkedTo) {
+                //     triggerDialogue(currentDialogue);
+                //     talkedTo = true;
+                // }
+            
+                // Handle F keypress to trigger dialogue
+                document.removeEventListener('keypress', handleInteract); // Remove previous event listener
+                document.addEventListener('keypress', handleInteract); // Add new event listener
+            });
+        
+            function handleInteract(event) {
+                if (event.key === 'f' && distance < 5) {
+                    triggerDialogue(currentDialogue);
+                }
+            }
+        });  
     }
 }
