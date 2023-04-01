@@ -18,13 +18,13 @@ export default class Objects
 
         this.setList()
         this.setParsers()
+        this.setNPCMovement()
 
         // Add all objects from the list
         for(let _options of this.list)
         {
             this.add(_options)
         }
-        this.setNPCMovement()
     }
 
     setList()
@@ -462,30 +462,31 @@ export default class Objects
             for (let npc of npcs) {
                 let closestObject = null;
                 let closestDistance = Infinity;
-            
+    
                 // Iterate over all objects and find the closest one to the NPC
                 for (let o of this.items) {
                     let distance = npc.position.distanceTo(o.container.position);
                     if (distance < closestDistance && o.container !== npc) {
-                    closestDistance = distance;
-                    closestObject = o.container;
+                        closestDistance = distance;
+                        closestObject = o.container;
                     }
                 }
-
+    
                 let carDistance = npc.position.distanceTo(this.physics.car.chassis.body.position);
                 if (carDistance < closestDistance) {
                     closestDistance = carDistance;
                     closestObject = this.physics.car.chassis.body.object;
                 }
-            
-                let npcName = npc.name;
-                let pattern = this.npcMovementPatterns[npcName.replace(/(\d+)/g, '')];
-            
-                // Check if the closest object is within a certain distance from the NPC, and if so, apply the movement pattern
-                if (pattern && pattern.animation != 'walking') {
-                    this.applyMovementPattern(npc, pattern);
-                } else if (closestObject && closestDistance > 0 && !npc.collided && pattern && pattern.animation === 'walking') {
-                    this.applyMovementPattern(npc, pattern);
+    
+                let npcBaseName = npc.name.replace(/(\d+)/g, '');
+                if (this.npcMovementPatterns.hasOwnProperty(npcBaseName)) {
+                    // Assign the correct movement pattern to each NPC
+                    npc.movementPattern = this.npcMovementPatterns[npcBaseName];
+                }
+    
+                // Check if the closest object is within a certain distance from the NPC, and if the movementPattern is defined
+                if (closestObject && closestDistance > 0 && !npc.collided && npc.movementPattern && npc.movementPattern.animation === 'walking') {
+                    this.applyMovementPattern(npc, npc.movementPattern);
                 }
             }
         });
@@ -506,9 +507,8 @@ export default class Objects
                 this.animateWalking(npcObject);
             }
             // Bounce back and forth resembling a pacing effect
-            movementPattern.initialPosition = npcObject.offset;
-            let startPosition = movementPattern.initialPosition.clone();
-            let targetPosition = movementPattern.initialPosition.clone();
+            let startPosition = npcObject.offset.clone();
+            let targetPosition = npcObject.offset.clone();
             targetPosition[movementPattern.axis] += movementPattern.distance;
     
             let pingPong = (t) => {
@@ -516,15 +516,22 @@ export default class Objects
             };
     
             let t = (Date.now() * 0.001 * movementPattern.speed) % 2;
-            var lerpFactor = pingPong(t);
+            let lerpFactor = pingPong(t);
     
             // Check if direction has changed
             let currentDirection = lerpFactor <= 1 ? 1 : -1;
             if (currentDirection !== movementPattern.previousDirection &&
                     movementPattern.animation === 'walking') {
-                npcObject.rotateZ(Math.PI); // Rotate 180 degrees
+                // Store the current Z-axis rotation value for each NPC
+                movementPattern.zRotation = movementPattern.zRotation ? movementPattern.zRotation + Math.PI : Math.PI;
                 movementPattern.previousDirection = currentDirection;
             }
+
+            // Apply the updated rotation value to the NPCs at each frame
+            if (movementPattern.animation === 'walking') {
+                npcObject.rotation.z = movementPattern.zRotation || 0;
+            }
+
     
             if (lerpFactor > 1) {
                 lerpFactor = 2 - lerpFactor;
