@@ -460,31 +460,33 @@ export default class Objects
         this.time.on('tick', () => {
             let npcs = this.getNPCs(); // Get all the NPCs from the items list
             for (let npc of npcs) {
-              let closestObject = null;
-              let closestDistance = Infinity;
-          
-              // Iterate over all objects and find the closest one to the NPC
-              for (let o of this.items) {
-                let distance = npc.position.distanceTo(o.container.position);
-                if (distance < closestDistance && o.container !== npc) {
-                  closestDistance = distance;
-                  closestObject = o.container;
+                let closestObject = null;
+                let closestDistance = Infinity;
+            
+                // Iterate over all objects and find the closest one to the NPC
+                for (let o of this.items) {
+                    let distance = npc.position.distanceTo(o.container.position);
+                    if (distance < closestDistance && o.container !== npc) {
+                    closestDistance = distance;
+                    closestObject = o.container;
+                    }
                 }
-              }
 
-              let carDistance = npc.position.distanceTo(this.physics.car.chassis.body.position);
-              if (carDistance < closestDistance) {
-                closestDistance = carDistance;
-                closestObject = this.physics.car.chassis.body.object;
-              }
-          
-              let npcName = npc.name;
-              let pattern = this.npcMovementPatterns[npcName.replace(/(\d+)/g, '')];
-          
-              // Check if the closest object is within a certain distance from the NPC, and if so, apply the movement pattern
-              if (closestObject && closestDistance > 1 && !npc.collided) {
-                this.applyMovementPattern(npc, pattern);
-              }
+                let carDistance = npc.position.distanceTo(this.physics.car.chassis.body.position);
+                if (carDistance < closestDistance) {
+                    closestDistance = carDistance;
+                    closestObject = this.physics.car.chassis.body.object;
+                }
+            
+                let npcName = npc.name;
+                let pattern = this.npcMovementPatterns[npcName.replace(/(\d+)/g, '')];
+            
+                // Check if the closest object is within a certain distance from the NPC, and if so, apply the movement pattern
+                if (pattern && pattern.animation != 'walking') {
+                    this.applyMovementPattern(npc, pattern);
+                } else if (closestObject && closestDistance > 0 && !npc.collided && pattern && pattern.animation === 'walking') {
+                    this.applyMovementPattern(npc, pattern);
+                }
             }
         });
     }
