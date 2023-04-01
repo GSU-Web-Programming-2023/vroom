@@ -164,7 +164,7 @@ export default class Objects
             this.list.push(object);
         }
 
-        // Spawn 10 aliens in random locations
+        // // Spawn 10 aliens in random locations
         for (let i = 0; i < 10; i++) {
             // Define a random distance between 30 and 70 meters
             let distance = Math.floor(Math.random() * 71) + 30;
@@ -376,6 +376,7 @@ export default class Objects
         object.container.name = _options.name
         object.container.is_npc = _options.is_npc
         object.container.offset = _options.offset
+        object.container.collided = false
         this.container.add(object.container)
 
         // Create physics object
@@ -411,6 +412,18 @@ export default class Objects
 
         // Save
         this.items.push(object)
+
+        let onCollide = (event, item) => {
+            let collidedBody = event.bodyA === item.collision.body ? event.bodyB : event.bodyA;
+            if (collidedBody && collidedBody.name !== 'ground') {
+              item.container.body.velocity.set(0, 0, 0);
+              item.container.collided = true;
+            }
+        };
+          
+        object.collision.body.removeEventListener('collide', onCollide);
+        object.collision.body.addEventListener('collide', (event) => onCollide(event, object));
+
     }
 
     setNPCMovement() {
@@ -444,39 +457,36 @@ export default class Objects
           // Add more movement patterns as needed
         };
         
-        
-        let collisionHandler = (item) => {
-            item.collision.body.collided = true
-          }
+        this.time.on('tick', () => {
+            let npcs = this.getNPCs(); // Get all the NPCs from the items list
+            for (let npc of npcs) {
+              let closestObject = null;
+              let closestDistance = Infinity;
           
-          this.time.on('tick', () => {
-            for (let npcName in this.npcMovementPatterns) {
-              for (let item of this.items) {
-                let onCollide = (event) => {
-                  let collidedBody = event.bodyA === item.collision.body ? event.bodyB : event.bodyA;
-                  if (collidedBody && collidedBody.name !== 'ground') {
-                    collisionHandler(item);
-                  }
-                };
-          
-                item.collision.body.removeEventListener('collide', onCollide);
-                item.collision.body.addEventListener('collide', onCollide);
-          
-                if (item.container && item.container.name && item.container.name.includes(npcName)) {
-                  // Check if the NPC has collided with any object except the ground
-                  if (item.collision.body.collided &&
-                      item.collision.body.name !== 'ground') {
-                    // Skip applying movement pattern if collided
-                    continue;
-                  }
-          
-                  // Apply the movement pattern to the corresponding NPC
-                  this.applyMovementPattern(item.container, this.npcMovementPatterns[npcName]);
+              // Iterate over all objects and find the closest one to the NPC
+              for (let o of this.items) {
+                let distance = npc.position.distanceTo(o.container.position);
+                if (distance < closestDistance && o.container !== npc) {
+                  closestDistance = distance;
+                  closestObject = o.container;
                 }
               }
-            }
-          });
+
+              let carDistance = npc.position.distanceTo(this.physics.car.chassis.body.position);
+              if (carDistance < closestDistance) {
+                closestDistance = carDistance;
+                closestObject = this.physics.car.chassis.body.object;
+              }
           
+              let npcName = npc.name;
+              let pattern = this.npcMovementPatterns[npcName.replace(/(\d+)/g, '')];
+          
+              // Check if the closest object is within a certain distance from the NPC, and if so, apply the movement pattern
+              if (closestObject && closestDistance > 1 && !npc.collided) {
+                this.applyMovementPattern(npc, pattern);
+              }
+            }
+        });
     }
       
     applyMovementPattern(npcObject, movementPattern) {
