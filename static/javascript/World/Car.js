@@ -488,9 +488,7 @@ export default class Car
                 "[Balloon] Just a totally normal weather balloon, nothing to see here...",
             ],
             "alien" : [
-                "[Alien] An acninet etffaric, lset in tmei and scpea...",
-                "[Alien] ...I gmloe with a ymtsre fgorde by arlneis' garce...",
-                "[Alien] ...Mlulietd hseus, eteald in etrces. Waht am I?",
+                "[Alien] ...Yuor wlli be obliterdaed by our advacned tceleghnooy....",,
             ],
             // more NPCs and their dialogues
         };
