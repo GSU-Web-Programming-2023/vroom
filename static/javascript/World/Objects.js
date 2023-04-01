@@ -413,13 +413,16 @@ export default class Objects
         // Save
         this.items.push(object)
 
-        let onCollide = (event, item) => {
-            let collidedBody = event.bodyA === item.collision.body ? event.bodyB : event.bodyA;
-            if (collidedBody && collidedBody.name !== 'ground') {
-              item.container.body.velocity.set(0, 0, 0);
-              item.container.collided = true;
+        let onCollide = (event, item) => {        
+            let bodyA = event.contact.bi;
+            let bodyB = event.contact.bj;
+        
+            // Check if both collided bodies are NPCs
+            if (bodyA && bodyA.name != "ground" && bodyB && bodyB.name != "ground") {
+                // Set the collided property for both NPCs
+                item.container.collided = true;
             }
-        };
+        };        
           
         object.collision.body.removeEventListener('collide', onCollide);
         object.collision.body.addEventListener('collide', (event) => onCollide(event, object));
@@ -460,43 +463,22 @@ export default class Objects
         this.time.on('tick', () => {
             let npcs = this.getNPCs(); // Get all the NPCs from the items list
             for (let npc of npcs) {
-                let closestObject = null;
-                let closestDistance = Infinity;
-    
-                // Iterate over all objects and find the closest one to the NPC
-                for (let o of this.items) {
-                    let distance = npc.position.distanceTo(o.container.position);
-                    if (distance < closestDistance && o.container !== npc) {
-                        closestDistance = distance;
-                        closestObject = o.container;
-                    }
-                }
-    
-                let carDistance = npc.position.distanceTo(this.physics.car.chassis.body.position);
-                if (carDistance < closestDistance) {
-                    closestDistance = carDistance;
-                    closestObject = this.physics.car.chassis.body.object;
-                }
-    
                 let npcBaseName = npc.name.replace(/(\d+)/g, '');
                 if (this.npcMovementPatterns.hasOwnProperty(npcBaseName)) {
                     // Assign the correct movement pattern to each NPC
                     npc.movementPattern = this.npcMovementPatterns[npcBaseName];
                 }
     
-                // Check if the closest object is within a certain distance from the NPC, and if the movementPattern is defined
-                if (npc.movementPattern && (!npc.movementPattern.animation || npc.movementPattern.animation !== 'walking')) {
+                if (!npc.collided && npc.movementPattern) {
                     this.applyMovementPattern(npc, npc.movementPattern);
-                } else if (closestObject && closestDistance > 0 && !npc.collided && npc.movementPattern && npc.movementPattern.animation === 'walking') {
-                    this.applyMovementPattern(npc, npc.movementPattern);
-                }                
+                }
             }
         });
     }
       
     applyMovementPattern(npcObject, movementPattern) {
         let object = this.items.find(item => item.container === npcObject);
-        if (!object || !npcObject.position) return;
+        if (npcObject.collided || !object || !npcObject.position) return;
     
         if (movementPattern.type === 'still') {
             // Do nothing; the NPC will remain stationary.
