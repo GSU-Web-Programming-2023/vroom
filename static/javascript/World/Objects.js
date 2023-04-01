@@ -51,7 +51,7 @@ export default class Objects
                 name: 'xb1',
                 base: this.resources.items.xb1.scene,
                 collision: this.resources.items.xb1Collision.scene,
-                offset: new THREE.Vector3(-55, -25, 0),
+                offset: new THREE.Vector3(-110, -50, 0),
                 mass: 15,
                 is_npc: true
             },
@@ -59,7 +59,7 @@ export default class Objects
                 name: 'r2d2',
                 base: this.resources.items.r2d2.scene,
                 collision: this.resources.items.r2d2Collision.scene,
-                offset: new THREE.Vector3(-54, -24, 0),
+                offset: new THREE.Vector3(-109, -49, 0),
                 mass: 20,
                 is_npc: true
             },
