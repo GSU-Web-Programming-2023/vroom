@@ -488,7 +488,7 @@ export default class Car
                 "[Balloon] Just a totally normal weather balloon, nothing to see here...",
             ],
             "alien" : [
-                "[Alien] ...Yuor wlli be obliterdaed by our advacned tceleghnooy....",,
+                "[Alien] ...Yuo wlli be obliterdaed by our advacned tceleghnooy slily hnmaus....",
             ],
             // more NPCs and their dialogues
         };
