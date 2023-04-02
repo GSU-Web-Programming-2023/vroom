@@ -46,7 +46,7 @@ export default class Objects
                 name: 'elon',
                 base: this.resources.items.elon.scene,
                 collision: this.resources.items.elonCollision.scene,
-                offset: new THREE.Vector3(-7, -11, 0),
+                offset: new THREE.Vector3(-7, -9, 0),
                 mass: 45,
                 is_npc: true,
                 dialogue: [
@@ -122,7 +122,7 @@ export default class Objects
                 name: 'aeroshell',
                 base: this.resources.items.aeroshell.scene,
                 collision: this.resources.items.aeroshellCollision.scene,
-                offset: new THREE.Vector3(-12, -10, 0),
+                offset: new THREE.Vector3(-12, 1, 0),
                 mass: 75
             },
             {
