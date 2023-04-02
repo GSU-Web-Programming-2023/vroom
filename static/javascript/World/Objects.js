@@ -24,12 +24,15 @@ export default class Objects
         {
             this.add(_options)
         }
+        
         this.setNPCMovement()
+        this.setNPCDialogue()
     }
 
     setList()
     {
         // Objects options list
+        // Important: Make at least two lines of dialogue for each NPC
         this.list = [
             {
                 name: 'startingPoint', // starting point
@@ -45,7 +48,14 @@ export default class Objects
                 collision: this.resources.items.elonCollision.scene,
                 offset: new THREE.Vector3(-7, -11, 0),
                 mass: 45,
-                is_npc: true
+                is_npc: true,
+                dialogue: [
+                    "[Elon] Hey! You there! Come make yourself useful...",
+                    "[Elon] It appears my 'genius' engineers have stranded me here on this rock...",
+                    "[Elon] Sigh...we're gonna have to rewrite the whole stack if we're gonna get outta here..",
+                    "[Elon] Locate my AI assistant, XB1-420-69...",
+                    "[Elon] Surely he'll know what to do..."
+                ]
             },
             {
                 name: 'xb1',
@@ -53,7 +63,11 @@ export default class Objects
                 collision: this.resources.items.xb1Collision.scene,
                 offset: new THREE.Vector3(-110, -50, 0),
                 mass: 15,
-                is_npc: true
+                is_npc: true,
+                dialogue: [
+                    "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
+                    "[XB1] ..bzzt..",
+                ]
             },
             {
                 name: 'r2d2',
@@ -61,7 +75,10 @@ export default class Objects
                 collision: this.resources.items.r2d2Collision.scene,
                 offset: new THREE.Vector3(-109, -49, 0),
                 mass: 20,
-                is_npc: true
+                is_npc: true,
+                dialogue: [
+                    "[R2] ..@@@>>?>?????>..//..",
+                ]
             },
             {
                 name: 'alien',
@@ -69,7 +86,11 @@ export default class Objects
                 collision: this.resources.items.alienCollision.scene,
                 offset: new THREE.Vector3(-35, 0, 1),
                 mass: 10,
-                is_npc: true
+                is_npc: true,
+                dialogue: [
+                    "[Alien] ...Yuo wlli be obliterdaed by our advacned tceleghnooy slily hnmaus...",
+                    "[Alien] ...",
+                ]
             },
             {
                 name: 'spyBalloon',
@@ -77,7 +98,11 @@ export default class Objects
                 collision: this.resources.items.spyBalloonCollision.scene,
                 offset: new THREE.Vector3(10, -12, 4),
                 mass: 0,
-                is_npc: true
+                is_npc: true,
+                dialogue: [
+                    "[spyBalloon] Just a totally normal weather balloon, nothing to see here...",
+                    "[spyBalloon] ...",
+                ]
             },
             {
                 name: 'lander',
@@ -195,7 +220,11 @@ export default class Objects
                 collision: this.resources.items.alienCollision.scene,
                 offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
                 mass: 10,
-                is_npc: true
+                is_npc: true,
+                dialogue: [
+                    "[Alien] ...Yuo wlli be obliterdaed by our advacned tceleghnooy slily hnmaus...",
+                    "[Alien] ...",
+                ]
             };
 
             // Append the object to the list
@@ -383,6 +412,7 @@ export default class Objects
         object.container.name = _options.name
         object.container.is_npc = _options.is_npc
         object.container.offset = _options.offset
+        object.container.dialogue = _options.dialogue
         object.container.collided = false
         this.container.add(object.container)
 
@@ -434,6 +464,39 @@ export default class Objects
         object.collision.body.removeEventListener('collide', onCollide);
         object.collision.body.addEventListener('collide', (event) => onCollide(event, object));
 
+    }
+
+    setNPCDialogue() {
+        // Set Triggers for coming into close proximity with NPCs
+        let npcs = this.getNPCs();
+        npcs.forEach(npc => {
+            // let talkedTo = false;
+            let position = npc.position.clone();
+            let distance = this.physics.car.chassis.body.position.distanceTo(position);
+            let currentDialogue = npc.dialogue;
+        
+            this.time.on('tick', () => {
+                // Update the position and distance every tick
+                position = npc.position.clone();
+                distance = this.physics.car.chassis.body.position.distanceTo(position);
+            
+                // Proximity trigger dialogue
+                // if (distance < 5 && !talkedTo) {
+                //     triggerDialogue(currentDialogue);
+                //     talkedTo = true;
+                // }
+            
+                // Handle F keypress to trigger dialogue
+                document.removeEventListener('keypress', handleInteract); // Remove previous event listener
+                document.addEventListener('keypress', handleInteract); // Add new event listener
+            });
+        
+            function handleInteract(event) {
+                if (event.key === 'f' && distance < 5) {
+                    triggerDialogue(currentDialogue);
+                }
+            }
+        });  
     }
 
     setNPCMovement() {

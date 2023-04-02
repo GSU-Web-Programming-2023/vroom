@@ -36,7 +36,6 @@ export default class Car
         this.setWheels()
         this.setTransformControls()
         this.setProximityIndicator()
-        this.setNPCDialogue()
         this.initAudio()
     }
 
@@ -465,65 +464,5 @@ export default class Car
             indicatorMaterial.opacity = 0.5;
           }
         });
-    }
-    
-    setNPCDialogue() {
-        // Set Triggers for coming into close proximity with NPCs
-        let npcDialogues = {
-            // At least two lines of dialogue for each NPC
-            "elon": [
-                "[Elon] Hey! You there! Come make yourself useful...",
-                "[Elon] It appears my 'genius' engineers have stranded me here on this rock...",
-                "[Elon] Sigh...we're gonna have to rewrite the whole stack if we're gonna get outta here..",
-                "[Elon] Locate my AI assistant, XB1-420-69...",
-                "[Elon] Surely he'll know what to do..."
-            ],
-            "xb1": [
-                "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
-                "[XB1] ..bzzt..",
-            ],
-            "r2d2": [
-                "[R2] ..@@@>>?>?????>..//..",
-            ],
-            "spyBalloon": [
-                "[Balloon] Just a totally normal weather balloon, nothing to see here...",
-                "[Balloon] ...",
-            ],
-            "alien" : [
-                "[Alien] ...Yuo wlli be obliterdaed by our advacned tceleghnooy slily hnmaus...",
-                "[Alien] ...",
-            ],
-            // more NPCs and their dialogues
-        };
-        
-        let npcs = this.objects.getNPCs();
-        npcs.forEach(npc => {
-            // let talkedTo = false;
-            let position = npc.position.clone();
-            let distance = this.chassis.object.position.distanceTo(position);
-            let currentDialogue = npcDialogues[npc.name.replace(/\d+/g, '')];
-        
-            this.time.on('tick', () => {
-                // Update the position and distance every tick
-                position = npc.position.clone();
-                distance = this.chassis.object.position.distanceTo(position);
-            
-                // Proximity trigger dialogue
-                // if (distance < 5 && !talkedTo) {
-                //     triggerDialogue(currentDialogue);
-                //     talkedTo = true;
-                // }
-            
-                // Handle F keypress to trigger dialogue
-                document.removeEventListener('keypress', handleInteract); // Remove previous event listener
-                document.addEventListener('keypress', handleInteract); // Add new event listener
-            });
-        
-            function handleInteract(event) {
-                if (event.key === 'f' && distance < 5) {
-                    triggerDialogue(currentDialogue);
-                }
-            }
-        });  
     }
 }
