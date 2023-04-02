@@ -122,15 +122,8 @@ export default class Objects
                 name: 'aeroshell',
                 base: this.resources.items.aeroshell.scene,
                 collision: this.resources.items.aeroshellCollision.scene,
-                offset: new THREE.Vector3(-12, 1, 0),
+                offset: new THREE.Vector3(-8, -6, 0),
                 mass: 75
-            },
-            {
-                name: 'tree',
-                base: this.resources.items.tree.scene,
-                collision: this.resources.items.treeCollision.scene,
-                offset: new THREE.Vector3(-7, -7, 0),
-                mass: 50
             },
             // {
             //     name: 'sphere',
