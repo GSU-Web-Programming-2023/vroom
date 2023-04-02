@@ -52,6 +52,9 @@ import spyBalloonCollisionSource from '../models/npcs/spyBalloon/collision.glb'
 import rocketSource from '../models/rocket/base.glb'
 import rocketCollisionSource from '../models/rocket/collision.glb'
 
+import aeroshellSource from '../models/aeroshell/base.glb'
+import aeroshellCollisionSource from '../models/aeroshell/collision.glb'
+
 import alienSource from '../models/npcs/alien/base.glb'
 import alienCollisionSource from '../models/npcs/alien/collision.glb'
 
@@ -113,6 +116,9 @@ export default class Resources extends EventEmitter
 
             { name: 'rocket', source: rocketSource },
             { name: 'rocketCollision', source: rocketCollisionSource },
+
+            { name: 'aeroshell', source: aeroshellSource },
+            { name: 'aeroshellCollision', source: aeroshellCollisionSource },
 
             { name: 'alien', source: alienSource },
             { name: 'alienCollision', source: alienCollisionSource }
