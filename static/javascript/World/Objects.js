@@ -24,7 +24,7 @@ export default class Objects
         {
             this.add(_options)
         }
-        
+
         this.setNPCMovement()
         this.setNPCDialogue()
     }
@@ -32,7 +32,7 @@ export default class Objects
     setList()
     {
         // Objects options list
-        // Important: Make at least two lines of dialogue for each NPC
+        // Important: Make sure to include the dialogue array for NPCs
         this.list = [
             {
                 name: 'startingPoint', // starting point
