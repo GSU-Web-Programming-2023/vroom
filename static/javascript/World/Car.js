@@ -470,6 +470,7 @@ export default class Car
     setNPCDialogue() {
         // Set Triggers for coming into close proximity with NPCs
         let npcDialogues = {
+            // At least two lines of dialogue for each NPC
             "elon": [
                 "[Elon] Hey! You there! Come make yourself useful...",
                 "[Elon] It appears my 'genius' engineers have stranded me here on this rock...",
@@ -486,9 +487,11 @@ export default class Car
             ],
             "spyBalloon": [
                 "[Balloon] Just a totally normal weather balloon, nothing to see here...",
+                "[Balloon] ...",
             ],
             "alien" : [
-                "[Alien] ...Yuo wlli be obliterdaed by our advacned tceleghnooy slily hnmaus....",
+                "[Alien] ...Yuo wlli be obliterdaed by our advacned tceleghnooy slily hnmaus...",
+                "[Alien] ...",
             ],
             // more NPCs and their dialogues
         };
