@@ -132,7 +132,7 @@ export default class Physics
         this.car.options.controlsAcceleratingSpeed = 0.7 // Acceleration
         this.car.options.controlsAcceleratingSpeedBoost = 1.25 // Boost Acceleration
         this.car.options.controlsAcceleratinMaxSpeed = 0.069 // Max Speed
-        this.car.options.controlsAcceleratinMaxSpeedBoost = 0.2 // Boost Max Speed
+        this.car.options.controlsAcceleratinMaxSpeedBoost = 0.23 // Boost Max Speed
         this.car.options.controlsAcceleratingQuad = false
         this.car.options.controlsBrakeStrength = 0.45
 

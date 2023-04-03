@@ -327,29 +327,33 @@ export default class Car
             }
         };
 
-        let collisionHandler = (event) => {
-            if (this.movement.localSpeed.length() > 0.05) {
+        let collisionHandler = (speed) => {
+            if (speed > 0.05) {
                 // Adjust the volume of the idle sound based on speed
-                let speedVolume = Math.min(0.6, this.movement.localSpeed.length());
+                let speedVolume = Math.min(0.6, speed);
                 this.car.sound.collision.volume(speedVolume);
                 
                 if (!this.car.sound.collision.playing()) {
+                    this.car.sound.boost.stop();
+                    this.car.sound.idle.stop();
                     this.car.sound.collision.play();
                 }
             }
         }
 
         this.car.setSound = () => {
-            // Honk sound
             // Remove the event listeners before adding new ones
+            // Honk sound
             document.removeEventListener('keydown', keyDownHandler);
             document.removeEventListener('keyup', keyUpHandler);
+            // Collision sound
             this.physics.car.chassis.body.removeEventListener('collide', collisionHandler);
 
             // Add the event listeners back
             document.addEventListener('keydown', keyDownHandler);
             document.addEventListener('keyup', keyUpHandler);
-            this.physics.car.chassis.body.addEventListener('collide', collisionHandler);
+            let speed = this.movement.localSpeed.length();
+            this.physics.car.chassis.body.addEventListener('collide', collisionHandler.bind(this, speed));
 
             // Engine Start
             if (this.physics.car.controls.actions.up || this.physics.car.controls.actions.down) {
@@ -363,7 +367,7 @@ export default class Car
             // Boost sound
             if ((this.physics.car.controls.actions.boost && this.physics.car.controls.actions.up) || 
                 (this.physics.car.controls.actions.boost && this.physics.car.controls.actions.down)) {
-                if (!this.car.sound.boost.playing()) {
+                if (!this.car.sound.boost.playing() && this.movement.localSpeed.length() > 0.01) {
                     this.car.sound.boost.play();
                     this.car.sound.idle.pause();
                 }
