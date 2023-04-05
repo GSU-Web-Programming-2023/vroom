@@ -344,6 +344,10 @@ html, body {
 
 form > *, .login > *, .register > * {
     margin-block: 0.5em;
+    font-size: larger;
+}
+form{
+    font-family: monospace;
 }
 
 hr {
@@ -395,6 +399,7 @@ hr {
 button {
     background-color: #3474eb; /* Change the color to your preference */
     border: none;
+    font-family: monospace;
     color: white;
     text-align: center;
     text-decoration: none;
