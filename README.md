@@ -26,12 +26,6 @@ flask run
 If you edit any Node.js files (files in the static/javascript folder), these commands apply:
 
 ``` bash
-# Just be sure that you've got parcel js on you system 
-npm install -g parcel-bundler
-
-# Install dependencies (only for first time) 
-npm i
-
 # Bundle JS files
 npx webpack --config webpack.config.js
 
@@ -57,7 +51,7 @@ pip install -r requirements.txt
 flask run
 ```
 
-IF 'instance' folder or 'migrations' folder doesn't exist or work, or you get a database related error, rebuild the database with these commands:
+IF `instance` folder or `migrations` folder doesn't exist, or you get a database related error, rebuild the database with these commands:
 ``` bash
 # Set up the initial files and folders for managing database changes
 flask db init
@@ -67,6 +61,22 @@ flask db migrate
 
 # Update the database structure by applying any pending changes
 flask db upgrade
+
+# Run the flask server on localhost:5000
+flask run
+```
+
+IF `node_modules` folder doesn't exist or `bundle.js` doesn't exist in the static/javascript folder, run these commands:
+
+``` bash
+# Just be sure that you've got parcel js on you system 
+npm install -g parcel-bundler
+
+# Install dependencies (only for first time) 
+npm i
+
+# Bundle JS files
+npx webpack --config webpack.config.js
 
 # Run the flask server on localhost:5000
 flask run
