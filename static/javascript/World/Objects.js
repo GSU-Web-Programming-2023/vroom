@@ -155,8 +155,8 @@ export default class Objects
             // },
         ]
 
-        // Spawn 75 trees and rocks in random locations
-        for (let i = 0; i < 75; i++) {
+        // Spawn 50 trees and rocks in random locations
+        for (let i = 0; i < 50; i++) {
             // Define a random distance between 30 and 70 meters
             let distance = Math.floor(Math.random() * 71) + 30;
         
