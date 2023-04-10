@@ -1,6 +1,6 @@
 // // Example POST request
 // window.addEventListener('load', function() {
-//   const url = 'http://localhost:5000/api/endpoint/';
+//   const url = '/api/endpoint/';
 //   const data = { name : 'Judah Paul' };
 
 //   response = fetch(url, {
@@ -26,7 +26,7 @@ registerForm.addEventListener('submit', function(event) {
 });
 
 function login () {
-    const url = 'http://localhost:5000/api/endpoint/';
+    const url = '/api/endpoint/';
     let username = document.getElementById('username1').value;
     let password = document.getElementById('password1').value;
   
@@ -65,7 +65,7 @@ function login () {
   }
   
 function register () {
-    const url = 'http://localhost:5000/api/endpoint/';
+    const url = '/api/endpoint/';
     let username = document.getElementById('username2').value;
     let password = document.getElementById('password2').value;
     let password2 = document.getElementById('password3').value;
@@ -104,7 +104,7 @@ function register () {
 }
 
 function save () {
-  const url = 'http://localhost:5000/api/endpoint/';
+  const url = '/api/endpoint/';
 
   let username = document.getElementById('user').value;
   let hours = document.getElementById('hours').textContent;
