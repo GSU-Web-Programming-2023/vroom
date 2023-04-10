@@ -18,6 +18,9 @@ python3 -m venv env
 # Activate the python environment
 env\Scripts\activate
 
+# Install python modules (only the first time)
+pip install -r requirements.txt
+
 # Run the flask server on localhost:5000
 flask run
 ```
