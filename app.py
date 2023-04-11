@@ -59,6 +59,12 @@ def create_achievements():
         achievement = Achievement(name='Hello World', description='Log in for the first time.')
         db.session.add(achievement)
         db.session.commit()
+        
+        achievement = Achievement(name='Avid Gamer', description='Log in 10 times.')
+        db.session.add(achievement)
+        db.session.commit()
+
+        # Add more achievements as needed
 
 # Routes
 @app.route('/', methods = ['GET'])
@@ -89,21 +95,16 @@ def api():
                         'name': a.name,
                         'description': a.description
                     })
-
+                
                 response = {
                     'user': user.username,
                     'user-id': user.id,
                     'hours': hours,
                     'minutes': minutes,
                     'seconds': seconds,
-                    'achievements': aList,
-                    'earnedA2' : user.has_achievement(a2)
+                    'achievements': aList
                 }
                 user.logins += 1
-                if user.logins >= 10:
-                    a2 = Achievement.query.filter_by(id=2).first()
-                    user.earn_achievement(a2)
-                    response['earnedA2'] = True
                 db.session.commit()
                 return response
             else:
@@ -137,11 +138,13 @@ def api():
             user.seconds_in_game = secondsTotal
             db.session.commit()
             a1 = Achievement.query.filter_by(id=1).first()
+            a2 = Achievement.query.filter_by(id=2).first()
             response = {
                 'user' : user.username,
                 'saved' : True,
                 'logins': user.logins,
-                'earnedA1' : user.has_achievement(a1)
+                'earnedA1' : user.has_achievement(a1),
+                'earnedA2' : user.has_achievement(a2)
             }
             return response
         elif "achievement" == data['postType']:
