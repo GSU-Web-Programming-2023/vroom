@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask import Flask
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
+CORS(app)
 
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -64,6 +67,7 @@ def home():
     return render_template('index.html')
 
 @app.route('/api/endpoint/', methods=['POST'])
+@cross_origin()
 def api():
     data = request.get_json()
     if "postType" in data:
@@ -92,9 +96,14 @@ def api():
                     'hours': hours,
                     'minutes': minutes,
                     'seconds': seconds,
-                    'achievements': aList
+                    'achievements': aList,
+                    'earnedA2' : user.has_achievement(a2)
                 }
                 user.logins += 1
+                if user.logins >= 10:
+                    a2 = Achievement.query.filter_by(id=2).first()
+                    user.earn_achievement(a2)
+                    response['earnedA2'] = True
                 db.session.commit()
                 return response
             else:

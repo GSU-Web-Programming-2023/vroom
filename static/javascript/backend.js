@@ -1,19 +1,3 @@
-// // Example POST request
-// window.addEventListener('load', function() {
-//   const url = 'http://localhost:5000/api/endpoint/';
-//   const data = { name : 'Judah Paul' };
-
-//   response = fetch(url, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(data)
-//   })
-//   .then(response => console.log(response))
-//   .catch(error => console.error(error));
-// });
-
 let loginForm = document.getElementById('login-form');
 let registerForm = document.getElementById('register-form');
 let username;
@@ -135,6 +119,9 @@ function save () {
         // Check for Achievements
         if (data['logins'] == 1 && !data['earnedA1']) {
           achievement(1);
+        }
+        else if (data['logins'] >= 10 && !data['earnedA2']) {
+          achievement(2);
         }
       }
     }).catch(error => console.log(error));
