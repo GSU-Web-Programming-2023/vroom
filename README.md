@@ -1,1 +1,1 @@
-![](readme.png)
+![](readme.svg)
