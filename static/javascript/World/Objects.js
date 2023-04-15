@@ -67,7 +67,8 @@ export default class Objects
                 dialogue: [
                     "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
                     "[XB1] ..bzzt..",
-                ]
+                ],
+                talkedTo: false // Add a boolean to check if the NPC has been talked to
             },
             {
                 name: 'r2d2',
@@ -488,12 +489,13 @@ export default class Objects
             
                 // Handle F keypress to trigger dialogue
                 document.removeEventListener('keypress', handleInteract); // Remove previous event listener
-                document.addEventListener('keypress', handleInteract); // Add new event listener
+                document.addEventListener('keypress', handleInteract, npc); // Add new event listener
             });
         
-            function handleInteract(event) {
-                if (event.key === 'f' && distance < 5) {
+            function handleInteract(event, npc) {
+                if (event.key === 'f' && distance < 5 && !npc.talkedTo) {
                     triggerDialogue(currentDialogue);
+                    npc.talkedTo = true;
                 }
             }
         });  

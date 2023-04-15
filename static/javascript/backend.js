@@ -1,18 +1,6 @@
-// // Example POST request
-// window.addEventListener('load', function() {
-//   const url = 'http://localhost:5000/api/endpoint/';
-//   const data = { name : 'Judah Paul' };
+// import { Object } from './Objects.js';
 
-//   response = fetch(url, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(data)
-//   })
-//   .then(response => console.log(response))
-//   .catch(error => console.error(error));
-// });
+// const obj = new Object();
 
 let loginForm = document.getElementById('login-form');
 let registerForm = document.getElementById('register-form');
@@ -103,20 +91,26 @@ function register () {
     }
 }
 
-function save () {
+const save = () => {
   const url = '/api/endpoint/';
 
   let username = document.getElementById('user').value;
   let hours = document.getElementById('hours').textContent;
   let minutes = document.getElementById('minutes').textContent;
   let seconds = document.getElementById('seconds').textContent;
+  
+  if (this.list) {
+  // Find the xb1 object in the list
+  let xb1 = this.list.find(item => item.name === 'xb1');
 
+  if (xb1) {
   const data = {
     postType : 'save',
     username: username,
     hours : hours,
     minutes : minutes,
-    seconds : seconds
+    seconds : seconds,
+    talkedTo: xb1.talkedTo
   };
   response = fetch(url, {
     method: 'POST',
@@ -139,8 +133,21 @@ function save () {
         else if (data['logins'] >= 10 && !data['earnedA2']) {
           achievement(2);
         }
+
+        // Check for talkedTo flag
+        if (data['talkedTo']) {
+          // Perform actions based on talkedTo flag
+          console.log("talkedTo flag is true");
+        }
       }
     }).catch(error => console.log(error));
+} else { 
+  console.log("xb1 not found in list");
+}
+}else {
+  console.log("this.list is undefined");
+}
+// obj.save()
 }
 
 function loadGame(data) {
