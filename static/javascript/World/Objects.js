@@ -470,7 +470,7 @@ export default class Objects
         // Set Triggers for coming into close proximity with NPCs
         let npcs = this.getNPCs();
         npcs.forEach(npc => {
-            // let talkedTo = false;
+            let talkedTo = false;
             let position = npc.position.clone();
             let distance = this.physics.car.chassis.body.position.distanceTo(position);
             let currentDialogue = npc.dialogue;
@@ -488,12 +488,16 @@ export default class Objects
             
                 // Handle F keypress to trigger dialogue
                 document.removeEventListener('keypress', handleInteract); // Remove previous event listener
-                document.addEventListener('keypress', handleInteract); // Add new event listener
+                document.addEventListener('keypress', (event) => handleInteract(event, npc)); // Add new event listener
             });
         
-            function handleInteract(event) {
+            function handleInteract(event, npc) {
                 if (event.key === 'f' && distance < 5) {
                     triggerDialogue(currentDialogue);
+                    let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
+                    if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
+                        xb1TalkedTo.value = 'true';
+                    }
                 }
             }
         });  

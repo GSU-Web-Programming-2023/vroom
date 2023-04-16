@@ -1,6 +1,6 @@
 function achievement(id) {
   let achievement;
-  const url = 'http://localhost:5000/api/endpoint/';
+  const url = '/api/endpoint/';
   const data = {
       'postType': 'achievement',
       'user_id': $('#user-id').val(),

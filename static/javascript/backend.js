@@ -1,19 +1,3 @@
-// // Example POST request
-// window.addEventListener('load', function() {
-//   const url = 'http://localhost:5000/api/endpoint/';
-//   const data = { name : 'Judah Paul' };
-
-//   response = fetch(url, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(data)
-//   })
-//   .then(response => console.log(response))
-//   .catch(error => console.error(error));
-// });
-
 let loginForm = document.getElementById('login-form');
 let registerForm = document.getElementById('register-form');
 let username;
@@ -103,7 +87,7 @@ function register () {
     }
 }
 
-function save () {
+const save = () => {
   const url = '/api/endpoint/';
 
   let username = document.getElementById('user').value;
@@ -116,8 +100,9 @@ function save () {
     username: username,
     hours : hours,
     minutes : minutes,
-    seconds : seconds
-  };
+    seconds : seconds,
+  }
+
   response = fetch(url, {
     method: 'POST',
     headers: {
@@ -139,9 +124,20 @@ function save () {
         else if (data['logins'] >= 10 && !data['earnedA2']) {
           achievement(2);
         }
+  
+        let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
+        if (xb1TalkedTo.value === 'true' && !data['earnedA3']) {
+          achievement(3);
+        }
+
+        // Check for talkedTo flag
+        if (data['talkedTo']) {
+          // Perform actions based on talkedTo flag
+          console.log("talkedTo flag is true");
+        }
       }
     }).catch(error => console.log(error));
-}
+  }
 
 function loadGame(data) {
   // load webpack bundle file to start the game
