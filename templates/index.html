@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vroom</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/achievement.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body><span id="loading">Loading</span>
+    <!-- Login / Register -->
+    <div id="landing-page">
+        <h2 class="page-title fade-in cyberpunk">VROOM</h2>
+        <div class="login fade-in">
+            <hr class="animated-hr"><br>
+            <span id="login-header" class="cyberpunk">Login Here!</span>
+            <br><br>
+            <form action="" id="login-form">
+                <label for="username1">Username: </label><br>
+                <input id="username1" type="text" required><br>
+                <label for="password1">Password: </label><br>
+                <input id="password1" type="text" required><br>
+                <button onclick="login();">Login</button>
+            </form>
+            <hr class="animated-hr mobile-hide">
+        </div>
+        <div class="separator mobile-hide"></div>
+        <div class="register fade-in">
+            <hr class="animated-hr mobile-hide"><br>
+            <span id="register-header" class="cyberpunk">New Here?<br>Register Now!</span>
+            <br><br>
+            <form action="" id="register-form">
+                <label for="username2">Username: </label><br>
+                <input id="username2" type="text" required><br>
+                <label for="password2">Password: </label><br>
+                <input id="password2" type="text" required><br>
+                <label for="password3">Confirm Password: </label><br>
+                <input id="password3" type="text" required><br>
+                <button onclick="register();">Register</button>
+            </form>
+            <hr class="animated-hr mobile-hide">
+        </div>
+    </div>
+    <!-- HUD -->
+    <div class="hud mobile-hide">
+        <div class="top-left">
+            <div id="timer">
+                <span>Time in game:&nbsp;</span>
+                <br>
+                <span id="hours">00</span>
+                &nbsp;hours&nbsp;
+                <span id="minutes">00</span>
+                &nbsp;minutes&nbsp;
+                <span id="seconds">00</span>
+                &nbsp;seconds&nbsp;
+            </div>
+        </div>
+        <div class="top-middle">
+            <div class="achievement-banner animated">
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
+                <div class="achievement-trophy icon logo">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+        
+                <div class="achievement-text">
+                    <p class="achievement-notification"></p>
+                    <p class="achievement-name"><i class="icon gamerscore"></i></p>
+                </div>
+            </div>
+        </div>
+        <div class="top-right">
+            <canvas id="minimap" tooltip="minimap"></canvas>
+        </div>
+        <div class="bottom-left">
+            <img id="hud-controls" src="{{ url_for('static', filename='images/controls.png') }}"></img>
+        </div>
+        <div class="bottom-middle">
+            <span id="dialogue"></span>
+        </div>
+        <div class="bottom-right">
+            <span id="speedometer" class="cyberpunk">99mph</span>
+        </div>
+    </div>
+    <!-- Pause Menu -->
+    <div id="pause-menu">
+        <div class="card settings">
+            <input id="user" type="hidden" value="">
+            <input id="user-id" type="hidden" value="">
+            <input id="honkHelper" type="hidden" value="false">
+            <input id="xb1TalkedTo" type="hidden" value="false">
+            <div class="pause-menu-option" onclick="togglePauseMenu();">Resume Game</div>
+            <div class="pause-menu-option" onclick="save();location.reload();">Save & Quit</div>
+        </div>
+        <div class="card achievements-pane">
+            <span style="
+              margin: 1em auto;
+              width: fit-content;
+              display: block;
+              font-family: monospace;
+              font-size: x-large;
+              ">Achievements
+            </span>
+        </div>
+    </div>
+    <!-- HUD JS -->
+    <script src="{{ url_for('static', filename='javascript/hud/timer.js') }}" async></script>
+    <script src="{{ url_for('static', filename='javascript/hud/dialogue.js') }}" async></script>
+    <script src="{{ url_for('static', filename='javascript/hud/achievement.js') }}" async></script>
+    <!-- GAME JS -->
+    <canvas id="game" class="canvas js-canvas fade-in"></canvas>
+    <!-- OTHER JS -->
+    <script src="{{ url_for('static', filename='javascript/backend.js') }}" async></script>
+    <script src="{{ url_for('static', filename='javascript/misc.js') }}" async></script>
+</body>
+</html>
