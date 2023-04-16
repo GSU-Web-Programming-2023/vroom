@@ -126,7 +126,7 @@ const save = () => {
         }
   
         let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
-        if (xb1TalkedTo === 'true' && !data['earnedA3']) {
+        if (xb1TalkedTo.value === 'true' && !data['earnedA3']) {
           achievement(3);
         }
 

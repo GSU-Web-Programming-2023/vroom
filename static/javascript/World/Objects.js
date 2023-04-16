@@ -488,14 +488,16 @@ export default class Objects
             
                 // Handle F keypress to trigger dialogue
                 document.removeEventListener('keypress', handleInteract); // Remove previous event listener
-                document.addEventListener('keypress', handleInteract, npc); // Add new event listener
+                document.addEventListener('keypress', (event) => handleInteract(event, npc)); // Add new event listener
             });
         
             function handleInteract(event, npc) {
-                if (event.key === 'f' && distance < 5 && !npc.talkedTo) {
+                if (event.key === 'f' && distance < 5) {
                     triggerDialogue(currentDialogue);
                     let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
-                    xb1TalkedTo.textContent = 'true';
+                    if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
+                        xb1TalkedTo.value = 'true';
+                    }
                 }
             }
         });  
