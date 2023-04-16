@@ -1,7 +1,3 @@
-// import { Object } from './Objects.js';
-
-// const obj = new Object();
-
 let loginForm = document.getElementById('login-form');
 let registerForm = document.getElementById('register-form');
 let username;
@@ -29,7 +25,8 @@ function login () {
       response = fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Allow-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(data)
       })
@@ -72,7 +69,8 @@ function register () {
         response = fetch(url, {
             method: 'POST',
             headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Allow-Control-Allow-Origin': '*'
             },
             body: JSON.stringify(data)
         })
@@ -98,24 +96,20 @@ const save = () => {
   let hours = document.getElementById('hours').textContent;
   let minutes = document.getElementById('minutes').textContent;
   let seconds = document.getElementById('seconds').textContent;
-  
-  if (this.list) {
-  // Find the xb1 object in the list
-  let xb1 = this.list.find(item => item.name === 'xb1');
 
-  if (xb1) {
   const data = {
     postType : 'save',
     username: username,
     hours : hours,
     minutes : minutes,
     seconds : seconds,
-    talkedTo: xb1.talkedTo
-  };
+  }
+
   response = fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Allow-Control-Allow-Origin': '*'
     },
     body: JSON.stringify(data)
   })
@@ -133,6 +127,11 @@ const save = () => {
         else if (data['logins'] >= 10 && !data['earnedA2']) {
           achievement(2);
         }
+  
+        let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
+        if (xb1TalkedTo === 'true' && !data['earnedA3']) {
+          achievement(3);
+        }
 
         // Check for talkedTo flag
         if (data['talkedTo']) {
@@ -141,14 +140,7 @@ const save = () => {
         }
       }
     }).catch(error => console.log(error));
-} else { 
-  console.log("xb1 not found in list");
-}
-}else {
-  console.log("this.list is undefined");
-}
-// obj.save()
-}
+  }
 
 function loadGame(data) {
   // load webpack bundle file to start the game

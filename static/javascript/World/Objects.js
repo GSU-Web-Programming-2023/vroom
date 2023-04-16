@@ -67,8 +67,7 @@ export default class Objects
                 dialogue: [
                     "[XB1] ..bzzt.. ..I am XB1-420-69.. bzzt..",
                     "[XB1] ..bzzt..",
-                ],
-                talkedTo: false // Add a boolean to check if the NPC has been talked to
+                ]
             },
             {
                 name: 'r2d2',
@@ -471,7 +470,7 @@ export default class Objects
         // Set Triggers for coming into close proximity with NPCs
         let npcs = this.getNPCs();
         npcs.forEach(npc => {
-            // let talkedTo = false;
+            let talkedTo = false;
             let position = npc.position.clone();
             let distance = this.physics.car.chassis.body.position.distanceTo(position);
             let currentDialogue = npc.dialogue;
@@ -495,7 +494,8 @@ export default class Objects
             function handleInteract(event, npc) {
                 if (event.key === 'f' && distance < 5 && !npc.talkedTo) {
                     triggerDialogue(currentDialogue);
-                    npc.talkedTo = true;
+                    let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
+                    xb1TalkedTo.textContent = 'true';
                 }
             }
         });  

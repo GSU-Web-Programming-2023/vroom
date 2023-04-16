@@ -5,7 +5,7 @@ from flask import Flask
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
-CORS(app, supports_credentials=True)
+CORS(app, origins=['http://localhost:5000', 'http://127.0.0.1:5000'], supports_credentials=True)
 
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -63,8 +63,13 @@ def create_achievements():
         achievement = Achievement(name='Avid Gamer', description='Log in 10 times.')
         db.session.add(achievement)
         db.session.commit()
+        
+        achievement = Achievement(name='Elon\'s Helper', description='Find and talk to XB1.')
+        db.session.add(achievement)
+        db.session.commit()
 
         # Add more achievements as needed
+        # Delete instance and migrations folders and recreate the database if you modify this
 
 # Routes
 @app.route('/', methods = ['GET'])
@@ -73,7 +78,7 @@ def home():
     return render_template('index.html')
 
 @app.route('/api/endpoint/', methods=['POST'])
-@cross_origin()
+@cross_origin(allow_headers=['Content-Type'])
 def api():
     data = request.get_json()
     if "postType" in data:
@@ -139,12 +144,14 @@ def api():
             db.session.commit()
             a1 = Achievement.query.filter_by(id=1).first()
             a2 = Achievement.query.filter_by(id=2).first()
+            a3 = Achievement.query.filter_by(id=3).first()
             response = {
                 'user' : user.username,
                 'saved' : True,
                 'logins': user.logins,
                 'earnedA1' : user.has_achievement(a1),
-                'earnedA2' : user.has_achievement(a2)
+                'earnedA2' : user.has_achievement(a2),
+                'earnedA3' : user.has_achievement(a3)
             }
             return response
         elif "achievement" == data['postType']:
