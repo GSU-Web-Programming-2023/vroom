@@ -25,8 +25,7 @@ function login () {
       response = fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Allow-Control-Allow-Origin': '*'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       })
@@ -69,8 +68,7 @@ function register () {
         response = fetch(url, {
             method: 'POST',
             headers: {
-            'Content-Type': 'application/json',
-            'Allow-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         })
@@ -108,8 +106,7 @@ const save = () => {
   response = fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'Allow-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
   })
