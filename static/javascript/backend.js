@@ -40,7 +40,7 @@ function login () {
             hours.textContent = data["hours"];
             minutes.textContent = data["minutes"];
             seconds.textContent = data["seconds"];
-            loadGame(data);
+            loadGame(data, referrer='login');
             loadAchievements(data);
             console.log(`${data['user']} just logged in`);
           }
@@ -137,11 +137,12 @@ const save = () => {
     }).catch(error => console.log(error));
   }
 
-function loadGame(data) {
+function loadGame(data, referrer = null) {
   // load webpack bundle file to start the game
   const script = document.createElement('script');
   script.src = 'static/javascript/bundle.js';
   document.body.appendChild(script);
+
   // do stuff with user data
   username = data['user'];
   let user_elem = document.getElementById('user');
@@ -174,6 +175,10 @@ function loadGame(data) {
     hud.style.display = 'block';
     setTimeout(() => {debugMenuEventListener();}, 1000);
   }, 3000);
+
+  if (referrer == 'login') {
+    setTimeout(() => typeWriter(`Welcome back, ${username}`), 4000);
+  }
 }
 
 function loadAchievements(data) {
