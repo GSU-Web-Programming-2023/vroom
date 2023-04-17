@@ -6,22 +6,22 @@ function startTimer() {
     var appendMinutes = document.getElementById("minutes")
     var appendHours = document.getElementById("hours")
     setInterval(() => {
-        seconds++; 
+        seconds++;
         if (seconds <= 9) {
             appendSeconds.innerHTML = "0" + seconds;
         }
-        
+
         if (seconds > 9) {
             appendSeconds.innerHTML = seconds;
-        } 
-        
+        }
+
         if (seconds > 59) {
             minutes++;
             appendMinutes.innerHTML = "0" + minutes;
             seconds = 0;
             appendSeconds.innerHTML = "0" + 0;
         }
-        
+
         if (minutes > 9) {
             appendMinutes.innerHTML = minutes;
         }
@@ -32,7 +32,7 @@ function startTimer() {
             minutes = 0;
             appendMinutes.innerHTML = "0" + 0;
         }
-        
+
         if (hours > 9) {
             appendHours.innerHTML = hours;
         }

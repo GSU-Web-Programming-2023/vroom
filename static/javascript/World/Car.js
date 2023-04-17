@@ -307,10 +307,10 @@ export default class Car
                 preload: true, // preload the audio data
             })
         };
-    
+
         this.car.engineStartPlayed = false;
         this.car.brakeSoundPlayed = false;
-    
+
         let keyDownHandler = (event) => {
             let honkHelper = document.querySelector('#honkHelper');
             if (event.key === 'h' && honkHelper.value == 'false') {
@@ -332,7 +332,7 @@ export default class Car
                 // Adjust the volume of the idle sound based on speed
                 let speedVolume = Math.min(0.6, speed);
                 this.car.sound.collision.volume(speedVolume);
-                
+
                 if (!this.car.sound.collision.playing()) {
                     this.car.sound.boost.stop();
                     this.car.sound.idle.stop();
@@ -363,9 +363,9 @@ export default class Car
                     this.car.sound.idle.play();
                 }
             }
-            
+
             // Boost sound
-            if ((this.physics.car.controls.actions.boost && this.physics.car.controls.actions.up) || 
+            if ((this.physics.car.controls.actions.boost && this.physics.car.controls.actions.up) ||
                 (this.physics.car.controls.actions.boost && this.physics.car.controls.actions.down)) {
                 if (!this.car.sound.boost.playing() && this.movement.localSpeed.length() > 0.01) {
                     this.car.sound.boost.play();
@@ -377,7 +377,7 @@ export default class Car
                     this.car.sound.boost.stop();
                 }
             }
-        
+
             // Brake sound
             if (this.physics.car.controls.actions.brake && !this.car.brakeSoundPlayed && this.movement.localSpeed.length() > 0.01) {
                 this.car.sound.brake.play();
@@ -386,11 +386,11 @@ export default class Car
                 this.car.sound.brake.stop();
                 this.car.brakeSoundPlayed = false;
             }
-        
+
             // Adjust the volume of the idle sound based on speed
             let speedVolume = Math.min(0.7, this.movement.localSpeed.length());
             this.car.sound.idle.volume(speedVolume);
-        
+
             if (this.movement.localSpeed.length() < 0.01) {
                 this.car.sound.idle.pause();
             } else {
@@ -399,7 +399,7 @@ export default class Car
                 }
             }
         };
-    
+
         // Call the setSound function on each tick
         this.time.on('tick', () => {
             this.car.setSound();
@@ -417,15 +417,15 @@ export default class Car
         let indicatorMesh = new THREE.Mesh(indicatorGeometry, indicatorMaterial);
         indicatorMesh.position.set(this.chassis.object.position.x, this.chassis.object.position.y, 2.75);
         this.chassis.object.add(indicatorMesh);
-      
+
         let flashing = false;
-      
+
         // Time tick
         this.time.on('tick', () => {
           let npcs = this.objects.getNPCs();
           let closestNPC = null;
           let closestDistance = Infinity;
-      
+
           for (let npc of npcs) {
             let distance = this.chassis.object.position.distanceTo(npc.position);
             if (distance < closestDistance) {
@@ -433,10 +433,10 @@ export default class Car
               closestNPC = npc;
             }
           }
-      
+
           if (closestNPC && closestDistance < 5) {
             indicatorMesh.visible = true;
-      
+
             // Flashing effect
             if (!flashing) {
               flashing = true;
@@ -445,12 +445,12 @@ export default class Car
               let flashInterval = 16;
               let numFlashes = flashDuration / flashInterval;
               let flashCount = 0;
-      
+
               let flash = () => {
                 let progress = flashCount / numFlashes;
                 let easedOpacity = Math.sin(progress * Math.PI);
                 indicatorMaterial.opacity = initialOpacity + (1 - initialOpacity) * easedOpacity;
-      
+
                 if (flashCount < numFlashes) {
                   flashCount++;
                   setTimeout(flash, flashInterval);
@@ -459,7 +459,7 @@ export default class Car
                   flashing = false;
                 }
               };
-      
+
               flash();
             }
           } else {

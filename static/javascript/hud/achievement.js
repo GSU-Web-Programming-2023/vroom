@@ -28,7 +28,7 @@ function achievement(id) {
 
       el.before(newone);
       $('.achievement-banner:last').remove();
-      
+
       let aPane = document.querySelector(".achievements-pane");
       aPane.innerHTML += `
         <div class='achievement'>

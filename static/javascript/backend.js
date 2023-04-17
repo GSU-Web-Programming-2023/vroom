@@ -13,7 +13,7 @@ function login () {
     const url = '/api/endpoint/';
     let username = document.getElementById('username1').value;
     let password = document.getElementById('password1').value;
-  
+
     if (username === "" || password === "") {
       alert("Please enter both your username and password to log in.");
     } else {
@@ -47,7 +47,7 @@ function login () {
         }).catch(error => alert(error));
     }
   }
-  
+
 function register () {
     const url = '/api/endpoint/';
     let username = document.getElementById('username2').value;
@@ -124,7 +124,7 @@ const save = () => {
         else if (data['logins'] >= 10 && !data['earnedA2']) {
           achievement(2);
         }
-  
+
         let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
         if (xb1TalkedTo.value === 'true' && !data['earnedA3']) {
           achievement(3);

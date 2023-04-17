@@ -88,12 +88,12 @@ export default class Physics
             shape: new CANNON.Plane(),
             material: this.materials.items.floor
         })
-    
+
         this.floor.body.name = 'ground'; // Assign a name to the ground's body
-    
+
         this.world.addBody(this.floor.body)
     }
-    
+
     setCar()
     {
         this.car = {}
@@ -421,7 +421,7 @@ export default class Physics
 
         document.addEventListener('keydown', this.car.controls.events.down);
         document.addEventListener('keyup', this.car.controls.events.up);
-        
+
         this.time.on('tick', () =>
         {
             /**

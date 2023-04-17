@@ -92,13 +92,13 @@ export default class Resources extends EventEmitter
             { name: 'carBackLightsBrake', source: carBackLightsBrakeSource },
             { name: 'carBackLightsReverse', source: carBackLightsReverseSource },
             { name: 'carAntena', source: carAntenaSource },
-            
+
             { name: 'elon', source: elonSource },
             { name: 'elonCollision', source: elonCollisionSource },
-            
+
             { name: 'xb1', source: xb1Source },
             { name: 'xb1Collision', source: xb1CollisionSource },
-            
+
             { name: 'r2d2', source: r2d2Source },
             { name: 'r2d2Collision', source: r2d2CollisionSource },
 

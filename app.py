@@ -59,15 +59,15 @@ def create_achievements():
         achievement = Achievement(name='Hello World', description='Log in for the first time.')
         db.session.add(achievement)
         db.session.commit()
-        
+
         achievement = Achievement(name='Avid Gamer', description='Log in 10 times.')
         db.session.add(achievement)
         db.session.commit()
-        
+
         achievement = Achievement(name='Elon\'s Helper', description='Find and talk to XB1.')
         db.session.add(achievement)
         db.session.commit()
-        
+
         achievement = Achievement(name='Five Head', description='Hit 5 Aliens.')
         db.session.add(achievement)
         db.session.commit()
@@ -104,7 +104,7 @@ def api():
                         'name': a.name,
                         'description': a.description
                     })
-                
+
                 response = {
                     'user': user.username,
                     'user-id': user.id,
