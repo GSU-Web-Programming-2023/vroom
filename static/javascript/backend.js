@@ -1,11 +1,12 @@
-let loginForm = document.getElementById('login-form');
-let registerForm = document.getElementById('register-form');
+// let loginForm = document.getElementById('login-form');
+// let registerForm = document.getElementById('register-form');
+const { loginForm, registerForm } = document;
 let username;
 
-loginForm.addEventListener('submit', function(event) {
+document.addEventListener('submit', function(event) {
   event.preventDefault();
 });
-registerForm.addEventListener('submit', function(event) {
+document.addEventListener('submit', function(event) {
   event.preventDefault();
 });
 
@@ -78,7 +79,6 @@ function register () {
                 alert(data['error']);
             } else {
               console.log(`${data['user']} just registered`);
-              loadGame(data);
             }
         }).catch(error => alert(error));
       } else {
