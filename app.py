@@ -67,6 +67,10 @@ def create_achievements():
         achievement = Achievement(name='Elon\'s Helper', description='Find and talk to XB1.')
         db.session.add(achievement)
         db.session.commit()
+        
+        achievement = Achievement(name='Five Head', description='Hit 5 Aliens.')
+        db.session.add(achievement)
+        db.session.commit()
 
         # Add more achievements as needed
         # Delete instance and migrations folders and recreate the database if you modify this
@@ -145,13 +149,15 @@ def api():
             a1 = Achievement.query.filter_by(id=1).first()
             a2 = Achievement.query.filter_by(id=2).first()
             a3 = Achievement.query.filter_by(id=3).first()
+            a4 = Achievement.query.filter_by(id=4).first()
             response = {
                 'user' : user.username,
                 'saved' : True,
                 'logins': user.logins,
                 'earnedA1' : user.has_achievement(a1),
                 'earnedA2' : user.has_achievement(a2),
-                'earnedA3' : user.has_achievement(a3)
+                'earnedA3' : user.has_achievement(a3),
+                'earnedA4' : user.has_achievement(a4)
             }
             return response
         elif "achievement" == data['postType']:

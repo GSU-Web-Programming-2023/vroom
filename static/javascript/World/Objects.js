@@ -11,6 +11,7 @@ export default class Objects
         this.shadows = _options.shadows
         this.physics = _options.physics
         this.debug = _options.debug
+        this.uniqueAliensHit = new Set();
 
         // Set up
         this.container = new THREE.Object3D()
@@ -450,20 +451,36 @@ export default class Objects
         // Save
         this.items.push(object)
 
-        let onCollide = (event, item) => {        
+        let onCollide = (event, item, aliensHit) => {
             let bodyA = event.contact.bi;
             let bodyB = event.contact.bj;
-        
+
             // Check if both collided bodies are NPCs
             if (bodyA && bodyA.name != "ground" && bodyB && bodyB.name != "ground") {
                 // Set the collided property for both NPCs
                 item.container.collided = true;
-            }
-        };        
-          
-        object.collision.body.removeEventListener('collide', onCollide);
-        object.collision.body.addEventListener('collide', (event) => onCollide(event, object));
 
+                // Check if npc is an alien
+                if (item.container.name.includes('alien')) {
+                    // Add the unique alien name to the set
+                    this.uniqueAliensHit.add(item.container.name);
+
+                    // Update the aliensHit count
+                    aliensHit = this.uniqueAliensHit.size;
+                    document.querySelector('#aliensHit').value = `${aliensHit}`;
+                }
+                console.log(this.uniqueAliensHit)
+            }
+        };
+        
+        let aliensHit = parseInt(document.querySelector('#aliensHit').value, 10);
+
+        if (object.collision.body.listener) {
+            object.collision.body.removeEventListener('collide', object.collision.body.listener);
+        }
+
+        object.collision.body.listener = (event) => onCollide(event, object, aliensHit);
+        object.collision.body.addEventListener('collide', object.collision.body.listener);
     }
 
     setNPCDialogue() {
@@ -487,8 +504,11 @@ export default class Objects
                 // }
             
                 // Handle F keypress to trigger dialogue
-                document.removeEventListener('keypress', handleInteract); // Remove previous event listener
-                document.addEventListener('keypress', (event) => handleInteract(event, npc)); // Add new event listener
+                if (npc.listener) {
+                    document.removeEventListener('keypress', npc.listener);
+                }
+                npc.listener = (event) => handleInteract(event, npc);
+                document.addEventListener('keypress', npc.listener);
             });
         
             function handleInteract(event, npc) {

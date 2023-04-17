@@ -129,11 +129,9 @@ const save = () => {
         if (xb1TalkedTo.value === 'true' && !data['earnedA3']) {
           achievement(3);
         }
-
-        // Check for talkedTo flag
-        if (data['talkedTo']) {
-          // Perform actions based on talkedTo flag
-          console.log("talkedTo flag is true");
+        // Check if 5 aliens have been hit
+        if (document.querySelector('#aliensHit').value >= 5 && !data['earnedA4']) {
+          achievement(4);
         }
       }
     }).catch(error => console.log(error));
