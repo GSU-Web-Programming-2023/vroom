@@ -155,12 +155,13 @@ html, body {
     right: 0;
 }
 
-#timer {
+#timer, #coordindates {
     padding: 0.5em;
     font-size: large;
     font-family: monospace;
     border-radius: 10px;
     background-color: #0000004e;
+    margin-bottom: 1em;
 }
 
 #minimap {

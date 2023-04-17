@@ -59,12 +59,16 @@ def create_achievements():
         achievement = Achievement(name='Hello World', description='Log in for the first time.')
         db.session.add(achievement)
         db.session.commit()
-        
+
         achievement = Achievement(name='Avid Gamer', description='Log in 10 times.')
         db.session.add(achievement)
         db.session.commit()
-        
+
         achievement = Achievement(name='Elon\'s Helper', description='Find and talk to XB1.')
+        db.session.add(achievement)
+        db.session.commit()
+
+        achievement = Achievement(name='Five Head', description='Hit 5 Aliens.')
         db.session.add(achievement)
         db.session.commit()
 
@@ -100,7 +104,7 @@ def api():
                         'name': a.name,
                         'description': a.description
                     })
-                
+
                 response = {
                     'user': user.username,
                     'user-id': user.id,
@@ -145,13 +149,15 @@ def api():
             a1 = Achievement.query.filter_by(id=1).first()
             a2 = Achievement.query.filter_by(id=2).first()
             a3 = Achievement.query.filter_by(id=3).first()
+            a4 = Achievement.query.filter_by(id=4).first()
             response = {
                 'user' : user.username,
                 'saved' : True,
                 'logins': user.logins,
                 'earnedA1' : user.has_achievement(a1),
                 'earnedA2' : user.has_achievement(a2),
-                'earnedA3' : user.has_achievement(a3)
+                'earnedA3' : user.has_achievement(a3),
+                'earnedA4' : user.has_achievement(a4)
             }
             return response
         elif "achievement" == data['postType']:

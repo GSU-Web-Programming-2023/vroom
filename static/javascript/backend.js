@@ -14,7 +14,7 @@ function login () {
     const url = '/api/endpoint/';
     let username = document.getElementById('username1').value;
     let password = document.getElementById('password1').value;
-  
+
     if (username === "" || password === "") {
       alert("Please enter both your username and password to log in.");
     } else {
@@ -41,14 +41,14 @@ function login () {
             hours.textContent = data["hours"];
             minutes.textContent = data["minutes"];
             seconds.textContent = data["seconds"];
-            loadGame(data);
+            loadGame(data, referrer='login');
             loadAchievements(data);
             console.log(`${data['user']} just logged in`);
           }
         }).catch(error => alert(error));
     }
   }
-  
+
 function register () {
     const url = '/api/endpoint/';
     let username = document.getElementById('username2').value;
@@ -124,26 +124,25 @@ const save = () => {
         else if (data['logins'] >= 10 && !data['earnedA2']) {
           achievement(2);
         }
-  
+
         let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
         if (xb1TalkedTo.value === 'true' && !data['earnedA3']) {
           achievement(3);
         }
-
-        // Check for talkedTo flag
-        if (data['talkedTo']) {
-          // Perform actions based on talkedTo flag
-          console.log("talkedTo flag is true");
+        // Check if 5 aliens have been hit
+        if (document.querySelector('#aliensHit').value >= 5 && !data['earnedA4']) {
+          achievement(4);
         }
       }
     }).catch(error => console.log(error));
   }
 
-function loadGame(data) {
+function loadGame(data, referrer = null) {
   // load webpack bundle file to start the game
   const script = document.createElement('script');
   script.src = 'static/javascript/bundle.js';
   document.body.appendChild(script);
+
   // do stuff with user data
   username = data['user'];
   let user_elem = document.getElementById('user');
@@ -176,6 +175,10 @@ function loadGame(data) {
     hud.style.display = 'block';
     setTimeout(() => {debugMenuEventListener();}, 1000);
   }, 3000);
+
+  if (referrer == 'login') {
+    setTimeout(() => triggerDialogue([`Welcome back, ${username}`]), 4000);
+  }
 }
 
 function loadAchievements(data) {

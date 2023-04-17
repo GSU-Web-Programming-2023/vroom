@@ -176,22 +176,22 @@ export default class Application
             this.passes.verticalBlurPass.material.uniforms.uResolution.value.y = this.sizes.viewport.height
         })
     }
-    
+
     setPerformanceStats() {
         // Create Stats.js instances
         this.stats1 = new Stats();
         this.stats2 = new Stats();
         this.stats3 = new Stats();
-      
+
         // Show the desired panels
         this.stats1.showPanel(0); // FPS
         this.stats2.showPanel(1); // MS
         this.stats3.showPanel(2); // MB
-      
+
         // Add Stats.js to debug folder
         if (this.debug) {
             const perfFolder = this.debug.addFolder('performance');
-            
+
             // Add a container div for the stats panels
             const statsContainer = document.createElement('div');
             statsContainer.setAttribute('id', 'stats-container');
@@ -201,12 +201,12 @@ export default class Application
             statsContainer.style.alignItems = 'center';
             statsContainer.style.width = '100%';
             perfFolder.__ul.appendChild(statsContainer);
-        
+
             // Add stats panels to container
             statsContainer.appendChild(this.stats1.dom);
             statsContainer.appendChild(this.stats2.dom);
             statsContainer.appendChild(this.stats3.dom);
-        
+
             // Make the stats panels relative to the container
             this.stats1.dom.style.position = 'relative';
             this.stats1.dom.style.top = '0';
@@ -216,13 +216,13 @@ export default class Application
             this.stats3.dom.style.top = '0';
             statsContainer.style.background = '#000000';
             statsContainer.style.display = 'none';
-          
+
             perfFolder.domElement.addEventListener('click', () => {
                 statsContainer.style.display = perfFolder.closed ? 'none' : 'flex';
             });
             document.querySelector("body > div.dg.ac > div > ul > li:nth-child(3) > div > ul > li").click();
         }
-      
+
         // Update stats on each tick
         this.time.on('tick', () => {
           this.stats1.update();
@@ -230,7 +230,7 @@ export default class Application
           this.stats3.update();
         });
       }
-      
+
     /**
      * Set world
      */

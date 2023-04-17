@@ -74,7 +74,7 @@ export default class
     setLights() {
         this.ambientLight = new THREE.AmbientLight(0xffffff, 3);
         this.container.add(this.ambientLight);
-    
+
         this.directionalLight = new THREE.DirectionalLight(0xffffff, 3.5);
         this.directionalLight.position.set(10, 2.6, 30);
         this.container.add(this.directionalLight);
@@ -87,7 +87,7 @@ export default class
         folder.add(this.directionalLight.position, 'y').step(0.01).min(- 30).max(30).name('directionalLightY');
         folder.add(this.directionalLight.position, 'z').step(0.01).min(0).max(30).name('directionalLightZ');
     }
-    
+
     setPhysics()
     {
         this.physics = new Physics({

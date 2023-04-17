@@ -57,6 +57,16 @@
                 <span id="seconds">00</span>
                 &nbsp;seconds&nbsp;
             </div>
+            <div id="coordindates">
+                <span>Coordindates:&nbsp;</span>
+                <br>
+                &nbsp;X:&nbsp;
+                <span id="xPos">0</span>
+                &nbsp;Y:&nbsp;
+                <span id="yPos">0</span>
+                &nbsp;Z:&nbsp;
+                <span id="zPos">0</span>
+            </div>
         </div>
         <div class="top-middle">
             <div class="achievement-banner animated">
@@ -68,7 +78,6 @@
                 <div class="achievement-trophy icon logo">
                     <i class="fa-solid fa-trophy"></i>
                 </div>
-        
                 <div class="achievement-text">
                     <p class="achievement-notification"></p>
                     <p class="achievement-name"><i class="icon gamerscore"></i></p>
@@ -95,6 +104,7 @@
             <input id="user-id" type="hidden" value="">
             <input id="honkHelper" type="hidden" value="false">
             <input id="xb1TalkedTo" type="hidden" value="false">
+            <input id="aliensHit" type="hidden" value="0">
             <div class="pause-menu-option" onclick="togglePauseMenu();">Resume Game</div>
             <div class="pause-menu-option" onclick="save();location.reload();">Save & Quit</div>
         </div>
