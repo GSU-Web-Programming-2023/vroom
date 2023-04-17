@@ -29,6 +29,7 @@ export default class Car
             this.debugFolder.open()
         }
 
+        this.setCoordinates()
         this.setMovement()
         this.setChassis()
         this.setAntena()
@@ -37,6 +38,18 @@ export default class Car
         this.setTransformControls()
         this.setProximityIndicator()
         this.initAudio()
+    }
+
+    setCoordinates()
+    {
+        let x = document.querySelector('#xPos');
+        let y = document.querySelector('#yPos');
+        let z = document.querySelector('#zPos');
+        this.time.on('tick', () => {
+            x.textContent = this.chassis.object.position.x.toFixed(2);
+            y.textContent = this.chassis.object.position.y.toFixed(2);
+            z.textContent = this.chassis.object.position.z.toFixed(2);
+        })
     }
 
     setMovement()

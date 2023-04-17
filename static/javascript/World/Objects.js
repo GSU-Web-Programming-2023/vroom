@@ -126,13 +126,6 @@ export default class Objects
                 offset: new THREE.Vector3(-112, -48, 0),
                 mass: 75
             },
-            {
-                name: 'tree',
-                base: this.resources.items.tree.scene,
-                collision: this.resources.items.treeCollision.scene,
-                offset: new THREE.Vector3(-7, -7, 0),
-                mass: 50
-            },
             // {
             //     name: 'sphere',
             //     base: this.resources.items.dynamicSphereBase.scene,
@@ -156,48 +149,7 @@ export default class Objects
             // },
         ]
 
-        // Spawn 50 trees and rocks in random locations
-        for (let i = 0; i < 50; i++) {
-            // Define a random distance between 30 and 70 meters
-            let distance = Math.floor(Math.random() * 71) + 30;
-
-            // Define a random angle between 0 and 2 * PI radians
-            let angle = Math.random() * 2 * Math.PI;
-
-            // Calculate the x and y offsets for the object using the distance and angle
-            let xOffset = distance * Math.cos(angle);
-            let yOffset = distance * Math.sin(angle);
-
-            // Initial Position
-            let object;
-            let x = 0;
-            let y = 0;
-            let z = 0;
-
-            let rand = Math.random();
-            if (rand < 0.6) { // 60% chance for rocks
-                object = {
-                    name: `rock${i}`,
-                    base: this.resources.items.rock.scene,
-                    collision: this.resources.items.rockCollision.scene,
-                    offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
-                    mass: 100
-                };
-            } else { // 40% chance for trees
-                object = {
-                    name: `tree${i}`,
-                    base: this.resources.items.tree.scene,
-                    collision: this.resources.items.treeCollision.scene,
-                    offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
-                    mass: 50
-                };
-            }
-
-            // Append the object to the list
-            this.list.push(object);
-        }
-
-        // // Spawn 10 aliens in random locations
+        // Spawn 10 aliens in random locations
         for (let i = 0; i < 10; i++) {
             // Define a random distance between 30 and 70 meters
             let distance = Math.floor(Math.random() * 71) + 30;
@@ -230,6 +182,65 @@ export default class Objects
 
             // Append the object to the list
             this.list.push(object);
+        }
+        
+        // Spawn 15 buildings in random locations
+        const gridSize = 4; // Define the grid size (number of rows and columns)
+        const gridSpacing = 20; // Define the spacing between buildings in the grid
+
+        for (let i = 0; i < gridSize; i++) {
+            for (let j = 0; j < gridSize; j++) {
+                // Add some randomization to the grid positions
+                let xOffset = (gridSpacing * i) + (Math.random() * 5 - 2.5);
+                let yOffset = (gridSpacing * j) + (Math.random() * 5 - 2.5);
+
+                // Initial Position
+                let object;
+                let x = -80;
+                let y = -99;
+                let z = 1;
+
+                // Choose between hydro, research, or skyscraper with the given probabilities
+                let randomValue = Math.random();
+                let buildingType;
+
+                if (randomValue < 0.3) {
+                    buildingType = 'hydroBuilding';
+                } else if (randomValue < 0.5) {
+                    buildingType = 'researchBuilding';
+                } else {
+                    buildingType = 'skyscraper';
+                }
+
+                if (buildingType === 'hydroBuilding') {
+                    object = {
+                        name: `hydroBuilding${i}_${j}`,
+                        base: this.resources.items.hydroBuilding.scene,
+                        collision: this.resources.items.hydroBuildingCollision.scene,
+                        offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                        mass: 250,
+                    };
+                } else if (buildingType === 'researchBuilding') {
+                    object = {
+                        name: `researchBuilding${i}_${j}`,
+                        base: this.resources.items.researchBuilding.scene,
+                        collision: this.resources.items.researchBuildingCollision.scene,
+                        offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                        mass: 300,
+                    };
+                } else {
+                    object = {
+                        name: `skyscraper${i}_${j}`,
+                        base: this.resources.items.skyscraper.scene,
+                        collision: this.resources.items.skyscraperCollision.scene,
+                        offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                        mass: 450,
+                    };
+                }
+
+                // Append the object to the list
+                this.list.push(object);
+            }
         }
     }
 
@@ -469,7 +480,6 @@ export default class Objects
                     aliensHit = this.uniqueAliensHit.size;
                     document.querySelector('#aliensHit').value = `${aliensHit}`;
                 }
-                console.log(this.uniqueAliensHit)
             }
         };
 

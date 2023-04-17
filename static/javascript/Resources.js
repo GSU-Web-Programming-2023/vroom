@@ -37,9 +37,6 @@ import xb1CollisionSource from '../models/npcs/xb1/collision.glb'
 import r2d2Source from '../models/npcs/r2d2/base.glb'
 import r2d2CollisionSource from '../models/npcs/r2d2/collision.glb'
 
-import treeSource from '../models/tree/base.glb'
-import treeCollisionSource from '../models/tree/collision.glb'
-
 import rockSource from '../models/rock/base.glb'
 import rockCollisionSource from '../models/rock/collision.glb'
 
@@ -57,6 +54,15 @@ import aeroshellCollisionSource from '../models/aeroshell/collision.glb'
 
 import alienSource from '../models/npcs/alien/base.glb'
 import alienCollisionSource from '../models/npcs/alien/collision.glb'
+
+import skyscraperSource from '../models/skyscraper/base.glb'
+import skyscraperCollisionSource from '../models/skyscraper/collision.glb'
+
+import researchBuildingSource from '../models/research_building/base.glb'
+import researchBuildingCollisionSource from '../models/research_building/collision.glb'
+
+import hydroBuildingSource from '../models/hydro_building/base.glb'
+import hydroBuildingCollisionSource from '../models/hydro_building/collision.glb'
 
 export default class Resources extends EventEmitter
 {
@@ -102,9 +108,6 @@ export default class Resources extends EventEmitter
             { name: 'r2d2', source: r2d2Source },
             { name: 'r2d2Collision', source: r2d2CollisionSource },
 
-            { name: 'tree', source: treeSource },
-            { name: 'treeCollision', source: treeCollisionSource },
-
             { name: 'rock', source: rockSource },
             { name: 'rockCollision', source: rockCollisionSource },
 
@@ -121,7 +124,16 @@ export default class Resources extends EventEmitter
             { name: 'aeroshellCollision', source: aeroshellCollisionSource },
 
             { name: 'alien', source: alienSource },
-            { name: 'alienCollision', source: alienCollisionSource }
+            { name: 'alienCollision', source: alienCollisionSource },
+
+            { name: 'skyscraper', source: skyscraperSource },
+            { name: 'skyscraperCollision', source: skyscraperCollisionSource },
+
+            { name: 'researchBuilding', source: researchBuildingSource },
+            { name: 'researchBuildingCollision', source: researchBuildingCollisionSource },
+
+            { name: 'hydroBuilding', source: hydroBuildingSource },
+            { name: 'hydroBuildingCollision', source: hydroBuildingCollisionSource }
         ])
 
         this.loader.on('fileEnd', (_resource, _data) =>

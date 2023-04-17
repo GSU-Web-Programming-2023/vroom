@@ -177,7 +177,7 @@ function loadGame(data, referrer = null) {
   }, 3000);
 
   if (referrer == 'login') {
-    setTimeout(() => typeWriter(`Welcome back, ${username}`), 4000);
+    setTimeout(() => triggerDialogue([`Welcome back, ${username}`]), 4000);
   }
 }
 
