@@ -1,5 +1,3 @@
-// let loginForm = document.getElementById('login-form');
-// let registerForm = document.getElementById('register-form');
 const { loginForm, registerForm } = document;
 let username;
 
@@ -158,8 +156,6 @@ function loadGame(data, referrer = null) {
   landing.style.visibility = 'hidden';
   let hudControls = document.getElementById('hud-controls');
   hudControls.style.opacity = '1';
-  let miniMap = document.getElementById('minimap');
-  miniMap.style.opacity = '1';
   let hud = document.getElementsByClassName('hud')[0];
   let pauseMenu = document.getElementById('pause-menu');
   pauseMenu.style.display = 'none';
