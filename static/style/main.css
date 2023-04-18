@@ -155,7 +155,7 @@ html, body {
     right: 0;
 }
 
-#timer, #coordindates {
+#timer, #coordinates {
     padding: 0.5em;
     font-size: large;
     font-family: monospace;
