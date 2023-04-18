@@ -186,7 +186,7 @@ export default class Objects
         
         // Spawn 15 buildings in random locations
         const gridSize = 4; // Define the grid size (number of rows and columns)
-        const gridSpacing = 20; // Define the spacing between buildings in the grid
+        const gridSpacing = 15; // Define the spacing between buildings in the grid
 
         for (let i = 0; i < gridSize; i++) {
             for (let j = 0; j < gridSize; j++) {
@@ -204,9 +204,9 @@ export default class Objects
                 let randomValue = Math.random();
                 let buildingType;
 
-                if (randomValue < 0.3) {
+                if (randomValue < 0.2) {
                     buildingType = 'hydroBuilding';
-                } else if (randomValue < 0.5) {
+                } else if (randomValue < 0.8) {
                     buildingType = 'researchBuilding';
                 } else {
                     buildingType = 'skyscraper';
