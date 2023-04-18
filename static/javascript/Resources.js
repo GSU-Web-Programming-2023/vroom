@@ -55,8 +55,14 @@ import aeroshellCollisionSource from '../models/aeroshell/collision.glb'
 import alienSource from '../models/npcs/alien/base.glb'
 import alienCollisionSource from '../models/npcs/alien/collision.glb'
 
+import atomicTwinSource from '../models/npcs/atomic_twin/base.glb'
+import atomicTwinCollisionSource from '../models/npcs/atomic_twin/collision.glb'
+
 import skyscraperSource from '../models/skyscraper/base.glb'
 import skyscraperCollisionSource from '../models/skyscraper/collision.glb'
+
+import buildingSource from '../models/building/base.glb'
+import buildingCollisionSource from '../models/building/collision.glb'
 
 import researchBuildingSource from '../models/research_building/base.glb'
 import researchBuildingCollisionSource from '../models/research_building/collision.glb'
@@ -126,8 +132,14 @@ export default class Resources extends EventEmitter
             { name: 'alien', source: alienSource },
             { name: 'alienCollision', source: alienCollisionSource },
 
+            { name: 'atomicTwin', source: atomicTwinSource },
+            { name: 'atomicTwinCollision', source: atomicTwinCollisionSource },
+
             { name: 'skyscraper', source: skyscraperSource },
             { name: 'skyscraperCollision', source: skyscraperCollisionSource },
+
+            { name: 'building', source: buildingSource },
+            { name: 'buildingCollision', source: buildingCollisionSource },
 
             { name: 'researchBuilding', source: researchBuildingSource },
             { name: 'researchBuildingCollision', source: researchBuildingCollisionSource },

@@ -48,7 +48,7 @@ export default class Car
         this.time.on('tick', () => {
             x.textContent = this.chassis.object.position.x.toFixed(2);
             y.textContent = this.chassis.object.position.y.toFixed(2);
-            z.textContent = this.chassis.object.position.z.toFixed(2);
+            z.textContent = Math.max(0, this.chassis.object.position.z - 0.04).toFixed(2);
         })
     }
 
@@ -341,7 +341,7 @@ export default class Car
         };
 
         let collisionHandler = (speed) => {
-            if (speed > 0.05) {
+            if (speed > 0.06) {
                 // Adjust the volume of the idle sound based on speed
                 let speedVolume = Math.min(0.6, speed);
                 this.car.sound.collision.volume(speedVolume);

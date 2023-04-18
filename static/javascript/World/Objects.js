@@ -59,6 +59,20 @@ export default class Objects
                 ]
             },
             {
+                name: 'atomicTwin1',
+                base: this.resources.items.atomicTwin.scene,
+                collision: this.resources.items.atomicTwinCollision.scene,
+                offset: new THREE.Vector3(-8, -7.8, 0),
+                mass: 15
+            },
+            {
+                name: 'atomicTwin2',
+                base: this.resources.items.atomicTwin.scene,
+                collision: this.resources.items.atomicTwinCollision.scene,
+                offset: new THREE.Vector3(-8, -11, 0),
+                mass: 15
+            },
+            {
                 name: 'xb1',
                 base: this.resources.items.xb1.scene,
                 collision: this.resources.items.xb1Collision.scene,
@@ -116,7 +130,7 @@ export default class Objects
                 name: 'rocket',
                 base: this.resources.items.rocket.scene,
                 collision: this.resources.items.rocketCollision.scene,
-                offset: new THREE.Vector3(-17, 9, 0),
+                offset: new THREE.Vector3(-12, 1.5, 0),
                 mass: 75
             },
             {
@@ -149,10 +163,10 @@ export default class Objects
             // },
         ]
 
-        // Spawn 10 aliens in random locations
-        for (let i = 0; i < 10; i++) {
-            // Define a random distance between 30 and 70 meters
-            let distance = Math.floor(Math.random() * 71) + 30;
+        // Spawn 20 aliens in random locations
+        for (let i = 0; i < 20; i++) {
+            // Define a random distance between 50 and 100 meters
+            let distance = Math.floor(Math.random() * 101) + 50;
 
             // Define a random angle between 0 and 2 * PI radians
             let angle = Math.random() * 2 * Math.PI;
@@ -184,64 +198,76 @@ export default class Objects
             this.list.push(object);
         }
         
-        // Spawn 15 buildings in random locations
-        const gridSize = 4; // Define the grid size (number of rows and columns)
-        const gridSpacing = 15; // Define the spacing between buildings in the grid
+        // Spawn a building cluster
+        let spawnBuildings = (x, y, z) => {
+            // Spawn 9 buildings in a grid
+            const gridSize = 3; // Define the grid size (number of rows and columns)
+            const gridSpacing = 15; // Define the spacing between buildings in the grid
 
-        for (let i = 0; i < gridSize; i++) {
-            for (let j = 0; j < gridSize; j++) {
-                // Add some randomization to the grid positions
-                let xOffset = (gridSpacing * i) + (Math.random() * 5 - 2.5);
-                let yOffset = (gridSpacing * j) + (Math.random() * 5 - 2.5);
+            for (let i = 0; i < gridSize; i++) {
+                for (let j = 0; j < gridSize; j++) {
+                    // Add some randomization to the grid positions
+                    let xOffset = (gridSpacing * i) + (Math.random() * 5 - 2.5);
+                    let yOffset = (gridSpacing * j) + (Math.random() * 5 - 2.5);
 
-                // Initial Position
-                let object;
-                let x = -80;
-                let y = -99;
-                let z = 1;
+                    // Initial Position
+                    let object;
 
-                // Choose between hydro, research, or skyscraper with the given probabilities
-                let randomValue = Math.random();
-                let buildingType;
+                    // Choose between hydro, research, or skyscraper with the given probabilities
+                    let randomValue = Math.random();
+                    let buildingType;
 
-                if (randomValue < 0.2) {
-                    buildingType = 'hydroBuilding';
-                } else if (randomValue < 0.8) {
-                    buildingType = 'researchBuilding';
-                } else {
-                    buildingType = 'skyscraper';
+                    if (randomValue < 0.2) {
+                        buildingType = 'hydroBuilding';
+                    } else if (randomValue < 0.7) {
+                        buildingType = 'researchBuilding';
+                    } else if (randomValue < 0.92) {
+                        buildingType = 'building';
+                    } else {
+                        buildingType = 'skyscraper';
+                    }
+                    
+                    if (buildingType === 'building') {
+                        object = {
+                            name: `building${i}_${j}`,
+                            base: this.resources.items.building.scene,
+                            collision: this.resources.items.buildingCollision.scene,
+                            offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                            mass: 250,
+                        };
+                    } else if (buildingType === 'hydroBuilding') {
+                        object = {
+                            name: `hydroBuilding${i}_${j}`,
+                            base: this.resources.items.hydroBuilding.scene,
+                            collision: this.resources.items.hydroBuildingCollision.scene,
+                            offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                            mass: 250,
+                        };
+                    } else if (buildingType === 'researchBuilding') {
+                        object = {
+                            name: `researchBuilding${i}_${j}`,
+                            base: this.resources.items.researchBuilding.scene,
+                            collision: this.resources.items.researchBuildingCollision.scene,
+                            offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                            mass: 300,
+                        };
+                    } else {
+                        object = {
+                            name: `skyscraper${i}_${j}`,
+                            base: this.resources.items.skyscraper.scene,
+                            collision: this.resources.items.skyscraperCollision.scene,
+                            offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+                            mass: 450,
+                        };
+                    }
+
+                    // Append the object to the list
+                    this.list.push(object);
                 }
-
-                if (buildingType === 'hydroBuilding') {
-                    object = {
-                        name: `hydroBuilding${i}_${j}`,
-                        base: this.resources.items.hydroBuilding.scene,
-                        collision: this.resources.items.hydroBuildingCollision.scene,
-                        offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
-                        mass: 250,
-                    };
-                } else if (buildingType === 'researchBuilding') {
-                    object = {
-                        name: `researchBuilding${i}_${j}`,
-                        base: this.resources.items.researchBuilding.scene,
-                        collision: this.resources.items.researchBuildingCollision.scene,
-                        offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
-                        mass: 300,
-                    };
-                } else {
-                    object = {
-                        name: `skyscraper${i}_${j}`,
-                        base: this.resources.items.skyscraper.scene,
-                        collision: this.resources.items.skyscraperCollision.scene,
-                        offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
-                        mass: 450,
-                    };
-                }
-
-                // Append the object to the list
-                this.list.push(object);
             }
         }
+
+        spawnBuildings(-90, -110, 1);
     }
 
     setParsers()
