@@ -97,7 +97,7 @@ export default class Objects
                 name: 'spyBalloon',
                 base: this.resources.items.spyBalloon.scene,
                 collision: this.resources.items.spyBalloonCollision.scene,
-                offset: new THREE.Vector3(10, -12, 4),
+                offset: new THREE.Vector3(-2, 18, 4),
                 mass: 0,
                 is_npc: true,
                 dialogue: [
@@ -550,7 +550,7 @@ export default class Objects
           'spyBalloon': {
             type: 'pingPong',
             animation: 'none',
-            axis: 'y',
+            axis: 'x',
             distance: 20,
             speed: 0.1,
           },
