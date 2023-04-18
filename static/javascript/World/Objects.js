@@ -201,7 +201,7 @@ export default class Objects
         // Spawn a building cluster
         let spawnBuildings = (x, y, z) => {
             // Spawn 9 buildings in a grid
-            const gridSize = 3; // Define the grid size (number of rows and columns)
+            const gridSize = 4; // Define the grid size (number of rows and columns)
             const gridSpacing = 15; // Define the spacing between buildings in the grid
 
             for (let i = 0; i < gridSize; i++) {
@@ -268,6 +268,54 @@ export default class Objects
         }
 
         spawnBuildings(-90, -110, 1);
+
+        // Function to generate valid cluster coordinates
+        function generateClusterCoordinates(existingClusters) {
+            let maxAttempts = 1000;
+            let attempts = 0;
+        
+            while (attempts < maxAttempts) {
+            attempts++;
+        
+            let newCluster = new THREE.Vector3(
+                Math.random() * 200 - 100,
+                Math.random() * 200 - 100,
+                1 // Assuming the Z coordinate is constant
+            );
+        
+            // Check if the new cluster is at least 90 units away from the origin
+            if (newCluster.distanceTo(new THREE.Vector3(0, 0, 0)) < 90) {
+                continue;
+            }
+        
+            // Check if the new cluster is at least 200 units away from all existing clusters
+            let isFarEnoughFromExistingClusters = existingClusters.every(
+                (existingCluster) => newCluster.distanceTo(new THREE.Vector3(existingCluster.x, existingCluster.y, 0)) >= 200
+            );
+        
+            if (isFarEnoughFromExistingClusters) {
+                return newCluster;
+            }
+            }
+        
+            console.warn('Failed to generate a valid cluster after maximum attempts');
+            return null;
+        }
+        
+        // Spawn clusters of buildings
+        let numberOfClusters = 5;
+        let clusters = [];
+        
+        for (let i = 0; i < numberOfClusters; i++) {
+            let newCluster = generateClusterCoordinates(clusters);
+            
+            if (newCluster) {
+            clusters.push(newCluster);
+            spawnBuildings(newCluster.x, newCluster.y, newCluster.z);
+            } else {
+            break;
+            }
+        }
     }
 
     setParsers()
