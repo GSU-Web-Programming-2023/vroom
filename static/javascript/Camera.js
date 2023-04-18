@@ -46,6 +46,10 @@ export default class Camera
         this.instance.fov = 60; // adjust as needed
         this.instance.updateProjectionMatrix();
 
+        // Increase the far clipping plane distance
+        this.instance.far = 1000;
+        this.instance.updateProjectionMatrix();
+
         // Resize event
         this.sizes.on('resize', () =>
         {
