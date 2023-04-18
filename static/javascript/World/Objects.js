@@ -59,16 +59,16 @@ export default class Objects
                 ]
             },
             {
-                name: 'atomicTwin1',
-                base: this.resources.items.atomicTwin.scene,
-                collision: this.resources.items.atomicTwinCollision.scene,
+                name: 'cyborg1',
+                base: this.resources.items.cyborg.scene,
+                collision: this.resources.items.cyborgCollision.scene,
                 offset: new THREE.Vector3(-8, -7.8, 0),
                 mass: 15
             },
             {
-                name: 'atomicTwin2',
-                base: this.resources.items.atomicTwin.scene,
-                collision: this.resources.items.atomicTwinCollision.scene,
+                name: 'cyborg2',
+                base: this.resources.items.cyborg.scene,
+                collision: this.resources.items.cyborgCollision.scene,
                 offset: new THREE.Vector3(-8, -11, 0),
                 mass: 15
             },
