@@ -387,6 +387,7 @@ export default class Physics
 
                 case 'ArrowRight':
                 case 'd':
+                case 'D':
                     this.car.controls.actions.right = false
                     this.car.controls.steering = 0
                     break

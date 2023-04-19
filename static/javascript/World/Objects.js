@@ -266,54 +266,7 @@ export default class Objects
                 }
             }
         }
-
-        // Function to generate valid cluster coordinates
-        function generateClusterCoordinates(existingClusters) {
-            let maxAttempts = 1000;
-            let attempts = 0;
-
-            while (attempts < maxAttempts) {
-                attempts++;
-
-                let newCluster = new THREE.Vector3(
-                    Math.random() * 200 - 100, // Generates a number between -100 and 100
-                    Math.random() * 200 - 100, // Generates a number between -100 and 100
-                    1 // Assuming the Z coordinate is constant
-                );
-
-                // Check if the new cluster is at least 100 units away from the origin
-                if (newCluster.distanceTo(new THREE.Vector3(0, 0, 0)) < 100) {
-                    continue;
-                }
-
-                // Check if the new cluster is at least 100 units away from all existing clusters
-                let isFarEnoughFromExistingClusters = existingClusters.every(
-                    (existingCluster) => newCluster.distanceTo(new THREE.Vector3(existingCluster.x, existingCluster.y, 0)) >= 100
-                );
-
-                if (isFarEnoughFromExistingClusters) {
-                    return newCluster;
-                }
-            }
-
-            console.warn('Failed to generate a valid cluster after maximum attempts');
-            return null;
-        }
-
-        // Spawn clusters of buildings
-        let numberOfClusters = 2;
-        let clusters = [];
-        
-        for (let i = 0; i < numberOfClusters; i++) {
-            let newCluster = generateClusterCoordinates(clusters);
-            
-            if (newCluster) {
-                clusters.push(newCluster);
-                spawnBuildings(newCluster.x, newCluster.y, newCluster.z);
-            } else {
-                break;
-            }
-        }
+        spawnBuildings(-85, -51, 1);
     }
 
     setParsers()
