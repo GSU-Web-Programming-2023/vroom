@@ -32,20 +32,6 @@ window.addEventListener('load', function() {
   });
 });
 
-// Show/Hide HUD Minimap when M is pressed
-window.addEventListener('load', function() {
-  document.addEventListener('keypress', function(event) {
-        if (event.key === 'm') {
-        let minimap = document.getElementById("minimap");
-        if (minimap.style.opacity === "0") {
-          minimap.style.opacity = "1";
-        } else {
-          minimap.style.opacity = "0";
-        }
-      }
-    });
-  });
-
 // Show/Hide Pause Menu when P is pressed
 function togglePauseMenu(){
   let menu = document.getElementById("pause-menu");

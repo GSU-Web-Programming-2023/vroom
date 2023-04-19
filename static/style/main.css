@@ -164,11 +164,6 @@ html, body {
     margin-bottom: 1em;
 }
 
-#minimap {
-    border-radius: 200px;
-    background-color: #0000006e;
-}
-
 #speedometer {
     margin-right: 20px;
     font-size: 70px;
