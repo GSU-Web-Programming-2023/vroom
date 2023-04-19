@@ -83,3 +83,32 @@ function debugMenuEventListener() {
     });
   }
 }
+
+//Implement logout (refresh) from inactivity after 1 minute
+// Define the number of seconds of inactivity before the page should reload (1 minute)
+let inactivityTime = 60; // 1 minute
+
+// Define a variable to store the ID of the interval timer
+let timer_Id;
+
+// Begin a timer that will reload the page after 1 minute of inactivity
+function beginTimer() {
+  timer_Id = setTimeout(function() {
+    location.reload();
+  }, inactivityTime * 1000);
+}
+
+// Reset the timer each time the user interacts with the page
+function resetTimer() {
+  clearTimeout(timer_Id);
+  beginTimer();
+}
+
+// Start a timer that will check for inactivity at a specified interval
+setInterval(function() {
+  // Add event listener to reset the timer on user interaction (moving mouse, pressing on a key, holding a key, clicking)
+  document.addEventListener('mousemove', resetTimer);
+  document.addEventListener('click', resetTimer);
+  document.addEventListener('keydown', resetTimer);
+  document.addEventListener('keypress', resetTimer);
+}, 1000); // Check for inactivity every second
