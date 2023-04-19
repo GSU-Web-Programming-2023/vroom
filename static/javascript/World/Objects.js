@@ -563,6 +563,38 @@ export default class Objects
 
         object.collision.body.listener = (event) => onCollide(event, object, aliensHit);
         object.collision.body.addEventListener('collide', object.collision.body.listener);
+
+        // Apply environment map to metallic children
+        // Load the cube texture
+        const textureLoader = new THREE.CubeTextureLoader();
+        const urls = [
+            '../../static/images/sky/px.jpg',
+            '../../static/images/sky/nx.jpg',
+            '../../static/images/sky/py.jpg',
+            '../../static/images/sky/ny.jpg',
+            '../../static/images/sky/pz.jpg',
+            '../../static/images/sky/nz.jpg',
+        ];        
+        const envMap = textureLoader.load(urls);
+
+        // Set the environment map for each material in the object
+        object.container.traverse((child) => {
+            if (child.isMesh && child.material) {
+            if (Array.isArray(child.material)) {
+                child.material.forEach((material) => {
+                if (material.metalness !== undefined) {
+                    material.envMap = envMap;
+                    material.needsUpdate = true;
+                }
+                });
+            } else {
+                if (child.material.metalness !== undefined) {
+                child.material.envMap = envMap;
+                child.material.needsUpdate = true;
+                }
+            }
+            }
+        });
     }
 
     setNPCDialogue() {

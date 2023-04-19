@@ -103,6 +103,7 @@ export default class
         this.objects = new Objects({
             time: this.time,
             resources: this.resources,
+            renderer: this.renderer,
             materials: this.materials,
             physics: this.physics,
             shadows: this.shadows,
