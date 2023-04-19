@@ -62,14 +62,14 @@ export default class Objects
                 name: 'cyborg1',
                 base: this.resources.items.cyborg.scene,
                 collision: this.resources.items.cyborgCollision.scene,
-                offset: new THREE.Vector3(-8, -7.8, 0),
+                offset: new THREE.Vector3(-8, -7.9, 0),
                 mass: 15
             },
             {
                 name: 'cyborg2',
                 base: this.resources.items.cyborg.scene,
                 collision: this.resources.items.cyborgCollision.scene,
-                offset: new THREE.Vector3(-8, -11, 0),
+                offset: new THREE.Vector3(-8, -10.5, 0),
                 mass: 15
             },
             {

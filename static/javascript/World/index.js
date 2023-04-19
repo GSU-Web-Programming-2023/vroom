@@ -72,7 +72,7 @@ export default class
     }
 
     setLights() {
-        this.ambientLight = new THREE.AmbientLight(0xffffff, 3);
+        this.ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
         this.container.add(this.ambientLight);
 
         this.directionalLight = new THREE.DirectionalLight(0xffffff, 3.5);
