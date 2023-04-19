@@ -116,7 +116,7 @@ const save = () => {
         console.log(data);
 
         // Check for Achievements
-        if (data['logins'] == 1 && !data['earnedA1']) {
+        if (data['logins'] >= 1 && !data['earnedA1']) {
           achievement(1);
         }
         else if (data['logins'] >= 10 && !data['earnedA2']) {
