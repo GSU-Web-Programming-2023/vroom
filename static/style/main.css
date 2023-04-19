@@ -340,7 +340,7 @@ html, body {
 
 form > *, .login > *, .register > * {
     margin-block: 0.5em;
-    font-size: larger;
+    font-size: large;
 }
 form{
     font-family: monospace;
