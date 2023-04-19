@@ -85,14 +85,14 @@ export default class Objects
                 ]
             },
             {
-                name: 'r2d2',
-                base: this.resources.items.r2d2.scene,
-                collision: this.resources.items.r2d2Collision.scene,
-                offset: new THREE.Vector3(-109, -49, 0),
-                mass: 20,
+                name: 'martianManHunter',
+                base: this.resources.items.martianManHunter.scene,
+                collision: this.resources.items.martianManHunterCollision.scene,
+                offset: new THREE.Vector3(-109, -48, 1.5),
+                mass: 0,
                 is_npc: true,
                 dialogue: [
-                    "[R2] ..@@@>>?>?????>..//..",
+                    "[MM] ...",
                 ]
             },
             {
@@ -538,9 +538,9 @@ export default class Objects
             let bodyA = event.contact.bi;
             let bodyB = event.contact.bj;
 
-            // Check if both collided bodies are NPCs
-            if (bodyA && bodyA.name != "ground" && bodyB && bodyB.name != "ground") {
-                // Set the collided property for both NPCs
+            // Check if both collided bodies are not the ground and the collided object is an alien
+            if (bodyA && bodyA.name != "ground" && bodyB && bodyB.name != "ground" && item.container.name.includes('alien')) {
+                // Set the collided property for the alien
                 item.container.collided = true;
 
                 // Check if npc is an alien
@@ -615,9 +615,12 @@ export default class Objects
             type: 'still',
             animation: 'none',
           },
-          'r2d2': {
-            type: 'still',
+          'martianManHunter': {
+            type: 'pingPong',
             animation: 'none',
+            axis: 'z',
+            distance: 0.5,
+            speed: 0.5,
           },
           'spyBalloon': {
             type: 'pingPong',
@@ -630,7 +633,7 @@ export default class Objects
             type: 'pingPong',
             animation: 'walking',
             axis: 'y',
-            distance: 5,
+            distance: 0.5,
             speed: 0.2,
           }
           // Add more movement patterns as needed

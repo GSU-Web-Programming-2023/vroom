@@ -34,8 +34,8 @@ import elonCollisionSource from '../models/npcs/elon/collision.glb'
 import xb1Source from '../models/npcs/xb1/base.glb'
 import xb1CollisionSource from '../models/npcs/xb1/collision.glb'
 
-import r2d2Source from '../models/npcs/r2d2/base.glb'
-import r2d2CollisionSource from '../models/npcs/r2d2/collision.glb'
+import martianManHunterSource from '../models/npcs/martianManHunter/base.glb'
+import martianManHunterCollisionSource from '../models/npcs/martianManHunter/collision.glb'
 
 import rockSource from '../models/rock/base.glb'
 import rockCollisionSource from '../models/rock/collision.glb'
@@ -111,8 +111,8 @@ export default class Resources extends EventEmitter
             { name: 'xb1', source: xb1Source },
             { name: 'xb1Collision', source: xb1CollisionSource },
 
-            { name: 'r2d2', source: r2d2Source },
-            { name: 'r2d2Collision', source: r2d2CollisionSource },
+            { name: 'martianManHunter', source: martianManHunterSource },
+            { name: 'martianManHunterCollision', source: martianManHunterCollisionSource },
 
             { name: 'rock', source: rockSource },
             { name: 'rockCollision', source: rockCollisionSource },
