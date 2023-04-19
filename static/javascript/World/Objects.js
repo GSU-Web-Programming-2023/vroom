@@ -217,11 +217,11 @@ export default class Objects
                     let randomValue = Math.random();
                     let buildingType;
 
-                    if (randomValue < 0.2) {
+                    if (randomValue < 0.1) {
                         buildingType = 'hydroBuilding';
-                    } else if (randomValue < 0.7) {
+                    } else if (randomValue < 0.30) {
                         buildingType = 'researchBuilding';
-                    } else if (randomValue < 0.92) {
+                    } else if (randomValue < 0.65) {
                         buildingType = 'building';
                     } else {
                         buildingType = 'skyscraper';
@@ -301,7 +301,7 @@ export default class Objects
         }
 
         // Spawn clusters of buildings
-        let numberOfClusters = 3;
+        let numberOfClusters = 2;
         let clusters = [];
         
         for (let i = 0; i < numberOfClusters; i++) {
