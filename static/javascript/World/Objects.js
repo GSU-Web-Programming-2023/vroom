@@ -271,37 +271,37 @@ export default class Objects
         function generateClusterCoordinates(existingClusters) {
             let maxAttempts = 1000;
             let attempts = 0;
-        
+
             while (attempts < maxAttempts) {
                 attempts++;
-            
+
                 let newCluster = new THREE.Vector3(
-                    Math.random() * 200 - 100,
-                    Math.random() * 200 - 100,
+                    Math.random() * 200 - 100, // Generates a number between -100 and 100
+                    Math.random() * 200 - 100, // Generates a number between -100 and 100
                     1 // Assuming the Z coordinate is constant
                 );
-            
+
                 // Check if the new cluster is at least 100 units away from the origin
                 if (newCluster.distanceTo(new THREE.Vector3(0, 0, 0)) < 100) {
                     continue;
                 }
-            
-                // Check if the new cluster is at least 200 units away from all existing clusters
+
+                // Check if the new cluster is at least 100 units away from all existing clusters
                 let isFarEnoughFromExistingClusters = existingClusters.every(
-                    (existingCluster) => newCluster.distanceTo(new THREE.Vector3(existingCluster.x, existingCluster.y, 0)) >= 200
+                    (existingCluster) => newCluster.distanceTo(new THREE.Vector3(existingCluster.x, existingCluster.y, 0)) >= 100
                 );
-            
+
                 if (isFarEnoughFromExistingClusters) {
                     return newCluster;
                 }
             }
-        
+
             console.warn('Failed to generate a valid cluster after maximum attempts');
             return null;
         }
-        
+
         // Spawn clusters of buildings
-        let numberOfClusters = 10;
+        let numberOfClusters = 3;
         let clusters = [];
         
         for (let i = 0; i < numberOfClusters; i++) {
