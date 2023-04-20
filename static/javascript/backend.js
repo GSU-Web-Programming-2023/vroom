@@ -1,11 +1,10 @@
 const { loginForm, registerForm } = document
 
-document.addEventListener("submit", function (event) {
+function preventDefault(event) {
   event.preventDefault()
-})
-document.addEventListener("submit", function (event) {
-  event.preventDefault()
-})
+}
+
+document.addEventListener("submit", preventDefault)
 
 function login() {
   const url = "/api/endpoint/"
