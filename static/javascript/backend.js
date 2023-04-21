@@ -135,12 +135,30 @@ const save = () => {
         if (xb1TalkedTo.value === "true" && !data["earnedA3"]) {
           achievement(3)
         }
+
         // Check if 5 aliens have been hit
         if (
           document.querySelector("#aliensHit").value >= 5 &&
           !data["earnedA4"]
         ) {
           achievement(4)
+        }
+
+        // Check if user was refreshed for inactivity
+        let refreshed = document.querySelector("#refreshed")
+        if (refreshed.value === "true") {
+          // Give achievement if first time
+          if (!data["earnedA5"]) {
+            achievement(5)
+            //Wait 10 seconds for the achievement animation to appear before refresh
+            setTimeout(function () {
+              location.reload()
+            }, 10000);
+          }
+          // Don't give if not first time
+          else {
+            location.reload()
+          }
         }
       }
     })

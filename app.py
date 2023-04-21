@@ -89,6 +89,13 @@ def create_achievements():
         db.session.add(achievement)
         db.session.commit()
 
+        achievement = Achievement(
+            name="Grass Toucher",
+            description="Get sent to the login screen for inactivity.",
+        )
+        db.session.add(achievement)
+        db.session.commit()
+
         # Add more achievements as needed
         # Delete instance and migrations folders and recreate the database if you modify this
 
@@ -166,6 +173,7 @@ def api():
             a2 = Achievement.query.filter_by(id=2).first()
             a3 = Achievement.query.filter_by(id=3).first()
             a4 = Achievement.query.filter_by(id=4).first()
+            a5 = Achievement.query.filter_by(id=5).first()
             response = {
                 "user": user.username,
                 "saved": True,
@@ -174,6 +182,7 @@ def api():
                 "earnedA2": user.has_achievement(a2),
                 "earnedA3": user.has_achievement(a3),
                 "earnedA4": user.has_achievement(a4),
+                "earnedA5": user.has_achievement(a5),
             }
             return response
         elif "achievement" == data["postType"]:
