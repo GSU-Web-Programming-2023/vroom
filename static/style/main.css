@@ -256,9 +256,13 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
 
 @media (max-width: 990px) {
     .bottom-right {
-        top: 0;
+        top: 2%;
         left: 0;
-        transform: translateX(calc(50% - 106.5px));
+        transform: translateX(calc(50% - 20.5px));
+        padding: 0;
+        height: fit-content;
+        width: fit-content;
+        font-size: 60px;
     }
 }
 

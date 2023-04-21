@@ -583,7 +583,7 @@ export default class Objects
             });
 
             function handleInteract(event, npc) {
-                if (event.type === 'click') {
+                if (event.type === 'click' && distance < 5) {
                     triggerDialogue(currentDialogue);
                     let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
                     if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
