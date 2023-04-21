@@ -91,8 +91,7 @@ def api():
             username = data['username']
             password = data['password']
             user = User.query.filter_by(username=username, password=password).first()
-            exists = user is not None
-            if exists:
+            if user is None:
                 hours, seconds_remainder = divmod(user.seconds_in_game, 3600)
                 minutes, seconds = divmod(seconds_remainder, 60)
 
