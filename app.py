@@ -9,6 +9,7 @@ CORS(app, origins=['http://localhost:5000', 'http://127.0.0.1:5000'], supports_c
 
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
