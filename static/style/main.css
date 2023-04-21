@@ -218,6 +218,17 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     left: 0;
 }
 
+.bottom-middle {
+    bottom: 2%;
+    left: 300px;
+    width: 60%;
+    max-width: 60%;
+}
+
+.bottom-middle > * {
+    position: relative;
+}
+
 @media (max-width: 1380px) {
     .bottom-middle {
         transform: translateX(-40%);
@@ -234,19 +245,11 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
 }
 @media (max-width: 768px) {
     .bottom-middle {
-        transform: translate(-87%, -165%);
+        bottom: 22%;
+        left: calc(50% - 40px);
+        width: 60%;
+        max-width: 60%;
     }
-}
-
-.bottom-middle {
-    bottom: 2%;
-    left: 300px;
-    width: 60%;
-    max-width: 60%;
-}
-
-.bottom-middle > * {
-    position: relative;
 }
 
 .bottom-right {
@@ -258,11 +261,10 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     .bottom-right {
         top: 2%;
         left: 0;
-        transform: translateX(calc(50% - 20.5px));
+        transform: translateX(calc(50% - -3.5px));
         padding: 0;
         height: fit-content;
         width: fit-content;
-        font-size: 60px;
     }
 }
 
@@ -277,7 +279,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
 
 #speedometer {
     margin-right: 20px;
-    font-size: 70px;
+    font-size: 60px;
 }
 
 .aHr {
