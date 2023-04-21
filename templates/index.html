@@ -48,7 +48,7 @@
     <!-- HUD -->
     <div class="hud">
         <div class="top-left">
-            <div id="timer">
+            <div id="timer" class="mobile-hide">
                 <span>Time in game:&nbsp;</span>
                 <br>
                 <span id="hours">00</span>
@@ -58,7 +58,7 @@
                 <span id="seconds">00</span>
                 &nbsp;seconds&nbsp;
             </div>
-            <div id="coordinates">
+            <div id="coordinates" class="mobile-hide">
                 <span>Coordinates:&nbsp;</span>
                 <br>
                 &nbsp;X:&nbsp;
@@ -68,6 +68,9 @@
                 &nbsp;Z:&nbsp;
                 <span id="zPos">0</span>
             </div>
+            <button id="interactBtn" class="mobile-show">
+                <i class="fas fa-hand-point-up"></i>
+            </button>
         </div>
         <div class="top-middle">
             <div class="achievement-banner animated">
@@ -86,7 +89,7 @@
             </div>
         </div>
         <div class="top-right mobile-show">
-            <button id="pause" class="mobile-show mobile-controls" onclick="togglePauseMenu();">
+            <button id="pauseBtn" class="mobile-show mobile-controls" onclick="togglePauseMenu();">
                 <i class="fas fa-cog"></i>
             </button>
         </div>

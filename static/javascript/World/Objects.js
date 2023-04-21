@@ -553,11 +553,13 @@ export default class Objects
     setNPCDialogue() {
         // Set Triggers for coming into close proximity with NPCs
         let npcs = this.getNPCs();
+
         npcs.forEach(npc => {
             let talkedTo = false;
             let position = npc.position.clone();
             let distance = this.physics.car.chassis.body.position.distanceTo(position);
             let currentDialogue = npc.dialogue;
+            let interactBtn = document.querySelector('#interactBtn');
 
             this.time.on('tick', () => {
                 // Update the position and distance every tick
@@ -572,18 +574,28 @@ export default class Objects
 
                 // Handle F keypress to trigger dialogue
                 if (npc.listener) {
+                    interactBtn.removeEventListener('click', npc.listener);
                     document.removeEventListener('keypress', npc.listener);
                 }
                 npc.listener = (event) => handleInteract(event, npc);
                 document.addEventListener('keypress', npc.listener);
+                interactBtn.addEventListener('click', npc.listener);
             });
 
             function handleInteract(event, npc) {
-                if (event.key === 'f' && distance < 5) {
+                if (event.type === 'click') {
                     triggerDialogue(currentDialogue);
                     let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
                     if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
                         xb1TalkedTo.value = 'true';
+                    }
+                } else if (event.type === 'keypress'){
+                    if (event.key === 'f' && distance < 5) {
+                        triggerDialogue(currentDialogue);
+                        let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
+                        if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
+                            xb1TalkedTo.value = 'true';
+                        }
                     }
                 }
             }

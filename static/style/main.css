@@ -197,12 +197,10 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     top: 0;
     right: 0;
 }
-@media (max-width: 767px) {
+@media (max-width: 990px) {
     .top-left {
       top: 5px;
       left: 5px;
-      width: 94%;
-      text-align: center;
       font-size: 12px;
       padding: 0.5em;
     }
@@ -212,7 +210,6 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
       right: 5px;
       font-size: 12px;
       padding: 0.5em;
-      transform: translateY(120px);
     }
   }
 
@@ -260,26 +257,10 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
 #timer, #coordinates {
     padding: 0.5em;
     font-family: monospace;
+    font-size: large;
     border-radius: 10px;
     background-color: #0000004e;
     margin-bottom: 1em;
-}
-@media (min-width: 768px) and (max-width: 990px) {
-    #timer, #coordinates {
-        font-size: medium;
-    }
-}
-
-@media (min-width: 991px) {
-    #timer, #coordinates {
-        font-size: large;
-    }
-}
-
-@media (max-width: 768px) {
-    #timer, #coordinates {
-        font-size: large;
-    }
 }
 
 #speedometer {
@@ -346,6 +327,12 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     word-break: break-word;
     white-space: pre-line;
   }  
+
+#pauseBtn, #interactBtn {
+    font-size: 16pt;
+    padding: 0.75em;
+    border-radius: 25px;
+}
 
 #pause-menu {
     display: none;
