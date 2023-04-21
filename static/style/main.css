@@ -15,7 +15,14 @@ html, body {
     background: url('../images/loading.gif') no-repeat center center fixed;
     background-color: black !important;
     background-size: 150px;
-    overflow: hidden;
+}
+
+html.landing-page-visible, body.landing-page-visible {
+    overflow: auto !important;
+}
+
+html:not(.landing-page-visible), body:not(.landing-page-visible) {
+    overflow: hidden !important;
 }
 
 #loading {
@@ -45,6 +52,12 @@ html, body {
       content: '.';
     }
   }
+
+@media (min-width: 768px) and (max-width: 990px) {
+    #loading {
+        transform: translateY(32px);
+    }
+}
 
 #game {
     display: none;
@@ -103,6 +116,66 @@ html, body {
         display: none !important;
     }
 }
+@media (min-width: 900px) {
+    .mobile-show {
+        display: none !important;
+    }
+}
+
+.mobile-controls {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.mobile-controls-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.actions-controls {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.arrow-controls {
+    display: grid;
+    grid-template-areas:
+        "left up right"
+        "left down right";
+    grid-gap: 10px;
+    margin-right: 20px;
+}
+
+#up {
+    grid-area: up;
+}
+
+#down {
+    grid-area: down;
+}
+
+#left {
+    grid-area: left;
+}
+
+#right {
+    grid-area: right;
+}
 
 /* Hide debug menu */
 .dg.ac {
@@ -124,6 +197,24 @@ html, body {
     top: 0;
     right: 0;
 }
+@media (max-width: 767px) {
+    .top-left {
+      top: 5px;
+      left: 5px;
+      width: 94%;
+      text-align: center;
+      font-size: 12px;
+      padding: 0.5em;
+    }
+  
+    .top-right {
+      top: 5px;
+      right: 5px;
+      font-size: 12px;
+      padding: 0.5em;
+      transform: translateY(120px);
+    }
+  }
 
 .bottom-left {
     bottom: 0;
@@ -136,6 +227,17 @@ html, body {
     }
     .bottom-left {
         display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 990px) {
+    .bottom-middle {
+        transform: translate(-41%, -25%);
+    }
+}
+@media (max-width: 768px) {
+    .bottom-middle {
+        transform: translate(-87%, -165%);
     }
 }
 
@@ -157,11 +259,27 @@ html, body {
 
 #timer, #coordinates {
     padding: 0.5em;
-    font-size: large;
     font-family: monospace;
     border-radius: 10px;
     background-color: #0000004e;
     margin-bottom: 1em;
+}
+@media (min-width: 768px) and (max-width: 990px) {
+    #timer, #coordinates {
+        font-size: medium;
+    }
+}
+
+@media (min-width: 991px) {
+    #timer, #coordinates {
+        font-size: large;
+    }
+}
+
+@media (max-width: 768px) {
+    #timer, #coordinates {
+        font-size: large;
+    }
 }
 
 #speedometer {
@@ -305,6 +423,8 @@ html, body {
     text-align: center;
     align-items: center;
     display: flex;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 990px) {

@@ -158,6 +158,8 @@ function loadGame(data, referrer = null) {
   let landing = document.getElementById("landing-page")
   landing.style.opacity = "0"
   landing.style.visibility = "hidden"
+  document.body.classList.remove('landing-page-visible');
+  document.documentElement.classList.remove('landing-page-visible');
   let hudControls = document.getElementById("hud-controls")
   hudControls.style.opacity = "1"
   let hud = document.getElementsByClassName("hud")[0]

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="landing-page-visible">
 <head>
     <meta charset="UTF-8">
     <title>Vroom</title>
@@ -10,7 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body><span id="loading">Loading</span>
+<body class="landing-page-visible">
+    <span id="loading">Loading</span>
     <!-- Login / Register -->
     <div id="landing-page">
         <h2 class="page-title fade-in cyberpunk">VROOM</h2>
@@ -45,7 +46,7 @@
         </div>
     </div>
     <!-- HUD -->
-    <div class="hud mobile-hide">
+    <div class="hud">
         <div class="top-left">
             <div id="timer">
                 <span>Time in game:&nbsp;</span>
@@ -84,15 +85,19 @@
                 </div>
             </div>
         </div>
-        <div class="top-right"></div>
+        <div class="top-right mobile-show">
+            <button id="pause" class="mobile-show mobile-controls" onclick="togglePauseMenu();">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
         <div class="bottom-left">
-            <img id="hud-controls" src="{{ url_for('static', filename='images/controls.png') }}"></img>
+            <img id="hud-controls" class="mobile-hide" src="{{ url_for('static', filename='images/controls.png') }}"></img>
         </div>
         <div class="bottom-middle">
             <span id="dialogue"></span>
         </div>
         <div class="bottom-right">
-            <span id="speedometer" class="cyberpunk">99mph</span>
+            <span id="speedometer" class="cyberpunk mobile-hide">99mph</span>
         </div>
     </div>
     <!-- Pause Menu -->

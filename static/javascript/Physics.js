@@ -423,6 +423,75 @@ export default class Physics
         document.addEventListener('keydown', this.car.controls.events.down);
         document.addEventListener('keyup', this.car.controls.events.up);
 
+        // Create onscreen controls
+        this.car.controls.createOnScreenControls = () => {
+            const container = document.createElement('div');
+            container.className = 'mobile-controls-container';
+            document.body.appendChild(container);
+        
+            const actionsControls = document.createElement('div');
+            actionsControls.classList.add('actions-controls');
+            container.appendChild(actionsControls);
+        
+            const arrowControls = document.createElement('div');
+            arrowControls.className = 'arrow-controls';
+            container.appendChild(arrowControls);
+        
+            const createButton = (text, id, callback, parent) => {
+                const button = document.createElement('button');
+                button.innerHTML = text;
+                button.id = id;
+                button.addEventListener('mousedown', () => {
+                    callback(true);
+                });
+                button.addEventListener('mouseup', () => {
+                    callback(false);
+                });
+                button.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    callback(true);
+                });
+                button.addEventListener('touchend', () => {
+                    callback(false);
+                });
+                button.classList.add('mobile-show');
+                button.classList.add('mobile-controls');
+                parent.appendChild(button);
+                return button;
+            };
+        
+            createButton('Up', 'up', (isPressed) => {
+                this.car.controls.actions.up = isPressed;
+            }, arrowControls);
+            createButton('Down', 'down', (isPressed) => {
+                this.car.controls.actions.down = isPressed;
+            }, arrowControls);
+            createButton('Left', 'left', (isPressed) => {
+                this.car.controls.actions.left = isPressed;
+                if (!isPressed) {
+                    this.car.controls.steering = 0;
+                }
+            }, arrowControls);
+            createButton('Right', 'right', (isPressed) => {
+                this.car.controls.actions.right = isPressed;
+                if (!isPressed) {
+                    this.car.controls.steering = 0;
+                }
+            }, arrowControls);
+        
+            createButton('Boost', 'boost', (isPressed) => {
+                this.car.controls.actions.boost = isPressed;
+            }, actionsControls);
+        
+            createButton('Brake', 'brake', (isPressed) => {
+                this.car.controls.actions.brake = isPressed;
+            }, actionsControls);
+        };            
+        
+        // Call the function to create onscreen controls
+        this.car.controls.createOnScreenControls();
+  
+
         this.time.on('tick', () =>
         {
             /**

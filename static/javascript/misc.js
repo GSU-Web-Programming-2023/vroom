@@ -72,7 +72,7 @@ function debugMenuEventListener() {
 
 //Implement logout (refresh) from inactivity after 1 minute
 // Define the number of seconds of inactivity before the page should reload (1 minute)
-let inactivityTime = 60; // 1 minute
+let inactivityTime = 300; // 5 minutes
 
 // Define a variable to store the ID of the interval timer
 let timer_Id;
