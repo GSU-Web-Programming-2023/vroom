@@ -254,6 +254,14 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     right: 0;
 }
 
+@media (max-width: 990px) {
+    .bottom-right {
+        top: 0;
+        left: 0;
+        transform: translateX(calc(50% - 106.5px));
+    }
+}
+
 #timer, #coordinates {
     padding: 0.5em;
     font-family: monospace;
