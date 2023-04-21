@@ -6,7 +6,7 @@ function preventDefault(event) {
 
 document.addEventListener("submit", preventDefault)
 
-function login() {
+async function login() {
   const url = "/api/endpoint/"
   let username = document.getElementById("username1").value
   let password = document.getElementById("password1").value
@@ -46,7 +46,12 @@ function login() {
   }
 }
 
-function register() {
+// A little hint for Naomi
+function clearForm() {
+  // fill in the relevant code here
+}
+
+async function register() {
   const url = "/api/endpoint/"
   let username = document.getElementById("username2").value
   let password = document.getElementById("password2").value
@@ -64,22 +69,25 @@ function register() {
         password: password,
       }
 
-      response = fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then(response => response.json())
-        .then(data => {
-          if ("error" in data) {
-            alert(data["error"])
-          } else {
-            console.log(`${data["user"]} just registered`)
-          }
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         })
-        .catch(error => alert(error))
+        const responseData = await response.json()
+
+        if ("error" in responseData) {
+          alert(responseData["error"])
+        } else {
+          console.log(`${responseData["user"]} just registered`)
+          // clearForm()
+        }
+      } catch (error) {
+        alert(error)
+      }
     } else {
       alert("Your passwords do not match. Please try again.")
     }
