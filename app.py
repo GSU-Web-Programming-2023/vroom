@@ -96,6 +96,14 @@ def create_achievements():
         db.session.add(achievement)
         db.session.commit()
 
+        # Make sure to change the number of hours in description if you are changing the requirements
+        achievement = Achievement(
+            name="No Life",
+            description="Spent at least 1 hour of gameplay. What are you doing?",
+        )
+        db.session.add(achievement)
+        db.session.commit()
+
         # Add more achievements as needed
         # Delete instance and migrations folders and recreate the database if you modify this
 
@@ -174,6 +182,7 @@ def api():
             a3 = Achievement.query.filter_by(id=3).first()
             a4 = Achievement.query.filter_by(id=4).first()
             a5 = Achievement.query.filter_by(id=5).first()
+            a6 = Achievement.query.filter_by(id=6).first()
             response = {
                 "user": user.username,
                 "saved": True,
@@ -183,6 +192,7 @@ def api():
                 "earnedA3": user.has_achievement(a3),
                 "earnedA4": user.has_achievement(a4),
                 "earnedA5": user.has_achievement(a5),
+                "earnedA6": user.has_achievement(a6),
             }
             return response
         elif "achievement" == data["postType"]:

@@ -6,7 +6,17 @@ function startTimer() {
     var appendMinutes = document.getElementById("minutes")
     var appendHours = document.getElementById("hours")
     setInterval(() => {
+        // The no-life achievement
+        // Check to see if user has at least 1 hour of activity (You can adjust how long)
+        if (hours >= 1) {
+            let noLife = document.querySelector('#noLife');
+            if (noLife.value != 'true') {
+                noLife.value = 'true';
+            }
+        }
+
         seconds++;
+
         if (seconds <= 9) {
             appendSeconds.innerHTML = "0" + seconds;
         }

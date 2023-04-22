@@ -160,6 +160,12 @@ const save = () => {
             location.reload()
           }
         }
+
+        // Check for no life achievement
+        let noLife = document.querySelector("#noLife")
+        if (noLife.value === "true" && !data["earnedA6"]) {
+          achievement(6)
+        }
       }
     })
     .catch(error => console.log(error))
