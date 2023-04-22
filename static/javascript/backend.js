@@ -144,27 +144,10 @@ const save = () => {
           achievement(4)
         }
 
-        // Check if user was refreshed for inactivity
-        let refreshed = document.querySelector("#refreshed")
-        if (refreshed.value === "true") {
-          // Give achievement if first time
-          if (!data["earnedA5"]) {
-            achievement(5)
-            //Wait 10 seconds for the achievement animation to appear before refresh
-            setTimeout(function () {
-              location.reload()
-            }, 10000);
-          }
-          // Don't give if not first time
-          else {
-            location.reload()
-          }
-        }
-
         // Check for no life achievement
         let noLife = document.querySelector("#noLife")
-        if (noLife.value === "true" && !data["earnedA6"]) {
-          achievement(6)
+        if (noLife.value === "true" && !data["earnedA5"]) {
+          achievement(5)
         }
       }
     })

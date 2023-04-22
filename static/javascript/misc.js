@@ -80,11 +80,7 @@ let timer_Id;
 // Begin a timer that will reload the page after 5 minutes of inactivity
 function beginTimer() {
   timer_Id = setTimeout(function () {
-    // Check if user has been refreshed before
-    let refreshed = document.querySelector('#refreshed');
-    if (refreshed.value != 'true') {
-      refreshed.value = 'true';
-    }
+    location.reload()
   }, inactivityTime * 1000);
 }
 

@@ -89,13 +89,6 @@ def create_achievements():
         db.session.add(achievement)
         db.session.commit()
 
-        achievement = Achievement(
-            name="Grass Toucher",
-            description="Get sent to the login screen for inactivity.",
-        )
-        db.session.add(achievement)
-        db.session.commit()
-
         # Make sure to change the number of hours in description if you are changing the requirements
         achievement = Achievement(
             name="No Life",
@@ -182,7 +175,6 @@ def api():
             a3 = Achievement.query.filter_by(id=3).first()
             a4 = Achievement.query.filter_by(id=4).first()
             a5 = Achievement.query.filter_by(id=5).first()
-            a6 = Achievement.query.filter_by(id=6).first()
             response = {
                 "user": user.username,
                 "saved": True,
@@ -192,7 +184,6 @@ def api():
                 "earnedA3": user.has_achievement(a3),
                 "earnedA4": user.has_achievement(a4),
                 "earnedA5": user.has_achievement(a5),
-                "earnedA6": user.has_achievement(a6),
             }
             return response
         elif "achievement" == data["postType"]:
