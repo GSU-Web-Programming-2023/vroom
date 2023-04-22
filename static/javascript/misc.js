@@ -80,14 +80,14 @@ function debugMenuEventListener() {
   }
 }
 
-//Implement logout (refresh) from inactivity after 1 minute
-// Define the number of seconds of inactivity before the page should reload (1 minute)
+//Implement logout (refresh) from inactivity after 5 minutes
+// Define the number of seconds of inactivity before the page should reload (5 minute5)
 let inactivityTime = 300; // 5 minutes
 
 // Define a variable to store the ID of the interval timer
 let timer_Id;
 
-// Begin a timer that will reload the page after 1 minute of inactivity
+// Begin a timer that will reload the page after 5 minutes of inactivity
 function beginTimer() {
   timer_Id = setTimeout(function () {
     location.reload();

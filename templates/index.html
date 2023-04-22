@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="landing-page-visible">
+
 <head>
     <meta charset="UTF-8">
     <title>Vroom</title>
@@ -8,8 +9,12 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body class="landing-page-visible">
     <span id="loading">Loading</span>
     <!-- Login / Register -->
@@ -79,6 +84,7 @@
                 <div class="achievement-loader"></div>
                 <div class="achievement-loader"></div>
                 <div class="achievement-loader"></div>
+                <div class="achievement-loader"></div>
                 <div class="achievement-trophy icon logo">
                     <i class="fa-solid fa-trophy"></i>
                 </div>
@@ -94,7 +100,8 @@
             </button>
         </div>
         <div class="bottom-left">
-            <img id="hud-controls" class="mobile-hide" src="{{ url_for('static', filename='images/controls.png') }}"></img>
+            <img id="hud-controls" class="mobile-hide"
+                src="{{ url_for('static', filename='images/controls.png') }}"></img>
         </div>
         <div class="bottom-middle">
             <span id="dialogue"></span>
@@ -111,6 +118,7 @@
             <input id="honkHelper" type="hidden" value="false">
             <input id="xb1TalkedTo" type="hidden" value="false">
             <input id="aliensHit" type="hidden" value="0">
+            <input id="noLife" type="hidden" value="false">
             <div class="pause-menu-option" onclick="togglePauseMenu();">Resume Game</div>
             <div class="pause-menu-option" onclick="save();location.reload();">Save & Quit</div>
         </div>
@@ -135,4 +143,5 @@
     <script src="{{ url_for('static', filename='javascript/backend.js') }}" async></script>
     <script src="{{ url_for('static', filename='javascript/misc.js') }}" async></script>
 </body>
+
 </html>

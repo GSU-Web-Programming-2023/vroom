@@ -135,12 +135,19 @@ const save = () => {
         if (xb1TalkedTo.value === "true" && !data["earnedA3"]) {
           achievement(3)
         }
+
         // Check if 5 aliens have been hit
         if (
           document.querySelector("#aliensHit").value >= 5 &&
           !data["earnedA4"]
         ) {
           achievement(4)
+        }
+
+        // Check for no life achievement
+        let noLife = document.querySelector("#noLife")
+        if (noLife.value === "true" && !data["earnedA5"]) {
+          achievement(5)
         }
       }
     })

@@ -15,13 +15,11 @@ import BlurPass from './Passes/Blur.js'
 import GlowsPass from './Passes/Glows.js'
 import Camera from './Camera.js'
 
-export default class Application
-{
+export default class Application {
     /**
      * Constructor
      */
-    constructor(_options)
-    {
+    constructor(_options) {
         // Options
         this.$canvas = _options.$canvas
 
@@ -31,8 +29,7 @@ export default class Application
         this.debug = new dat.GUI({ width: 420 })
         this.resources = new Resources()
 
-        this.resources.on('ready', () =>
-        {
+        this.resources.on('ready', () => {
             this.setRenderer()
             this.setCamera()
             this.setPasses()
@@ -44,8 +41,7 @@ export default class Application
     /**
      * Set renderer
      */
-    setRenderer()
-    {
+    setRenderer() {
         // Scene
         this.scene = new THREE.Scene()
 
@@ -64,8 +60,7 @@ export default class Application
         this.renderer.autoClear = false
 
         // Resize event
-        this.sizes.on('resize', () =>
-        {
+        this.sizes.on('resize', () => {
             this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
         })
     }
@@ -73,8 +68,7 @@ export default class Application
     /**
      * Set camera
      */
-    setCamera()
-    {
+    setCamera() {
         this.camera = new Camera({
             time: this.time,
             sizes: this.sizes,
@@ -84,19 +78,16 @@ export default class Application
 
         this.scene.add(this.camera.instance)
 
-        this.time.on('tick', () =>
-        {
+        this.time.on('tick', () => {
             this.camera.target.copy(this.world.car.chassis.object.position)
         })
     }
 
-    setPasses()
-    {
+    setPasses() {
         this.passes = {}
 
         // Debug
-        if(this.debug)
-        {
+        if (this.debug) {
             this.passes.debugFolder = this.debug.addFolder('postprocess')
             // this.passes.debugFolder.open()
         }
@@ -118,8 +109,7 @@ export default class Application
         this.passes.verticalBlurPass.material.uniforms.uStrength.value = new THREE.Vector2(0.0, 1.25)
 
         // Debug
-        if(this.debug)
-        {
+        if (this.debug) {
             const folder = this.passes.debugFolder.addFolder('blur')
             folder.open()
 
@@ -135,16 +125,14 @@ export default class Application
         this.passes.glowsPass.material.uniforms.uAlpha.value = 0.55
 
         // Debug
-        if(this.debug)
-        {
+        if (this.debug) {
             const folder = this.passes.debugFolder.addFolder('glows')
             folder.open()
 
             folder.add(this.passes.glowsPass.material.uniforms.uPosition.value, 'x').step(0.001).min(- 1).max(2).name('positionX')
             folder.add(this.passes.glowsPass.material.uniforms.uPosition.value, 'y').step(0.001).min(- 1).max(2).name('positionY')
             folder.add(this.passes.glowsPass.material.uniforms.uRadius, 'value').step(0.001).min(0).max(2).name('radius')
-            folder.addColor(this.passes.glowsPass, 'color').name('color').onChange(() =>
-            {
+            folder.addColor(this.passes.glowsPass, 'color').name('color').onChange(() => {
                 this.passes.glowsPass.material.uniforms.uColor.value = new THREE.Color(this.passes.glowsPass.color)
             })
             folder.add(this.passes.glowsPass.material.uniforms.uAlpha, 'value').step(0.001).min(0).max(1).name('alpha')
@@ -158,16 +146,14 @@ export default class Application
         this.passes.composer.addPass(this.passes.smaa)
 
         // Time tick
-        this.time.on('tick', () =>
-        {
+        this.time.on('tick', () => {
             // Renderer
             this.passes.composer.render()
             // this.renderer.render(this.scene, this.camera.instance)
         })
 
         // Resize event
-        this.sizes.on('resize', () =>
-        {
+        this.sizes.on('resize', () => {
             this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
             this.passes.composer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
             this.passes.horizontalBlurPass.material.uniforms.uResolution.value.x = this.sizes.viewport.width
@@ -225,17 +211,16 @@ export default class Application
 
         // Update stats on each tick
         this.time.on('tick', () => {
-          this.stats1.update();
-          this.stats2.update();
-          this.stats3.update();
+            this.stats1.update();
+            this.stats2.update();
+            this.stats3.update();
         });
-      }
+    }
 
     /**
      * Set world
      */
-    setWorld()
-    {
+    setWorld() {
         this.world = new World({
             debug: this.debug,
             resources: this.resources,
@@ -249,8 +234,7 @@ export default class Application
     /**
      * Destructor
      */
-    destructor()
-    {
+    destructor() {
         this.time.off('tick')
         this.sizes.off('resize')
 
