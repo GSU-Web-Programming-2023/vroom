@@ -11,17 +11,20 @@
     font-family: 'cyberpunk';
 }
 
-html, body {
+html,
+body {
     background: url('../images/loading.gif') no-repeat center center fixed;
     background-color: black !important;
     background-size: 150px;
 }
 
-html.landing-page-visible, body.landing-page-visible {
+html.landing-page-visible,
+body.landing-page-visible {
     overflow: auto !important;
 }
 
-html:not(.landing-page-visible), body:not(.landing-page-visible) {
+html:not(.landing-page-visible),
+body:not(.landing-page-visible) {
     overflow: hidden !important;
 }
 
@@ -36,22 +39,25 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
 #loading:after {
     content: ' .';
     animation: ellipsis 1s infinite;
-  }
-  
-  @keyframes ellipsis {
+}
+
+@keyframes ellipsis {
     0% {
-      content: '.';
+        content: '.';
     }
+
     33% {
-      content: '..';
+        content: '..';
     }
+
     66% {
-      content: '...';
+        content: '...';
     }
+
     100% {
-      content: '.';
+        content: '.';
     }
-  }
+}
 
 @media (min-width: 768px) and (max-width: 990px) {
     #loading {
@@ -63,10 +69,9 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     display: none;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-}  
+}
 
-.canvas
-{
+.canvas {
     position: fixed;
     top: 0;
     left: 0;
@@ -89,21 +94,23 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     animation-fill-mode: forwards;
 }
 
-  @keyframes fade-in {
+@keyframes fade-in {
     from {
-      opacity: 0;
+        opacity: 0;
     }
-    to {
-      opacity: 1;
-    }
-  }
 
-.hud{
+    to {
+        opacity: 1;
+    }
+}
+
+.hud {
     display: none;
     transition: ease;
     animation-duration: 1.5s;
 }
-.hud > * {
+
+.hud>* {
     z-index: 750;
     position: absolute;
     color: white;
@@ -116,6 +123,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
         display: none !important;
     }
 }
+
 @media (min-width: 900px) {
     .mobile-show {
         display: none !important;
@@ -183,7 +191,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     display: none;
 }
 
-.top-left{
+.top-left {
     top: 0;
     left: 0;
 }
@@ -197,21 +205,22 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     top: 0;
     right: 0;
 }
+
 @media (max-width: 990px) {
     .top-left {
-      top: 5px;
-      left: 5px;
-      font-size: 12px;
-      padding: 0.5em;
+        top: 5px;
+        left: 5px;
+        font-size: 12px;
+        padding: 0.5em;
     }
-  
+
     .top-right {
-      top: 5px;
-      right: 5px;
-      font-size: 12px;
-      padding: 0.5em;
+        top: 5px;
+        right: 5px;
+        font-size: 12px;
+        padding: 0.5em;
     }
-  }
+}
 
 .bottom-left {
     bottom: 0;
@@ -225,7 +234,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     max-width: 60%;
 }
 
-.bottom-middle > * {
+.bottom-middle>* {
     position: relative;
 }
 
@@ -233,6 +242,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     .bottom-middle {
         transform: translateX(-40%);
     }
+
     .bottom-left {
         display: none;
     }
@@ -243,6 +253,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
         transform: translate(-41%, -25%);
     }
 }
+
 @media (max-width: 768px) {
     .bottom-middle {
         bottom: 22%;
@@ -268,7 +279,8 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     }
 }
 
-#timer, #coordinates {
+#timer,
+#coordinates {
     padding: 0.5em;
     font-family: monospace;
     font-size: large;
@@ -293,7 +305,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     border-inline-end: solid 1px;
 }
 
-.aContent > * {
+.aContent>* {
     padding-inline: 1em;
 }
 
@@ -309,7 +321,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     background: linear-gradient(100deg, #6864639e, #838d99) !important;
 }
 
-.achievement-trophy > i{
+.achievement-trophy>i {
     transform: translate(15px, 15px);
 }
 
@@ -340,9 +352,10 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     word-wrap: break-word;
     word-break: break-word;
     white-space: pre-line;
-  }  
+}
 
-#pauseBtn, #interactBtn {
+#pauseBtn,
+#interactBtn {
     font-size: 16pt;
     padding: 0.75em;
     border-radius: 25px;
@@ -361,6 +374,16 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     padding: 0;
     align-items: center;
     justify-content: space-around;
+}
+
+@media (max-width: 990px) {
+    #pause-menu {
+        overflow: auto;
+    }
+
+    .achievements-pane {
+        width: auto;
+    }
 }
 
 .card {
@@ -390,8 +413,10 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
 }
 
 .pause-menu-option:hover {
-    background-color: #7c7c7c; /* Change the color to your preference */
-    transform: translateY(-2px); /* Adds a slight upward movement on hover */
+    background-color: #7c7c7c;
+    /* Change the color to your preference */
+    transform: translateY(-2px);
+    /* Adds a slight upward movement on hover */
 }
 
 .achievement-banner {
@@ -433,6 +458,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
         display: block;
         height: 160vh;
     }
+
     .login {
         transform: translateY(55px);
     }
@@ -444,7 +470,7 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     }
 }
 
-#landing-page > * {
+#landing-page>* {
     padding: 2em;
     width: 60%;
     margin: auto;
@@ -455,15 +481,19 @@ html:not(.landing-page-visible), body:not(.landing-page-visible) {
     margin-bottom: 2em;
 }
 
-#login-header, #register-header {
+#login-header,
+#register-header {
     font-size: 18pt;
 }
 
-form > *, .login > *, .register > * {
+form>*,
+.login>*,
+.register>* {
     margin-block: 0.5em;
     font-size: large;
 }
-form{
+
+form {
     font-family: monospace;
 }
 
@@ -482,13 +512,14 @@ hr {
     animation-name: grow-h;
     animation-duration: 1s;
     animation-fill-mode: forwards;
-  }
+}
 
 @keyframes grow-h {
     from {
         width: 0;
         left: 0;
     }
+
     to {
         width: 40%;
         left: 0;
@@ -508,13 +539,15 @@ hr {
     from {
         height: 0;
     }
+
     to {
         height: 60%;
     }
 }
 
 button {
-    background-color: #3474eb; /* Change the color to your preference */
+    background-color: #3474eb;
+    /* Change the color to your preference */
     border: none;
     font-family: monospace;
     color: white;
@@ -530,13 +563,17 @@ button {
 }
 
 button:hover {
-    background-color: #0d4ec5; /* Change the color to your preference */
-    transform: translateY(-2px); /* Adds a slight upward movement on hover */
+    background-color: #0d4ec5;
+    /* Change the color to your preference */
+    transform: translateY(-2px);
+    /* Adds a slight upward movement on hover */
 }
 
 button:active {
-    background-color: #0d4ec5; /* Change the color to your preference */
-    transform: translateY(0); /* Resets the movement on click */
+    background-color: #0d4ec5;
+    /* Change the color to your preference */
+    transform: translateY(0);
+    /* Resets the movement on click */
 }
 
 input[type="text"] {
@@ -556,99 +593,363 @@ input[type="text"]:focus {
 }
 
 /* margin classes */
-.m-0 { margin: 0; }
-.mx-0 { margin-left: 0; margin-right: 0; }
-.my-0 { margin-top: 0; margin-bottom: 0; }
-.mt-0 { margin-top: 0; }
-.mb-0 { margin-bottom: 0; }
-.ml-0 { margin-left: 0; }
-.mr-0 { margin-right: 0; }
+.m-0 {
+    margin: 0;
+}
 
-.m-1 { margin: 0.25rem; }
-.mx-1 { margin-left: 0.25rem; margin-right: 0.25rem; }
-.my-1 { margin-top: 0.25rem; margin-bottom: 0.25rem; }
-.mt-1 { margin-top: 0.25rem; }
-.mb-1 { margin-bottom: 0.25rem; }
-.ml-1 { margin-left: 0.25rem; }
-.mr-1 { margin-right: 0.25rem; }
+.mx-0 {
+    margin-left: 0;
+    margin-right: 0;
+}
 
-.m-2 { margin: 0.5rem; }
-.mx-2 { margin-left: 0.5rem; margin-right: 0.5rem; }
-.my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
-.mt-2 { margin-top: 0.5rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.ml-2 { margin-left: 0.5rem; }
-.mr-2 { margin-right: 0.5rem; }
+.my-0 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
-.m-3 { margin: 1rem; }
-.mx-3 { margin-left: 1rem; margin-right: 1rem; }
-.my-3 { margin-top: 1rem; margin-bottom: 1rem; }
-.mt-3 { margin-top: 1rem; }
-.mb-3 { margin-bottom: 1rem; }
-.ml-3 { margin-left: 1rem; }
-.mr-3 { margin-right: 1rem; }
+.mt-0 {
+    margin-top: 0;
+}
 
-.m-4 { margin: 1.25rem; }
-.mx-4 { margin-left: 1.25rem; margin-right: 1.25rem; }
-.my-4 { margin-top: 1.25rem; margin-bottom: 1.25rem; }
-.mt-4 { margin-top: 1.25rem; }
-.mb-4 { margin-bottom: 1.25rem; }
-.ml-4 { margin-left: 1.25rem; }
-.mr-4 { margin-right: 1.25rem; }
+.mb-0 {
+    margin-bottom: 0;
+}
 
-.m-5 { margin: 1.5rem; }
-.mx-5 { margin-left: 1.5rem; margin-right: 1.5rem; }
-.my-5 { margin-top: 1.5rem; margin-bottom: 1.5rem; }
-.mt-5 { margin-top: 1.5rem; }
-.mb-5 { margin-bottom: 1.5rem; }
-.ml-5 { margin-left: 1.5rem; }
-.mr-5 { margin-right: 1.5rem; }
+.ml-0 {
+    margin-left: 0;
+}
+
+.mr-0 {
+    margin-right: 0;
+}
+
+.m-1 {
+    margin: 0.25rem;
+}
+
+.mx-1 {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
+
+.my-1 {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.mt-1 {
+    margin-top: 0.25rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.25rem;
+}
+
+.ml-1 {
+    margin-left: 0.25rem;
+}
+
+.mr-1 {
+    margin-right: 0.25rem;
+}
+
+.m-2 {
+    margin: 0.5rem;
+}
+
+.mx-2 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.my-2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+.mr-2 {
+    margin-right: 0.5rem;
+}
+
+.m-3 {
+    margin: 1rem;
+}
+
+.mx-3 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.my-3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.ml-3 {
+    margin-left: 1rem;
+}
+
+.mr-3 {
+    margin-right: 1rem;
+}
+
+.m-4 {
+    margin: 1.25rem;
+}
+
+.mx-4 {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+}
+
+.my-4 {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.mt-4 {
+    margin-top: 1.25rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.25rem;
+}
+
+.ml-4 {
+    margin-left: 1.25rem;
+}
+
+.mr-4 {
+    margin-right: 1.25rem;
+}
+
+.m-5 {
+    margin: 1.5rem;
+}
+
+.mx-5 {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.my-5 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.mt-5 {
+    margin-top: 1.5rem;
+}
+
+.mb-5 {
+    margin-bottom: 1.5rem;
+}
+
+.ml-5 {
+    margin-left: 1.5rem;
+}
+
+.mr-5 {
+    margin-right: 1.5rem;
+}
 
 /* padding classes */
-.p-0 { padding: 0; }
-.px-0 { padding-left: 0; padding-right: 0; }
-.py-0 { padding-top: 0; padding-bottom: 0; }
-.pt-0 { padding-top: 0; }
-.pb-0 { padding-bottom: 0; }
-.pl-0 { padding-left: 0; }
-.pr-0 { padding-right: 0; }
+.p-0 {
+    padding: 0;
+}
 
-.p-1 { padding: 0.25rem; }
-.px-1 { padding-left: 0.25rem; padding-right: 0.25rem; }
-.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
-.pt-1 { padding-top: 0.25rem; }
-.pb-1 { padding-bottom: 0.25rem; }
-.pl-1 { padding-left: 0.25rem; }
-.pr-1 { padding-right: 0.25rem; }
+.px-0 {
+    padding-left: 0;
+    padding-right: 0;
+}
 
-.p-2 { padding: 0.5rem; }
-.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
-.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-.pt-2 { padding-top: 0.5rem; }
-.pb-2 { padding-bottom: 0.5rem; }
-.pl-2 { padding-left: 0.5rem; }
-.pr-2 { padding-right: 0.5rem; }
+.py-0 {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
-.p-3 { padding: 1rem; }
-.px-3 { padding-left: 1rem; padding-right: 1rem; }
-.py-3 { padding-top: 1rem; padding-bottom: 1rem; }
-.pt-3 { padding-top: 1rem; }
-.pb-3 { padding-bottom: 1rem; }
-.pl-3 { padding-left: 1rem; }
-.pr-3 { padding-right: 1rem; }
+.pt-0 {
+    padding-top: 0;
+}
 
-.p-4 { padding: 1.25rem; }
-.px-4 { padding-left: 1.25rem; padding-right: 1.25rem; }
-.py-4 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
-.pt-4 { padding-top: 1.25rem; }
-.pb-4 { padding-bottom: 1.25rem; }
-.pl-4 { padding-left: 1.25rem; }
-.pr-4 { padding-right: 1.25rem; }
+.pb-0 {
+    padding-bottom: 0;
+}
 
-.p-5 { padding: 1.5rem; }
-.px-5 { padding-left: 1.5rem; padding-right: 1.5rem; }
-.py-5 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
-.pt-5 { padding-top: 1.5rem; }
-.pb-5 { padding-bottom: 1.5rem; }
-.pl-5 { padding-left: 1.5rem; }
-.pr-5 { padding-right: 1.5rem; }
+.pl-0 {
+    padding-left: 0;
+}
+
+.pr-0 {
+    padding-right: 0;
+}
+
+.p-1 {
+    padding: 0.25rem;
+}
+
+.px-1 {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+.py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.pt-1 {
+    padding-top: 0.25rem;
+}
+
+.pb-1 {
+    padding-bottom: 0.25rem;
+}
+
+.pl-1 {
+    padding-left: 0.25rem;
+}
+
+.pr-1 {
+    padding-right: 0.25rem;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+
+.px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.pt-2 {
+    padding-top: 0.5rem;
+}
+
+.pb-2 {
+    padding-bottom: 0.5rem;
+}
+
+.pl-2 {
+    padding-left: 0.5rem;
+}
+
+.pr-2 {
+    padding-right: 0.5rem;
+}
+
+.p-3 {
+    padding: 1rem;
+}
+
+.px-3 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.py-3 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.pt-3 {
+    padding-top: 1rem;
+}
+
+.pb-3 {
+    padding-bottom: 1rem;
+}
+
+.pl-3 {
+    padding-left: 1rem;
+}
+
+.pr-3 {
+    padding-right: 1rem;
+}
+
+.p-4 {
+    padding: 1.25rem;
+}
+
+.px-4 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.py-4 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.pt-4 {
+    padding-top: 1.25rem;
+}
+
+.pb-4 {
+    padding-bottom: 1.25rem;
+}
+
+.pl-4 {
+    padding-left: 1.25rem;
+}
+
+.pr-4 {
+    padding-right: 1.25rem;
+}
+
+.p-5 {
+    padding: 1.5rem;
+}
+
+.px-5 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.py-5 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.pt-5 {
+    padding-top: 1.5rem;
+}
+
+.pb-5 {
+    padding-bottom: 1.5rem;
+}
+
+.pl-5 {
+    padding-left: 1.5rem;
+}
+
+.pr-5 {
+    padding-right: 1.5rem;
+}
