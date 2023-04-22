@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
 from flask_migrate import Migrate
-from flask import Flask
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
@@ -72,6 +72,7 @@ def create_achievements():
         achievement = Achievement(
             name="Hello World", description="Log in for the first time."
         )
+
         db.session.add(achievement)
         db.session.commit()
 
@@ -154,7 +155,7 @@ def api():
                 db.session.commit()
                 new_user.logins += 1
                 db.session.commit()
-            except Exception as e:
+            except IntegrityError as e:
                 if "UNIQUE constraint failed" in str(e):
                     return {"error": "A player with that username already exists."}
                 else:
