@@ -1,9 +1,7 @@
 import * as THREE from 'three'
 
-export default class Objects
-{
-    constructor(_options)
-    {
+export default class Objects {
+    constructor(_options) {
         // Options
         this.time = _options.time
         this.resources = _options.resources
@@ -12,6 +10,7 @@ export default class Objects
         this.physics = _options.physics
         this.debug = _options.debug
         this.uniqueAliensHit = new Set();
+        this.uniqueInteractions = new Set();
 
         // Set up
         this.container = new THREE.Object3D()
@@ -21,8 +20,7 @@ export default class Objects
         this.setParsers()
 
         // Add all objects from the list
-        for(let _options of this.list)
-        {
+        for (let _options of this.list) {
             this.add(_options)
         }
 
@@ -30,8 +28,7 @@ export default class Objects
         this.setNPCDialogue()
     }
 
-    setList()
-    {
+    setList() {
         // Objects options list
         // Important: Make sure to include the dialogue array for NPCs
         this.list = [
@@ -197,7 +194,7 @@ export default class Objects
             // Append the object to the list
             this.list.push(object);
         }
-        
+
         // Spawn a building cluster
         let spawnBuildings = (x, y, z) => {
             // Spawn 9 buildings in a grid
@@ -226,7 +223,7 @@ export default class Objects
                     } else {
                         buildingType = 'skyscraper';
                     }
-                    
+
                     if (buildingType === 'building') {
                         object = {
                             name: `building${i}_${j}`,
@@ -269,24 +266,21 @@ export default class Objects
         spawnBuildings(-85, -51, 1);
     }
 
-    setParsers()
-    {
+    setParsers() {
         this.parsers = {}
 
         this.parsers.items = [
             // Shade
             {
                 regex: /^shade([a-z]+)_?[0-9]{0,3}?/i,
-                apply: (_mesh, _options) =>
-                {
+                apply: (_mesh, _options) => {
                     // Find material
                     let match = _mesh.name.match(/^shade([a-z]+)_?[0-9]{0,3}?/i)
                     let materialName = match[1].toLowerCase()
                     let material = this.materials.shades.items[materialName]
 
                     // Default
-                    if(typeof material === 'undefined')
-                    {
+                    if (typeof material === 'undefined') {
                         material = new THREE.MeshNormalMaterial()
                     }
 
@@ -301,16 +295,14 @@ export default class Objects
             // Shade
             {
                 regex: /^pure([a-z]+)_?[0-9]{0,3}?/i,
-                apply: (_mesh, _options) =>
-                {
+                apply: (_mesh, _options) => {
                     // Find material
                     let match = _mesh.name.match(/^pure([a-z]+)_?[0-9]{0,3}?/i)
                     let materialName = match[1].toLowerCase()
                     let material = this.materials.pures.items[materialName]
 
                     // Default
-                    if(typeof material === 'undefined')
-                    {
+                    if (typeof material === 'undefined') {
                         material = new THREE.MeshNormalMaterial()
                     }
 
@@ -325,8 +317,7 @@ export default class Objects
             // Floor
             {
                 regex: /^floor_?[0-9]{0,3}?/i,
-                apply: (_mesh, _options) =>
-                {
+                apply: (_mesh, _options) => {
                     // Create floor manually because of missing UV
                     let geometry = new THREE.PlaneBufferGeometry(_mesh.scale.x, _mesh.scale.z, 10, 10)
                     let material = this.materials.items.floorShadow.clone()
@@ -343,8 +334,7 @@ export default class Objects
 
         // Default
         this.parsers.default = {}
-        this.parsers.default.apply = (_mesh) =>
-        {
+        this.parsers.default.apply = (_mesh) => {
             // Create clone mesh with original material
             let mesh = _mesh.clone()
             mesh.material = _mesh.material
@@ -359,20 +349,16 @@ export default class Objects
         // Go through each base child
         let baseChildren = [..._children]
 
-        for(let _child of baseChildren)
-        {
+        for (let _child of baseChildren) {
             // Find center
-            if(_child.name.match(/^center_?[0-9]{0,3}?/i))
-            {
+            if (_child.name.match(/^center_?[0-9]{0,3}?/i)) {
                 center.set(_child.position.x, _child.position.y, _child.position.z)
             }
 
-            if(_child instanceof THREE.Mesh)
-            {
+            if (_child instanceof THREE.Mesh) {
                 // Find parser and use default if not found
                 let parser = this.parsers.items.find((_item) => _child.name.match(_item.regex))
-                if(typeof parser === 'undefined')
-                {
+                if (typeof parser === 'undefined') {
                     parser = this.parsers.default
                 }
 
@@ -385,10 +371,8 @@ export default class Objects
         }
 
         // Recenter
-        if(center.length() > 0)
-        {
-            for(let _child of container.children)
-            {
+        if (center.length() > 0) {
+            for (let _child of container.children) {
                 _child.position.sub(center)
             }
 
@@ -399,8 +383,8 @@ export default class Objects
     }
 
     getObjectByName(name) {
-        for(let object of this.items) {
-            if(object.container.name === name) {
+        for (let object of this.items) {
+            if (object.container.name === name) {
                 return object.container;
             }
         }
@@ -421,8 +405,8 @@ export default class Objects
 
     getObjectsByName(name) {
         let objects = [];
-        for(let object of this.items) {
-            if(object.container.name.includes(name)) {
+        for (let object of this.items) {
+            if (object.container.name.includes(name)) {
                 objects.push(object.container);
             }
         }
@@ -432,15 +416,14 @@ export default class Objects
     getNPCs() {
         let npcs = [];
         for (let object of this.items) {
-          if (object.container.is_npc) {
-            npcs.push(object.container);
-          }
+            if (object.container.is_npc) {
+                npcs.push(object.container);
+            }
         }
         return npcs;
     }
 
-    add(_options)
-    {
+    add(_options) {
         let object = {}
 
         // Container
@@ -460,14 +443,12 @@ export default class Objects
             mass: _options.mass
         })
 
-        for(let _child of object.container.children)
-        {
+        for (let _child of object.container.children) {
             _child.position.sub(object.collision.center)
         }
 
         // Time tick event
-        this.time.on('tick', () =>
-        {
+        this.time.on('tick', () => {
             object.container.position.copy(object.collision.body.position)
             object.container.quaternion.copy(object.collision.body.quaternion)
         })
@@ -527,25 +508,25 @@ export default class Objects
             '../../static/images/sky/ny.jpg',
             '../../static/images/sky/pz.jpg',
             '../../static/images/sky/nz.jpg',
-        ];        
+        ];
         const envMap = textureLoader.load(urls);
 
         // Set the environment map for each material in the object
         object.container.traverse((child) => {
             if (child.isMesh && child.material) {
-            if (Array.isArray(child.material)) {
-                child.material.forEach((material) => {
-                if (material.metalness !== undefined) {
-                    material.envMap = envMap;
-                    material.needsUpdate = true;
+                if (Array.isArray(child.material)) {
+                    child.material.forEach((material) => {
+                        if (material.metalness !== undefined) {
+                            material.envMap = envMap;
+                            material.needsUpdate = true;
+                        }
+                    });
+                } else {
+                    if (child.material.metalness !== undefined) {
+                        child.material.envMap = envMap;
+                        child.material.needsUpdate = true;
+                    }
                 }
-                });
-            } else {
-                if (child.material.metalness !== undefined) {
-                child.material.envMap = envMap;
-                child.material.needsUpdate = true;
-                }
-            }
             }
         });
     }
@@ -566,35 +547,139 @@ export default class Objects
                 position = npc.position.clone();
                 distance = this.physics.car.chassis.body.position.distanceTo(position);
 
+                /*
+                let talkedTo = document.querySelector(`#${npc.name}TalkedTo`);
                 // Proximity trigger dialogue
-                // if (distance < 5 && !talkedTo) {
-                //     triggerDialogue(currentDialogue);
-                //     talkedTo = true;
-                // }
+                if (distance < 5 && talkedTo.value != 'true') {
+                    triggerDialogue(currentDialogue);
+                    talkedTo = true;
+                    this.uniqueInteractions.add(npc.name);
+
+                    interactions = this.uniqueInteractions.size;
+                    document.querySelector('#interactions').value = `${interactions}`;
+                }
+                */
+
+                let interactions = parseInt(document.querySelector('#interactions').value, 10);
 
                 // Handle F keypress to trigger dialogue
                 if (npc.listener) {
                     interactBtn.removeEventListener('click', npc.listener);
                     document.removeEventListener('keypress', npc.listener);
                 }
-                npc.listener = (event) => handleInteract(event, npc);
+                npc.listener = (event) => handleInteract(event, npc, interactions);
                 document.addEventListener('keypress', npc.listener);
                 interactBtn.addEventListener('click', npc.listener);
             });
 
-            function handleInteract(event, npc) {
+            function handleInteract(event, npc, interactions) {
                 if (event.type === 'click' && distance < 5) {
                     triggerDialogue(currentDialogue);
+                    /* This code snippet will replace the if statements later
+                    let talkedTo = document.querySelector(`#${npc.name}TalkedTo`);
+                    // Proximity trigger dialogue
+                    if (distance < 5 && talkedTo.value != 'true') {
+                        talkedTo = true;
+                        this.uniqueInteractions.add(npc.name);
+
+                        interactions = this.uniqueInteractions.size;
+                        document.querySelector('#interactions').value = `${interactions}`;
+                    }
+                    */
                     let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
+                    let alienTalkedTo = document.querySelector('#alienTalkedTo');
+                    let elonTalkedTo = document.querySelector('#elonTalkedTo');
+                    let martianMHTalkedTo = document.querySelector('#martianMHTalkedTo');
+                    let spyBalloonTalkedTo = document.querySelector('#spyBalloonTalkedTo');
                     if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
                         xb1TalkedTo.value = 'true';
+                        this.uniqueInteractions.add(npc.name);
+
+                        interactions = this.uniqueInteractions.size;
+                        document.querySelector('#interactions').value = `${interactions}`;
                     }
-                } else if (event.type === 'keypress'){
+                    if (npc.name == 'alien' && alienTalkedTo.value != 'true') {
+                        alienTalkedTo.value = 'true';
+                        this.uniqueInteractions.add(npc.name);
+
+                        interactions = this.uniqueInteractions.size;
+                        document.querySelector('#interactions').value = `${interactions}`;
+                    }
+                    if (npc.name == 'elon' && elonTalkedTo.value != 'true') {
+                        elonTalkedTo.value = 'true';
+                        this.uniqueInteractions.add(npc.name);
+
+                        interactions = this.uniqueInteractions.size;
+                        document.querySelector('#interactions').value = `${interactions}`;
+                    }
+                    if (npc.name == 'martianManHunter' && martianMHTalkedTo.value != 'true') {
+                        martianMHTalkedTo.value = 'true';
+                        this.uniqueInteractions.add(npc.name);
+
+                        interactions = this.uniqueInteractions.size;
+                        document.querySelector('#interactions').value = `${interactions}`;
+                    }
+                    if (npc.name == 'spyBalloon' && spyBalloonTalkedTo.value != 'true') {
+                        spyBalloonTalkedTo.value = 'true';
+                        this.uniqueInteractions.add(npc.name);
+
+                        interactions = this.uniqueInteractions.size;
+                        document.querySelector('#interactions').value = `${interactions}`;
+                    }
+                }
+                else if (event.type === 'keypress') {
                     if (event.key === 'f' && distance < 5) {
                         triggerDialogue(currentDialogue);
+                        /* Same here
+                        let talkedTo = document.querySelector(`#${npc.name}TalkedTo`);
+                        // Proximity trigger dialogue
+                        if (distance < 5 && talkedTo.value != 'true') {
+                            talkedTo = true;
+                            this.uniqueInteractions.add(npc.name);
+
+                            interactions = this.uniqueInteractions.size;
+                            document.querySelector('#interactions').value = `${interactions}`;
+                        }
+                        */
                         let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
+                        let alienTalkedTo = document.querySelector('#alienTalkedTo');
+                        let elonTalkedTo = document.querySelector('#elonTalkedTo');
+                        let martianMHTalkedTo = document.querySelector('#martianMHTalkedTo');
+                        let spyBalloonTalkedTo = document.querySelector('#spyBalloonTalkedTo');
                         if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
                             xb1TalkedTo.value = 'true';
+                            this.uniqueInteractions.add(npc.name);
+
+                            interactions = this.uniqueInteractions.size;
+                            document.querySelector('#interactions').value = `${interactions}`;
+                        }
+                        if (npc.name == 'alien' && alienTalkedTo.value != 'true') {
+                            alienTalkedTo.value = 'true';
+                            this.uniqueInteractions.add(npc.name);
+
+                            interactions = this.uniqueInteractions.size;
+                            document.querySelector('#interactions').value = `${interactions}`;
+                        }
+                        if (npc.name == 'elon' && elonTalkedTo.value != 'true') {
+                            elonTalkedTo.value = 'true';
+                            this.uniqueInteractions.add(npc.name);
+
+                            interactions = this.uniqueInteractions.size;
+                            document.querySelector('#interactions').value = `${interactions}`;
+                        }
+                        if (npc.name == 'martianManHunter' && martianMHTalkedTo.value != 'true') {
+                            martianMHTalkedTo.value = 'true';
+                            this.uniqueInteractions.add(npc.name);
+
+                            interactions = this.uniqueInteractions.size;
+                            document.querySelector('#interactions').value = `${interactions}`;
+                        }
+                        if (npc.name == 'spyBalloon' && spyBalloonTalkedTo.value != 'true') {
+                            spyBalloonTalkedTo.value = 'true';
+                            this.uniqueInteractions.add(npc.name);
+
+                            interactions = this.uniqueInteractions.size;
+                            document.querySelector('#interactions').value = `${interactions}`;
                         }
                     }
                 }
@@ -604,36 +689,36 @@ export default class Objects
 
     setNPCMovement() {
         this.npcMovementPatterns = {
-          'elon': {
-            type: 'still',
-            animation: 'none',
-          },
-          'xb1': {
-            type: 'still',
-            animation: 'none',
-          },
-          'martianManHunter': {
-            type: 'pingPong',
-            animation: 'none',
-            axis: 'z',
-            distance: 0.5,
-            speed: 0.5,
-          },
-          'spyBalloon': {
-            type: 'pingPong',
-            animation: 'none',
-            axis: 'x',
-            distance: 20,
-            speed: 0.1,
-          },
-          'alien': {
-            type: 'pingPong',
-            animation: 'walking',
-            axis: 'y',
-            distance: 0.5,
-            speed: 0.2,
-          }
-          // Add more movement patterns as needed
+            'elon': {
+                type: 'still',
+                animation: 'none',
+            },
+            'xb1': {
+                type: 'still',
+                animation: 'none',
+            },
+            'martianManHunter': {
+                type: 'pingPong',
+                animation: 'none',
+                axis: 'z',
+                distance: 0.5,
+                speed: 0.5,
+            },
+            'spyBalloon': {
+                type: 'pingPong',
+                animation: 'none',
+                axis: 'x',
+                distance: 20,
+                speed: 0.1,
+            },
+            'alien': {
+                type: 'pingPong',
+                animation: 'walking',
+                axis: 'y',
+                distance: 0.5,
+                speed: 0.2,
+            }
+            // Add more movement patterns as needed
         };
 
         this.time.on('tick', () => {
@@ -659,9 +744,9 @@ export default class Objects
         if (movementPattern.type === 'still') {
             // Do nothing; the NPC will remain stationary.
         } else if (movementPattern.type === 'pingPong' &&
-                    movementPattern.axis &&
-                    movementPattern.distance &&
-                    movementPattern.speed) {
+            movementPattern.axis &&
+            movementPattern.distance &&
+            movementPattern.speed) {
 
             if (movementPattern.animation && movementPattern.animation === 'walking') {
                 this.animateWalking(npcObject);
@@ -681,7 +766,7 @@ export default class Objects
             // Check if direction has changed
             let currentDirection = lerpFactor <= 1 ? 1 : -1;
             if (movementPattern.animation && currentDirection !== movementPattern.previousDirection &&
-                    movementPattern.animation === 'walking') {
+                movementPattern.animation === 'walking') {
                 // Store the current Z-axis rotation value for each NPC
                 movementPattern.zRotation = movementPattern.zRotation ? movementPattern.zRotation + Math.PI : Math.PI;
                 movementPattern.previousDirection = currentDirection;
