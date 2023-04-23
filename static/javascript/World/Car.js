@@ -1,10 +1,8 @@
 import * as THREE from 'three'
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js'
 
-export default class Car
-{
-    constructor(_options)
-    {
+export default class Car {
+    constructor(_options) {
         this.car = {}
 
         // Options
@@ -23,8 +21,7 @@ export default class Car
         this.container = new THREE.Object3D()
 
         // Debug
-        if(this.debug)
-        {
+        if (this.debug) {
             this.debugFolder = this.debug.addFolder('car')
             this.debugFolder.open()
         }
@@ -40,8 +37,7 @@ export default class Car
         this.initAudio()
     }
 
-    setCoordinates()
-    {
+    setCoordinates() {
         let x = document.querySelector('#xPos');
         let y = document.querySelector('#yPos');
         let z = document.querySelector('#zPos');
@@ -52,8 +48,7 @@ export default class Car
         })
     }
 
-    setMovement()
-    {
+    setMovement() {
         this.movement = {}
         this.movement.speed = new THREE.Vector3()
         this.movement.localSpeed = new THREE.Vector3()
@@ -77,8 +72,7 @@ export default class Car
         })
     }
 
-    setChassis()
-    {
+    setChassis() {
         this.chassis = {}
         this.chassis.offset = new THREE.Vector3(0, 0, - 0.28)
         this.chassis.object = this.objects.getConvertedMesh(this.resources.items.carChassis.scene.children)
@@ -89,22 +83,19 @@ export default class Car
         this.shadows.add(this.chassis.object, { sizeX: 3, sizeY: 2, offsetZ: 0.2 })
 
         // Time tick
-        this.time.on('tick', () =>
-        {
+        this.time.on('tick', () => {
             // Save old position for movement calculation
             this.chassis.oldPosition = this.chassis.object.position.clone()
 
             // Update if mode physics
-            if(!this.transformControls.enabled)
-            {
+            if (!this.transformControls.enabled) {
                 this.chassis.object.position.copy(this.physics.car.chassis.body.position).add(this.chassis.offset)
                 this.chassis.object.quaternion.copy(this.physics.car.chassis.body.quaternion)
             }
         })
     }
 
-    setAntena()
-    {
+    setAntena() {
         this.antena = {}
 
         this.antena.speedStrength = 10
@@ -119,8 +110,7 @@ export default class Car
         this.antena.localPosition = new THREE.Vector2()
 
         // Time tick
-        this.time.on('tick', () =>
-        {
+        this.time.on('tick', () => {
             this.antena.speed.x -= this.movement.acceleration.x * this.antena.speedStrength
             this.antena.speed.y -= this.movement.acceleration.y * this.antena.speedStrength
 
@@ -141,8 +131,7 @@ export default class Car
         })
 
         // Debug
-        if(this.debug)
-        {
+        if (this.debug) {
             let folder = this.debugFolder.addFolder('antena')
             folder.open()
 
@@ -152,8 +141,7 @@ export default class Car
         }
     }
 
-    setBackLights()
-    {
+    setBackLights() {
         this.backLightsBrake = {}
 
         this.backLightsBrake.material = this.materials.pures.items.red.clone()
@@ -161,8 +149,7 @@ export default class Car
         this.backLightsBrake.material.opacity = 0.5
 
         this.backLightsBrake.object = this.objects.getConvertedMesh(this.resources.items.carBackLightsBrake.scene.children)
-        for(let _child of this.backLightsBrake.object.children)
-        {
+        for (let _child of this.backLightsBrake.object.children) {
             _child.material = this.backLightsBrake.material
         }
 
@@ -176,35 +163,29 @@ export default class Car
         this.backLightsReverse.material.opacity = 0.5
 
         this.backLightsReverse.object = this.objects.getConvertedMesh(this.resources.items.carBackLightsReverse.scene.children)
-        for(let _child of this.backLightsReverse.object.children)
-        {
+        for (let _child of this.backLightsReverse.object.children) {
             _child.material = this.backLightsReverse.material
         }
 
         this.chassis.object.add(this.backLightsReverse.object)
 
         // Time tick
-        this.time.on('tick', () =>
-        {
+        this.time.on('tick', () => {
             // Space is down
-            if(this.physics.car.controls.actions.space)
-            {
+            if (this.physics.car.controls.actions.space) {
                 this.backLightsBrake.material.opacity = 1
                 this.backLightsReverse.material.opacity = 0.5
             }
 
             // Space is not down
-            else
-            {
+            else {
                 // Forward
-                if(this.movement.localSpeed.x > 0)
-                {
+                if (this.movement.localSpeed.x > 0) {
                     this.backLightsBrake.material.opacity = this.movement.localAcceleration.x < - 0.001 ? 1 : 0.5
                     this.backLightsReverse.material.opacity = 0.5
                 }
                 // Backward
-                else
-                {
+                else {
                     this.backLightsBrake.material.opacity = this.movement.localAcceleration.x > 0.001 ? 1 : 0.5
                     this.backLightsReverse.material.opacity = this.movement.localAcceleration.x < - 0.001 ? 1 : 0.5
                 }
@@ -212,14 +193,12 @@ export default class Car
         })
     }
 
-    setWheels()
-    {
+    setWheels() {
         this.wheels = {}
         this.wheels.object = this.objects.getConvertedMesh(this.resources.items.carWheel.scene.children)
         this.wheels.items = []
 
-        for(let i = 0; i < 4; i++)
-        {
+        for (let i = 0; i < 4; i++) {
             let object = this.wheels.object.clone()
 
             this.wheels.items.push(object)
@@ -227,12 +206,9 @@ export default class Car
         }
 
         // Time tick
-        this.time.on('tick', () =>
-        {
-            if(!this.transformControls.enabled)
-            {
-                for(let _wheelKey in this.physics.car.wheels.bodies)
-                {
+        this.time.on('tick', () => {
+            if (!this.transformControls.enabled) {
+                for (let _wheelKey in this.physics.car.wheels.bodies) {
                     let wheelBody = this.physics.car.wheels.bodies[_wheelKey]
                     let wheelObject = this.wheels.items[_wheelKey]
 
@@ -243,43 +219,35 @@ export default class Car
         })
     }
 
-    setTransformControls()
-    {
+    setTransformControls() {
         this.transformControls = new TransformControls(this.camera.instance, this.renderer.domElement)
         this.transformControls.size = 0.5
         this.transformControls.attach(this.chassis.object)
         this.transformControls.enabled = false
         this.transformControls.visible = this.transformControls.enabled
 
-        document.addEventListener('keydown', (_event) =>
-        {
-            if(this.mode === 'transformControls')
-            {
-                if(_event.key === 'r')
-                {
+        document.addEventListener('keydown', (_event) => {
+            if (this.mode === 'transformControls') {
+                if (_event.key === 'r') {
                     this.transformControls.setMode('rotate')
                 }
-                else if(_event.key === 'g')
-                {
+                else if (_event.key === 'g') {
                     this.transformControls.setMode('translate')
                 }
             }
         })
 
-        this.transformControls.addEventListener('dragging-changed', (_event) =>
-        {
+        this.transformControls.addEventListener('dragging-changed', (_event) => {
             this.camera.orbitControls.enabled = !_event.value
         })
 
         this.container.add(this.transformControls)
 
-        if(this.debug)
-        {
+        if (this.debug) {
             let folder = this.debugFolder.addFolder('controls')
             folder.open()
 
-            folder.add(this.transformControls, 'enabled').onChange(() =>
-            {
+            folder.add(this.transformControls, 'enabled').onChange(() => {
                 this.transformControls.visible = this.transformControls.enabled
             })
         }
@@ -327,7 +295,7 @@ export default class Car
         let keyDownHandler = (event) => {
             let honkHelper = document.querySelector('#honkHelper');
             if (event.key === 'h' && honkHelper.value == 'false') {
-                let honkSound = new Howl({src: ['static/sounds/car-honk.mp3'], volume: 0.5, loop: false, preload: true});
+                let honkSound = new Howl({ src: ['static/sounds/car-honk.mp3'], volume: 0.5, loop: false, preload: true });
                 honkSound.play();
                 honkHelper.value = 'true';
             }
@@ -423,63 +391,67 @@ export default class Car
     setProximityIndicator() {
         let indicatorGeometry = new THREE.SphereGeometry(0.2, 16, 16);
         let indicatorMaterial = new THREE.MeshBasicMaterial({
-          color: 0xffff00,
-          transparent: true,
-          opacity: 0.5
+            color: 0xffff00,
+            transparent: true,
+            opacity: 0.5
         });
         let indicatorMesh = new THREE.Mesh(indicatorGeometry, indicatorMaterial);
-        indicatorMesh.position.set(this.chassis.object.position.x, this.chassis.object.position.y, 2.75);
-        this.chassis.object.add(indicatorMesh);
+        for (let object of this.objects.items) {
+            if (object.container.name === 'startingPoint') {
+                object.container.add(indicatorMesh);
+            }
+        }
 
         let flashing = false;
 
         // Time tick
         this.time.on('tick', () => {
-          let npcs = this.objects.getNPCs();
-          let closestNPC = null;
-          let closestDistance = Infinity;
+            let npcs = this.objects.getNPCs();
+            let closestNPC = null;
+            let closestDistance = Infinity;
 
-          for (let npc of npcs) {
-            let distance = this.chassis.object.position.distanceTo(npc.position);
-            if (distance < closestDistance) {
-              closestDistance = distance;
-              closestNPC = npc;
-            }
-          }
-
-          if (closestNPC && closestDistance < 5) {
-            indicatorMesh.visible = true;
-
-            // Flashing effect
-            if (!flashing) {
-              flashing = true;
-              let initialOpacity = indicatorMaterial.opacity;
-              let flashDuration = 500;
-              let flashInterval = 16;
-              let numFlashes = flashDuration / flashInterval;
-              let flashCount = 0;
-
-              let flash = () => {
-                let progress = flashCount / numFlashes;
-                let easedOpacity = Math.sin(progress * Math.PI);
-                indicatorMaterial.opacity = initialOpacity + (1 - initialOpacity) * easedOpacity;
-
-                if (flashCount < numFlashes) {
-                  flashCount++;
-                  setTimeout(flash, flashInterval);
-                } else {
-                  indicatorMaterial.opacity = initialOpacity;
-                  flashing = false;
+            for (let npc of npcs) {
+                let distance = this.chassis.object.position.distanceTo(npc.position);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestNPC = npc;
                 }
-              };
-
-              flash();
             }
-          } else {
-            indicatorMesh.visible = false;
-            flashing = false;
-            indicatorMaterial.opacity = 0.5;
-          }
+
+            if (closestNPC && closestDistance < 5) {
+                indicatorMesh.position.set(closestNPC.position.x, closestNPC.position.y, closestNPC.position.z + 1.5);
+                indicatorMesh.visible = true;
+
+                // Flashing effect
+                if (!flashing) {
+                    flashing = true;
+                    let initialOpacity = indicatorMaterial.opacity;
+                    let flashDuration = 500;
+                    let flashInterval = 16;
+                    let numFlashes = flashDuration / flashInterval;
+                    let flashCount = 0;
+
+                    let flash = () => {
+                        let progress = flashCount / numFlashes;
+                        let easedOpacity = Math.sin(progress * Math.PI);
+                        indicatorMaterial.opacity = initialOpacity + (1 - initialOpacity) * easedOpacity;
+
+                        if (flashCount < numFlashes) {
+                            flashCount++;
+                            setTimeout(flash, flashInterval);
+                        } else {
+                            indicatorMaterial.opacity = initialOpacity;
+                            flashing = false;
+                        }
+                    };
+
+                    flash();
+                }
+            } else {
+                indicatorMesh.visible = false;
+                flashing = false;
+                indicatorMaterial.opacity = 0.5;
+            }
         });
     }
 }
