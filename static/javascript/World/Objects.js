@@ -589,7 +589,7 @@ export default class Objects {
                     let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
                     let alienTalkedTo = document.querySelector('#alienTalkedTo');
                     let elonTalkedTo = document.querySelector('#elonTalkedTo');
-                    let martianMHTalkedTo = document.querySelector('#martianMHTalkedTo');
+                    let martianMHTalkedTo = document.querySelector('#martianManHunterTalkedTo');
                     let spyBalloonTalkedTo = document.querySelector('#spyBalloonTalkedTo');
                     if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
                         xb1TalkedTo.value = 'true';
@@ -644,7 +644,7 @@ export default class Objects {
                         let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
                         let alienTalkedTo = document.querySelector('#alienTalkedTo');
                         let elonTalkedTo = document.querySelector('#elonTalkedTo');
-                        let martianMHTalkedTo = document.querySelector('#martianMHTalkedTo');
+                        let martianMHTalkedTo = document.querySelector('#martianManHunterTalkedTo');
                         let spyBalloonTalkedTo = document.querySelector('#spyBalloonTalkedTo');
                         if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
                             xb1TalkedTo.value = 'true';
