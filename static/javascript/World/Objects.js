@@ -10,7 +10,6 @@ export default class Objects {
         this.physics = _options.physics
         this.debug = _options.debug
         this.uniqueAliensHit = new Set();
-        // this.uniqueInteractions = new Set();
 
         // Set up
         this.container = new THREE.Object3D()
@@ -161,7 +160,23 @@ export default class Objects {
         ]
 
         // Spawn 20 aliens in random locations
+        let alienInputs = document.querySelector("#alienInputs");
         for (let i = 0; i < 20; i++) {
+            // Create html element with unique id for each alien
+            let input = document.createElement("input");
+            input.type = "hidden";
+            input.value = "false";
+            input.id = `alien${i}`;
+
+            // Clone the template input element and set its id to the current index
+            let template = document.getElementById('alienTalkedTo');
+            let clonedTemplate = template.cloneNode();
+            clonedTemplate.id = `alien${i}TalkedTo`;
+
+            // Append the input elements to the parent element
+            alienInputs.appendChild(input);
+            alienInputs.appendChild(clonedTemplate);
+
             // Define a random distance between 50 and 100 meters
             let distance = Math.floor(Math.random() * 101) + 50;
 
@@ -547,19 +562,7 @@ export default class Objects {
                 position = npc.position.clone();
                 distance = this.physics.car.chassis.body.position.distanceTo(position);
 
-                /*
-                let talkedTo = document.querySelector(`#${npc.name}TalkedTo`);
-                // Proximity trigger dialogue
-                if (distance < 5 && talkedTo.value != 'true') {
-                    triggerDialogue(currentDialogue);
-                    talkedTo = true;
-                    this.uniqueInteractions.add(npc.name);
-
-                    interactions = this.uniqueInteractions.size;
-                    document.querySelector('#interactions').value = `${interactions}`;
-                }
-                */
-
+                // Create a variable that holds current amount of interactions
                 let interactions = parseInt(document.querySelector('#interactions').value, 10);
 
                 // Handle F keypress to trigger dialogue
@@ -578,11 +581,8 @@ export default class Objects {
                     let talkedTo = document.querySelector(`#${npc.name}TalkedTo`);
                     if (talkedTo.value != 'true') {
                         talkedTo.value = 'true';
-                        // Add npc name to the set
-                        // this.uniqueInteractions.add(npc.name); // Causing me an error, so I use line 586
 
                         // Update the npc interaction count
-                        // interactions = this.uniqueInteractions.size;
                         interactions++;
                         document.querySelector('#interactions').value = `${interactions}`;
                     }
@@ -593,11 +593,8 @@ export default class Objects {
                         let talkedTo = document.querySelector(`#${npc.name}TalkedTo`);
                         if (talkedTo.value != 'true') {
                             talkedTo.value = 'true';
-                            // Add npc name to the set
-                            // this.uniqueInteractions.add(npc.name); // Causing me an error, so I use line 601
 
                             // Update the npc interaction count
-                            // interactions = this.uniqueInteractions.size;
                             interactions++;
                             document.querySelector('#interactions').value = `${interactions}`;
                         }
