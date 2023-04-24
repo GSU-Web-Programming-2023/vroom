@@ -10,7 +10,7 @@ export default class Objects {
         this.physics = _options.physics
         this.debug = _options.debug
         this.uniqueAliensHit = new Set();
-        this.uniqueInteractions = new Set();
+        // this.uniqueInteractions = new Set();
 
         // Set up
         this.container = new THREE.Object3D()
@@ -575,110 +575,30 @@ export default class Objects {
             function handleInteract(event, npc, interactions) {
                 if (event.type === 'click' && distance < 5) {
                     triggerDialogue(currentDialogue);
-                    /* This code snippet will replace the if statements later
                     let talkedTo = document.querySelector(`#${npc.name}TalkedTo`);
-                    // Proximity trigger dialogue
-                    if (distance < 5 && talkedTo.value != 'true') {
-                        talkedTo = true;
-                        this.uniqueInteractions.add(npc.name);
+                    if (talkedTo.value != 'true') {
+                        talkedTo.value = 'true';
+                        // Add npc name to the set
+                        // this.uniqueInteractions.add(npc.name); // Causing me an error, so I use line 586
 
-                        interactions = this.uniqueInteractions.size;
-                        document.querySelector('#interactions').value = `${interactions}`;
-                    }
-                    */
-                    let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
-                    let alienTalkedTo = document.querySelector('#alienTalkedTo');
-                    let elonTalkedTo = document.querySelector('#elonTalkedTo');
-                    let martianMHTalkedTo = document.querySelector('#martianManHunterTalkedTo');
-                    let spyBalloonTalkedTo = document.querySelector('#spyBalloonTalkedTo');
-                    if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
-                        xb1TalkedTo.value = 'true';
-                        this.uniqueInteractions.add(npc.name);
-
-                        interactions = this.uniqueInteractions.size;
-                        document.querySelector('#interactions').value = `${interactions}`;
-                    }
-                    if (npc.name == 'alien' && alienTalkedTo.value != 'true') {
-                        alienTalkedTo.value = 'true';
-                        this.uniqueInteractions.add(npc.name);
-
-                        interactions = this.uniqueInteractions.size;
-                        document.querySelector('#interactions').value = `${interactions}`;
-                    }
-                    if (npc.name == 'elon' && elonTalkedTo.value != 'true') {
-                        elonTalkedTo.value = 'true';
-                        this.uniqueInteractions.add(npc.name);
-
-                        interactions = this.uniqueInteractions.size;
-                        document.querySelector('#interactions').value = `${interactions}`;
-                    }
-                    if (npc.name == 'martianManHunter' && martianMHTalkedTo.value != 'true') {
-                        martianMHTalkedTo.value = 'true';
-                        this.uniqueInteractions.add(npc.name);
-
-                        interactions = this.uniqueInteractions.size;
-                        document.querySelector('#interactions').value = `${interactions}`;
-                    }
-                    if (npc.name == 'spyBalloon' && spyBalloonTalkedTo.value != 'true') {
-                        spyBalloonTalkedTo.value = 'true';
-                        this.uniqueInteractions.add(npc.name);
-
-                        interactions = this.uniqueInteractions.size;
+                        // Update the npc interaction count
+                        // interactions = this.uniqueInteractions.size;
+                        interactions++;
                         document.querySelector('#interactions').value = `${interactions}`;
                     }
                 }
                 else if (event.type === 'keypress') {
                     if (event.key === 'f' && distance < 5) {
                         triggerDialogue(currentDialogue);
-                        /* Same here
                         let talkedTo = document.querySelector(`#${npc.name}TalkedTo`);
-                        // Proximity trigger dialogue
-                        if (distance < 5 && talkedTo.value != 'true') {
-                            talkedTo = true;
-                            this.uniqueInteractions.add(npc.name);
+                        if (talkedTo.value != 'true') {
+                            talkedTo.value = 'true';
+                            // Add npc name to the set
+                            // this.uniqueInteractions.add(npc.name); // Causing me an error, so I use line 601
 
-                            interactions = this.uniqueInteractions.size;
-                            document.querySelector('#interactions').value = `${interactions}`;
-                        }
-                        */
-                        let xb1TalkedTo = document.querySelector('#xb1TalkedTo');
-                        let alienTalkedTo = document.querySelector('#alienTalkedTo');
-                        let elonTalkedTo = document.querySelector('#elonTalkedTo');
-                        let martianMHTalkedTo = document.querySelector('#martianManHunterTalkedTo');
-                        let spyBalloonTalkedTo = document.querySelector('#spyBalloonTalkedTo');
-                        if (npc.name == 'xb1' && xb1TalkedTo.value != 'true') {
-                            xb1TalkedTo.value = 'true';
-                            this.uniqueInteractions.add(npc.name);
-
-                            interactions = this.uniqueInteractions.size;
-                            document.querySelector('#interactions').value = `${interactions}`;
-                        }
-                        if (npc.name == 'alien' && alienTalkedTo.value != 'true') {
-                            alienTalkedTo.value = 'true';
-                            this.uniqueInteractions.add(npc.name);
-
-                            interactions = this.uniqueInteractions.size;
-                            document.querySelector('#interactions').value = `${interactions}`;
-                        }
-                        if (npc.name == 'elon' && elonTalkedTo.value != 'true') {
-                            elonTalkedTo.value = 'true';
-                            this.uniqueInteractions.add(npc.name);
-
-                            interactions = this.uniqueInteractions.size;
-                            document.querySelector('#interactions').value = `${interactions}`;
-                        }
-                        if (npc.name == 'martianManHunter' && martianMHTalkedTo.value != 'true') {
-                            martianMHTalkedTo.value = 'true';
-                            this.uniqueInteractions.add(npc.name);
-
-                            interactions = this.uniqueInteractions.size;
-                            document.querySelector('#interactions').value = `${interactions}`;
-                        }
-                        if (npc.name == 'spyBalloon' && spyBalloonTalkedTo.value != 'true') {
-                            spyBalloonTalkedTo.value = 'true';
-                            this.uniqueInteractions.add(npc.name);
-
-                            interactions = this.uniqueInteractions.size;
+                            // Update the npc interaction count
+                            // interactions = this.uniqueInteractions.size;
+                            interactions++;
                             document.querySelector('#interactions').value = `${interactions}`;
                         }
                     }

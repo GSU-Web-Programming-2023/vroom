@@ -152,7 +152,7 @@ const save = () => {
 
         // Check if 5 NPCs have been interacted
         if (
-          document.querySelector("#interactions").value >= 5 &&
+          parseInt(document.querySelector("#interactions").value) >= 5 &&
           !data["earnedA6"]
         ) {
           achievement(6)
