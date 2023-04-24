@@ -149,6 +149,14 @@ const save = () => {
         if (noLife.value === "true" && !data["earnedA5"]) {
           achievement(5)
         }
+
+        // Check if 5 NPCs have been interacted
+        if (
+          parseInt(document.querySelector("#interactions").value) >= 5 &&
+          !data["earnedA6"]
+        ) {
+          achievement(6)
+        }
       }
     })
     .catch(error => console.log(error))
