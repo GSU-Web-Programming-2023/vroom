@@ -49,6 +49,14 @@ async function login() {
 // A little hint for Naomi
 function clearForm() {
   // fill in the relevant code here
+
+  let username = document.getElementById("username2")
+  let password = document.getElementById("password2")
+  let password2 = document.getElementById("password3")
+  username.value = "";
+  password.value = "";
+  password2.value = "";
+  alert('You have successfully registered!');
 }
 
 async function register() {
@@ -83,7 +91,7 @@ async function register() {
           alert(responseData["error"])
         } else {
           console.log(`${responseData["user"]} just registered`)
-          // clearForm()
+          clearForm()
         }
       } catch (error) {
         alert(error)
