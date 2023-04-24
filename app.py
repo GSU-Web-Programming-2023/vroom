@@ -3,6 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from flask_migrate import Migrate
 from flask_cors import CORS, cross_origin
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(
@@ -12,7 +16,7 @@ CORS(
 )
 
 # Database
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{os.environ['DB_USERNAME']}:{os.environ['DB_PASSWORD']}@{os.environ['DB_HOST']}/{os.environ['DB_NAME']}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -163,7 +167,7 @@ def api():
                 new_user.logins += 1
                 db.session.commit()
             except IntegrityError as e:
-                if "UNIQUE constraint failed" in str(e):
+                if "UNIQUE constraint failed" in str(e) or "Duplicate entry" in str(e):
                     return {"error": "A player with that username already exists."}
                 else:
                     return {"error": str(e)}

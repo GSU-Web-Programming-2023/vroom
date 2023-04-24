@@ -20,6 +20,7 @@ packaging
 pathspec
 platformdirs
 PyMySQL
+python-dotenv
 six
 SQLAlchemy
 typing_extensions
