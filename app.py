@@ -99,7 +99,7 @@ def create_achievements():
 
         achievement = Achievement(
             name="Extrovert",
-            description="Talked to 5 NPCs.",
+            description="Talk to 5 NPCs.",
         )
         db.session.add(achievement)
         db.session.commit()
