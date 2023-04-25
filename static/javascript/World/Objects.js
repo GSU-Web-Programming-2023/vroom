@@ -159,56 +159,56 @@ export default class Objects {
             // },
         ]
 
-        // Spawn 20 aliens in random locations
-        let alienInputs = document.querySelector("#alienInputs");
-        for (let i = 0; i < 20; i++) {
-            // Create html element with unique id for each alien
-            let input = document.createElement("input");
-            input.type = "hidden";
-            input.value = "false";
-            input.id = `alien${i}`;
+        // // Spawn 20 aliens in random locations
+        // let alienInputs = document.querySelector("#alienInputs");
+        // for (let i = 0; i < 20; i++) {
+        //     // Create html element with unique id for each alien
+        //     let input = document.createElement("input");
+        //     input.type = "hidden";
+        //     input.value = "false";
+        //     input.id = `alien${i}`;
 
-            // Clone the template input element and set its id to the current index
-            let template = document.getElementById('alienTalkedTo');
-            let clonedTemplate = template.cloneNode();
-            clonedTemplate.id = `alien${i}TalkedTo`;
+        //     // Clone the template input element and set its id to the current index
+        //     let template = document.getElementById('alienTalkedTo');
+        //     let clonedTemplate = template.cloneNode();
+        //     clonedTemplate.id = `alien${i}TalkedTo`;
 
-            // Append the input elements to the parent element
-            alienInputs.appendChild(input);
-            alienInputs.appendChild(clonedTemplate);
+        //     // Append the input elements to the parent element
+        //     alienInputs.appendChild(input);
+        //     alienInputs.appendChild(clonedTemplate);
 
-            // Define a random distance between 50 and 100 meters
-            let distance = Math.floor(Math.random() * 101) + 50;
+        //     // Define a random distance between 50 and 100 meters
+        //     let distance = Math.floor(Math.random() * 71) + 50;
 
-            // Define a random angle between 0 and 2 * PI radians
-            let angle = Math.random() * 2 * Math.PI;
+        //     // Define a random angle between 0 and 2 * PI radians
+        //     let angle = Math.random() * 2 * Math.PI;
 
-            // Calculate the x and y offsets for the object using the distance and angle
-            let xOffset = distance * Math.cos(angle);
-            let yOffset = distance * Math.sin(angle);
+        //     // Calculate the x and y offsets for the object using the distance and angle
+        //     let xOffset = distance * Math.cos(angle);
+        //     let yOffset = distance * Math.sin(angle);
 
-            // Initial Position
-            let object;
-            let x = 0;
-            let y = 0;
-            let z = 1;
+        //     // Initial Position
+        //     let object;
+        //     let x = 0;
+        //     let y = 0;
+        //     let z = 1;
 
-            object = {
-                name: `alien${i}`,
-                base: this.resources.items.alien.scene,
-                collision: this.resources.items.alienCollision.scene,
-                offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
-                mass: 10,
-                is_npc: true,
-                dialogue: [
-                    "[Alien] ...Yuo wlli be obliterdaed by our advacned tceleghnooy slily hnmaus...",
-                    "[Alien] ...",
-                ]
-            };
+        //     object = {
+        //         name: `alien${i}`,
+        //         base: this.resources.items.alien.scene,
+        //         collision: this.resources.items.alienCollision.scene,
+        //         offset: new THREE.Vector3(x + xOffset, y + yOffset, z),
+        //         mass: 10,
+        //         is_npc: true,
+        //         dialogue: [
+        //             "[Alien] ...Yuo wlli be obliterdaed by our advacned tceleghnooy slily hnmaus...",
+        //             "[Alien] ...",
+        //         ]
+        //     };
 
-            // Append the object to the list
-            this.list.push(object);
-        }
+        //     // Append the object to the list
+        //     this.list.push(object);
+        // }
 
         // Spawn a building cluster
         let spawnBuildings = (x, y, z) => {
