@@ -89,7 +89,7 @@ You can now run the application using the following command:
 
 This will start the web application on your local development server, typically accessible at `http://127.0.0.1:5000` or `http://localhost:5000`.
 
-![](readme.svg)
+[View Flowchart](readme.svg)
 
 ## Deployment Script (Phusion Passenger)
 
