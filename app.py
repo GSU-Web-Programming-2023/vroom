@@ -4,14 +4,13 @@ from sqlalchemy.exc import IntegrityError
 from flask_migrate import Migrate
 from flask_cors import CORS, cross_origin
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(
     app,
-    origins=["http://localhost:5000", "http://127.0.0.1:5000", "https://vroom.judahpaul.com"],
+    origins=["*"],
     supports_credentials=True,
 )
 

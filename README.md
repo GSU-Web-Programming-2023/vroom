@@ -92,24 +92,74 @@ This will start the web application on your local development server, typically 
 
 [View Flowchart](readme.svg)
 
-## Deployment Script (Phusion Passenger)
+## Deployment Script (NGINX + Systemd)
 
 To deploy the application to a production server, you can use the following deployment script:
 
 ```bash
 #!/bin/bash
+
+# Remove the existing vroom directory
 rm -rf vroom
+# Clone the repository
 git clone https://github.com/GSU-Web-Programming-2023/vroom
 cd vroom
+# Build the application
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 flask db init
 flask db migrate
 flask db upgrade
-export FLASK_APP=app
-export FLASK_ENV=production
-mkdir tmp && touch tmp/restart.txt
+
+# create the systemd service file
+cat <<EOF > /etc/systemd/system/vroom.service
+[Unit]
+Description=VROOM
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/vroom
+Environment="FLASK_APP=app"
+Environment="FLASK_ENV=production"
+ExecStart=/opt/vroom/env/bin/flask run --host=0.0.0.0 --port=5000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Create the Nginx configuration file
+cat <<EOF > /etc/nginx/sites-available/vroom.conf
+server {
+    listen 80;
+    server_name ~^vroom\.judahpaul\.com$;
+
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+}
+EOF
+
+sudo setenforce 0
+
+ln -S /etc/nginx/sites-available/* /etc/nginx/sites-enabled/*
+nginx -t
+systemctl restart nginx
+systemctl status nginx --no-pager
+
+# Start the application
+systemctl daemon-reload
+systemctl start vroom
+systemctl enable vroom
+systemctl status vroom --no-pager
+
+echo "VROOM deployed successfully"
 ```
 
 Save the script to a file named `setup_vroom.sh` (or whatever you want) and make it executable by running:

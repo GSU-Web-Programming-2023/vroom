@@ -1,5 +1,5 @@
 {
-  "name": "three.js-template",
+  "name": "vroom",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "predev": "npm run clean",
     "dev": "parcel src/index.html -p 1234 --open",
     "prebuild": "npm run clean",
-    "build": "parcel build src/index.html --out-dir ../public_html --public-url . --detailed-report",
+    "build": "parcel build src/index.html --out-dir ../vroom.judahpaul.com --public-url . --detailed-report",
     "clean": "shx rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
