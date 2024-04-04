@@ -1,3 +1,6 @@
+# VROOM 🛻
+A Mars exploration game made with Three.JS + Flask.
+
 ## Prerequisites
 
 Before proceeding, ensure that you have Python (version 3.6 or higher) installed on your system. If you do not have Python installed, you can download it from the [official Python website](https://www.python.org/downloads/).
@@ -11,23 +14,23 @@ Before proceeding, ensure that you have Python (version 3.6 or higher) installed
 `git clone https://github.com/GSU-Web-Programming-2023/o-o-game.git`
 
 
-This will create a folder named `o-o-game` in your current directory.
+This will create a folder named `vroom` in your current directory.
 
 2. **Navigate to the project folder**
 
-Change your current directory to the `o-o-game` folder:
+Change your current directory to the `vroom` folder:
 
-`cd o-o-game`
+`cd vroom`
 
 
 3. **Create a virtual environment (optional but recommended)**
 
 It is recommended to create a virtual environment for your project to isolate the dependencies. To create a virtual environment, run the following command:
 
-`python -m venv venv`
+`python -m venv env`
 
 
-This will create a virtual environment named `venv`. To activate the virtual environment, run the following command:
+This will create a virtual environment named `env`. To activate the virtual environment, run the following command:
 
 - On Windows:
 
@@ -41,7 +44,7 @@ This will create a virtual environment named `venv`. To activate the virtual env
   source venv/bin/activate
   ```
 
-You should see `(venv)` at the beginning of your command prompt, indicating that the virtual environment is active.
+You should see `(env)` at the beginning of your command prompt, indicating that the virtual environment is active.
 
 4. **Install the required packages**
 
@@ -49,11 +52,11 @@ The `requirements.txt` file contains a list of all the necessary packages for th
 
 `pip install -r requirements.txt`
 
-This will install all the required packages, including Flask, Flask-Cors, Flask-Migrate, Flask-SQLAlchemy, and PyMySQL, among others.
+This will install all the required packages, including Flask, Flask-Cors, Flask-Migrate, Flask-SQLAlchemy, and PyMySQL (if using MySQL), among others.
 
 5. **Configure the environment variables**
 
-The application uses environment variables to store sensitive information such as database credentials. Create a `.env` file in the root directory of the project and add the following variables:
+If you decide to use something like MySQL it's highly advisable to store your credentials in environment variables. Create a `.env` file in the root directory of the project and add the following variables:
 
 ```
 DB_USERNAME=<your_database_username>
@@ -87,3 +90,39 @@ You can now run the application using the following command:
 This will start the web application on your local development server, typically accessible at `http://127.0.0.1:5000` or `http://localhost:5000`.
 
 ![](readme.svg)
+
+## Deployment Script (Phusion Passenger)
+
+To deploy the application to a production server, you can use the following deployment script:
+
+```bash
+#!/bin/bash
+
+git clone https://github.com/GSU-Web-Programming-2023/vroom
+cd vroom
+python -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+flask db init
+flask db migrate
+flask db upgrade
+export FLASK_APP=app
+export FLASK_ENV=production
+mkdir tmp && touch tmp/restart.txt
+```
+
+Save the script to a file named `setup_vroom.sh` (or whatever you want) and make it executable by running:
+
+```bash
+chmod +x setup_vroom.sh
+```
+
+You can then run the script to set up the application on the server:
+
+```bash
+./setup_vroom.sh
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
