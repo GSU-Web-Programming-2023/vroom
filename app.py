@@ -11,12 +11,13 @@ load_dotenv()
 app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(
     app,
-    origins=["http://localhost:5000", "http://127.0.0.1:5000"],
+    origins=["http://localhost:5000", "http://127.0.0.1:5000", "https://vroom.judahpaul.com"],
     supports_credentials=True,
 )
 
 # Database
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+# app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{os.environ['DB_USERNAME']}:{os.environ['DB_PASSWORD']}@{os.environ['DB_HOST']}/{os.environ['DB_NAME']}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
