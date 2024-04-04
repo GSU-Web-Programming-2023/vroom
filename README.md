@@ -27,21 +27,22 @@ Change your current directory to the `vroom` folder:
 
 It is recommended to create a virtual environment for your project to isolate the dependencies. To create a virtual environment, run the following command:
 
-`python -m venv env`
-
+```bash
+python3 -m venv env
+```
 
 This will create a virtual environment named `env`. To activate the virtual environment, run the following command:
 
 - On Windows:
 
   ```
-  venv\Scripts\activate
+  env\Scripts\activate
   ```
 
 - On macOS and Linux:
 
   ```
-  source venv/bin/activate
+  source env/bin/activate
   ```
 
 You should see `(env)` at the beginning of your command prompt, indicating that the virtual environment is active.
@@ -97,10 +98,10 @@ To deploy the application to a production server, you can use the following depl
 
 ```bash
 #!/bin/bash
-
+rm -rf vroom
 git clone https://github.com/GSU-Web-Programming-2023/vroom
 cd vroom
-python -m venv env
+python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 flask db init
